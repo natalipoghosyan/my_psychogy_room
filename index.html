@@ -1225,6 +1225,19 @@
     letter-spacing: 1px;
   }
 
+
+  footer a,
+  .footer-links a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  footer a:hover,
+  .footer-links a:hover {
+    color: var(--gold);
+  }
+
   /* ── SCROLL ANIMATIONS ── */
   .reveal {
     opacity: 0;
@@ -1327,16 +1340,16 @@
     .hero-left { padding: 120px 32px 80px; }
     .hero-left::after { display: none; }
     .hero-right { 
-      min-height: 360px; 
+      min-height: 78vh; 
       align-items: center; 
       justify-content: center;
-      padding: 34px 0 56px;
+      padding: 46px 0 70px;
     }
 
     .hero-bg-circle {
-      width: 280px;
-      height: 280px;
-      opacity: 0.75;
+      width: 390px;
+      height: 390px;
+      opacity: 0.78;
     }
 
     .hero-photo-placeholder {
@@ -1344,12 +1357,12 @@
     }
 
     .photo-frame {
-      width: 230px;
-      height: 230px;
+      width: min(340px, 82vw);
+      height: min(340px, 82vw);
       border-radius: 50%;
       overflow: hidden;
       animation: mobileFloat 3.8s ease-in-out infinite;
-      box-shadow: 0 24px 70px rgba(44,36,32,0.22);
+      box-shadow: 0 28px 85px rgba(44,36,32,0.26);
     }
 
     .photo-frame::before {
@@ -1407,16 +1420,76 @@
   @media (max-width: 600px) {
     .certs-scroll { grid-template-columns: 1fr; }
     .photo-frame {
-      width: 190px;
-      height: 190px;
+      width: min(300px, 84vw);
+      height: min(300px, 84vw);
     }
     .hero-right {
-      min-height: 310px;
-      padding-bottom: 44px;
+      min-height: 70vh;
+      padding-bottom: 56px;
+    }
+    .hero-bg-circle {
+      width: 330px;
+      height: 330px;
     }
     .hero-stat-bar { flex-direction: column; gap: 16px; padding: 24px; }
     .stat-divider { width: 60px; height: 1px; }
   }
+
+  /* ── FINAL MOBILE HERO PHOTO FIX ── */
+  @media (max-width: 900px) {
+    .hero-right {
+      min-height: 78vh !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 46px 0 70px !important;
+    }
+
+    .hero-bg-circle {
+      width: 390px !important;
+      height: 390px !important;
+      opacity: 0.78 !important;
+    }
+
+    .hero-photo-placeholder {
+      height: auto !important;
+    }
+
+    .photo-frame {
+      width: min(340px, 82vw) !important;
+      height: min(340px, 82vw) !important;
+      border-radius: 50% !important;
+      overflow: hidden !important;
+      animation: mobileFloat 3.8s ease-in-out infinite !important;
+      box-shadow: 0 28px 85px rgba(44,36,32,0.26) !important;
+    }
+
+    .photo-frame::before {
+      top: 8px !important;
+      left: 8px !important;
+      right: 8px !important;
+      bottom: 8px !important;
+      border-radius: 50% !important;
+      z-index: 2 !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .photo-frame {
+      width: min(300px, 84vw) !important;
+      height: min(300px, 84vw) !important;
+    }
+
+    .hero-right {
+      min-height: 70vh !important;
+      padding-bottom: 56px !important;
+    }
+
+    .hero-bg-circle {
+      width: 330px !important;
+      height: 330px !important;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -1519,7 +1592,7 @@
           <div class="pillar-num">03</div>
           <div>
             <div class="pillar-title">Կողքդ ամբողջ ճանապարհին</div>
-            <div class="pillar-desc">Թերապիան գործընթաց է, ոչ մեկ նիստ։ Ես ամեն փուլում կողքդ եմ, ըստ քո ռիթմի։</div>
+            <div class="pillar-desc">Թերապիան գործընթաց է, ոչ մեկ հանդիպում։ Ես ամեն փուլում կողքդ եմ, ըստ քո ռիթմի։</div>
           </div>
         </div>
         <div class="pillar">
@@ -1759,11 +1832,11 @@
 
       <div class="price-card featured reveal reveal-delay-2">
         <div class="price-badge">Հիմնական</div>
-        <div class="price-type">Անհատական Նիստ</div>
+        <div class="price-type">Անհատական Հանդիպում</div>
         <div class="price-amount"><span class="price-currency">֏</span>—</div>
         <div class="price-per">Կապ հաստատեք գնի համար</div>
         <ul class="price-features">
-          <li>50-60 րոպե անհատական թերապիա</li>
+          <li>50-60 րոպե անհատական հանդիպում</li>
           <li>ԿՎՎ, Էքզիստ., Այցելու-կ. մոտ.</li>
           <li>Անձնական թռիչք ու վերլուծություն</li>
           <li>Ամբողջ գաղտնիություն</li>
@@ -1774,7 +1847,7 @@
       <div class="price-card reveal reveal-delay-3">
         <div class="price-type">Փաթեթ</div>
         <div class="price-amount"><span class="price-currency">֏</span>—</div>
-        <div class="price-per">4 նիստ · Հատուկ գին</div>
+        <div class="price-per">4 հանդիպում · Հատուկ գին</div>
         <ul class="price-features">
           <li>4 անհատական հանդիպում</li>
           <li>Ճամփորդություն ու հետևողականություն</li>
@@ -1819,14 +1892,14 @@
           Ե՞ րբ կտեսնեմ արդյունք
           <span class="faq-arrow">+</span>
         </button>
-        <div class="faq-a">Ոմանք արդեն առաջին 2-3 նիստից նկատում են փոփոխություն — ավելի թեթև, ավելի հասկանալի, ավելի ինքնավստահ։ Երկարաժամկետ փոփոխությունն ավելի խորն է — ու բոլորովին ձեր անձնական ռիթմով։</div>
+        <div class="faq-a">Ոմանք արդեն առաջին 2-3 հանդիպումից նկատում են փոփոխություն — ավելի թեթև, ավելի հասկանալի, ավելի ինքնավստահ։ Երկարաժամկետ փոփոխությունն ավելի խորն է — ու բոլորովին ձեր անձնական ռիթմով։</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
           Ինչ կատարվում է առաջին հանդիպումին
           <span class="faq-arrow">+</span>
         </button>
-        <div class="faq-a">Առաջին նիստը ծանոթության նիստ է — ես ձեզ հարց կտամ, դուք կզգաք, թե ի՞նչ տեղ ու ի՞նչ ատմոսֆերա ենք ստեղծում։ Ոչ մի ախտորոշում, ոչ մի ճնշում — ուղղակի ջերմ, անկեղծ ու ապահով ծանոթություն։</div>
+        <div class="faq-a">Առաջին հանդիպումը ծանոթության հանդիպում է — ես ձեզ հարց կտամ, դուք կզգաք, թե ի՞նչ տեղ ու ի՞նչ ատմոսֆերա ենք ստեղծում։ Ոչ մի ախտորոշում, ոչ մի ճնշում — ուղղակի ջերմ, անկեղծ ու ապահով ծանոթություն։</div>
       </div>
     </div>
   </div>
@@ -1851,7 +1924,7 @@
     <button class="price-popup-close" onclick="closePricePopup()" aria-label="Փակել">×</button>
 
     <div class="price-popup-label">Արժեքացանկ</div>
-    <h3 class="price-popup-title" id="pricePopupTitle">Նիստի <em>արժեքը</em></h3>
+    <h3 class="price-popup-title" id="pricePopupTitle">Հանդիպման <em>արժեքը</em></h3>
 
     <p class="price-popup-text">
       Առաջին քայլը կարող է լինել շատ պարզ․ կարճ գրում եք, միասին հասկանում ենք՝ ինչ ձևաչափն է ձեզ հարմար։
@@ -2022,14 +2095,23 @@
     const res = document.getElementById('quiz-result');
 
     if (questions) questions.style.display = 'none';
-    if (document.getElementById('result-emoji')) document.getElementById('result-emoji').textContent = r.emoji;
-    if (document.getElementById('result-title')) document.getElementById('result-title').textContent = r.title;
-    if (document.getElementById('result-text')) document.getElementById('result-text').textContent = r.text;
+    const emoji = document.getElementById('result-emoji');
+    const title = document.getElementById('result-title');
+    const text = document.getElementById('result-text');
 
+    if (emoji) emoji.textContent = r.emoji;
+    if (title) title.textContent = r.title;
+    if (text) text.textContent = r.text;
     if (res) res.classList.add('show');
   }
 
-  document.addEventListener('DOMContentLoaded', renderQuizStep);
+  document.addEventListener('DOMContentLoaded', function() {
+    renderQuizStep();
+
+    document.querySelectorAll('.quiz-option').forEach(button => {
+      button.addEventListener('touchstart', function() {}, { passive: true });
+    });
+  });
 
   // ── PRICE POPUP ──
   function openPricePopup() {
