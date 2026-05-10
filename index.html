@@ -1253,6 +1253,11 @@
     50% { transform: translateY(-10px); }
   }
 
+  @keyframes mobileFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.015); }
+  }
+
   /* ── STICKY NAV ── */
   .nav {
     position: fixed;
@@ -1321,7 +1326,46 @@
     .hero { grid-template-columns: 1fr; }
     .hero-left { padding: 120px 32px 80px; }
     .hero-left::after { display: none; }
-    .hero-right { min-height: 560px; align-items: center; }
+    .hero-right { 
+      min-height: 360px; 
+      align-items: center; 
+      justify-content: center;
+      padding: 34px 0 56px;
+    }
+
+    .hero-bg-circle {
+      width: 280px;
+      height: 280px;
+      opacity: 0.75;
+    }
+
+    .hero-photo-placeholder {
+      height: auto;
+    }
+
+    .photo-frame {
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: mobileFloat 3.8s ease-in-out infinite;
+      box-shadow: 0 24px 70px rgba(44,36,32,0.22);
+    }
+
+    .photo-frame::before {
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border-radius: 50%;
+      border-color: rgba(184,154,122,0.85);
+    }
+
+    .hero-photo {
+      object-fit: cover;
+      object-position: center top;
+    }
+
     .hero-stat-bar { position: static; transform: none; margin: 0 auto; width: fit-content; }
     .why-grid { grid-template-columns: 1fr; gap: 40px; }
     .services-grid { grid-template-columns: 1fr; }
@@ -1337,6 +1381,22 @@
     .container { padding: 0 24px; }
     section { padding: 72px 0; }
     .quiz-box { padding: 32px 24px; }
+    .quiz-nav {
+      flex-wrap: wrap;
+    }
+    .quiz-btn {
+      min-height: 48px;
+      touch-action: manipulation;
+    }
+    .quiz-progress {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 8px;
+    }
+    .quiz-option {
+      min-height: 52px;
+      touch-action: manipulation;
+    }
 
     .price-popup-card { padding: 34px 24px; }
     .price-list-row { flex-direction: column; align-items: flex-start; }
@@ -1346,6 +1406,14 @@
 
   @media (max-width: 600px) {
     .certs-scroll { grid-template-columns: 1fr; }
+    .photo-frame {
+      width: 190px;
+      height: 190px;
+    }
+    .hero-right {
+      min-height: 310px;
+      padding-bottom: 44px;
+    }
     .hero-stat-bar { flex-direction: column; gap: 16px; padding: 24px; }
     .stat-divider { width: 60px; height: 1px; }
   }
@@ -1882,26 +1950,51 @@
   let quizStep = 0;
   const answers = [null, null, null];
 
+  function getQuizSteps() {
+    return Array.from(document.querySelectorAll('.quiz-step'));
+  }
+
+  function renderQuizStep() {
+    const steps = getQuizSteps();
+
+    steps.forEach((stepEl, index) => {
+      stepEl.style.display = index === quizStep ? 'block' : 'none';
+    });
+
+    const prevBtn = document.getElementById('quiz-prev');
+    const nextBtn = document.getElementById('quiz-next');
+    const progress = document.getElementById('quiz-prog');
+
+    if (prevBtn) prevBtn.style.display = quizStep === 0 ? 'none' : 'inline-flex';
+    if (nextBtn) nextBtn.textContent = quizStep === steps.length - 1 ? 'Ավարտ →' : 'Հաջորդ →';
+    if (progress) progress.textContent = `${quizStep + 1} / ${steps.length}`;
+  }
+
   function selectOption(btn, step, idx) {
-    document.querySelectorAll(`.quiz-step[data-step="${step}"] .quiz-option`).forEach(o => o.classList.remove('selected'));
+    const currentOptions = document.querySelectorAll(`.quiz-step[data-step="${step}"] .quiz-option`);
+
+    currentOptions.forEach(option => {
+      option.classList.remove('selected');
+      option.style.borderColor = '';
+    });
+
     btn.classList.add('selected');
     answers[step] = idx;
   }
 
   function quizNext() {
+    const steps = getQuizSteps();
+
     if (answers[quizStep] === null) {
       const opts = document.querySelectorAll(`.quiz-step[data-step="${quizStep}"] .quiz-option`);
-      opts.forEach(o => { o.style.borderColor = 'rgba(196,132,106,0.5)'; });
-      setTimeout(() => opts.forEach(o => { o.style.borderColor = ''; }), 800);
+      opts.forEach(option => { option.style.borderColor = 'rgba(196,132,106,0.75)'; });
+      setTimeout(() => opts.forEach(option => { option.style.borderColor = ''; }), 800);
       return;
     }
-    if (quizStep < 2) {
-      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'none';
+
+    if (quizStep < steps.length - 1) {
       quizStep++;
-      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'block';
-      document.getElementById('quiz-prev').style.display = 'inline-flex';
-      document.getElementById('quiz-prog').textContent = `${quizStep + 1} / 3`;
-      if (quizStep === 2) document.getElementById('quiz-next').textContent = 'Ավարտ →';
+      renderQuizStep();
     } else {
       showResult();
     }
@@ -1909,31 +2002,34 @@
 
   function quizPrev() {
     if (quizStep > 0) {
-      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'none';
       quizStep--;
-      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'block';
-      document.getElementById('quiz-prog').textContent = `${quizStep + 1} / 3`;
-      if (quizStep === 0) document.getElementById('quiz-prev').style.display = 'none';
-      document.getElementById('quiz-next').textContent = 'Հաջորդ →';
+      renderQuizStep();
     }
   }
 
   function showResult() {
     const results = [
-      { emoji: '🌊', title: 'Հանդարտության կարիք', text: 'Տագնապ ու անդադար ուղեղ — շատ ծանոթ պատկեր։ ԿՎՎ ու թուլացող մոտեցումները կարող են բառացիորեն փոխել ամեն ինչ։ Մենք կսկսենք հենց այնտեղ, որտեղ ամենաշատ ճնշում ես զգում։' },
-      { emoji: '🌸', title: 'Ինքնաճանաչման ճամփորդ', text: 'Ուզում ես ճանաչել ու սիրել քեզ ավելի — ու դա ոչ թե «ինքնախաբեություն» է, այլ ամենահամարձակ բանը, ինչ կարելի է ընտրել։ Ես կողքդ կլինեմ ամբողջ ճանապարհին։' },
-      { emoji: '💞', title: 'Հարաբերությունների ուղղություն', text: 'Մարդկային կապ, սահման ու ինքնագնահատական — ամեն ինչ կապված է։ Կհասկանանք, ինչ ես ուզում հարաբերություններից, ու ինչ ես ստանում, ու ինչ կարող ես փոխել։' },
-      { emoji: '✨', title: 'Ինքնաճանաչման ճամփ', text: 'Ապրել ավելի գիտակից ու ամբողջական — Էքզիստենցիալ ու Այցելու-կ. մոտեցումը ճիշտ ձեզ համար է։ Ձեր ամբողջ անձնավորությամբ ու կյանքի իմաստով կկամ ձեր կողքին։' }
+      { emoji: '🌊', title: 'Հանդարտության կարիք', text: 'Տագնապ ու անդադար մտքեր — շատ ծանոթ պատկեր։ ԿՎՎ ու հանգստացնող մոտեցումները կարող են օգնել հասկանալ՝ ինչ է կատարվում ներսում, և քայլ առ քայլ վերադառնալ ավելի հանգիստ վիճակի։' },
+      { emoji: '🌸', title: 'Ինքնաճանաչման ճանապարհ', text: 'Ուզում ես ավելի լավ ճանաչել ու ընդունել քեզ։ Սա շատ կարևոր ու առողջ ցանկություն է։ Թերապիան կարող է դառնալ այն ապահով տարածքը, որտեղ դու սկսում ես լսել քեզ ավելի հստակ։' },
+      { emoji: '💞', title: 'Հարաբերությունների ուղղություն', text: 'Մարդկային կապերը, սահմանները և ինքնագնահատականը շատ կապված են իրար հետ։ Կարող ենք միասին հասկանալ՝ ինչ ես զգում, ինչի կարիք ունես և ինչպես ավելի առողջ սահմաններ կառուցել։' },
+      { emoji: '✨', title: 'Ավելի գիտակից կյանք', text: 'Ուզում ես ապրել ավելի իմաստավորված ու ամբողջական։ Այստեղ կարող ենք աշխատել ոչ միայն խնդրի, այլ քո ներքին աշխարհի, արժեքների և ցանկությունների հետ։' }
     ];
+
     const dominant = answers[2] !== null ? answers[2] : (answers[0] !== null ? answers[0] : 0);
-    const r = results[dominant];
-    document.getElementById('quiz-questions').style.display = 'none';
+    const r = results[dominant] || results[0];
+
+    const questions = document.getElementById('quiz-questions');
     const res = document.getElementById('quiz-result');
-    document.getElementById('result-emoji').textContent = r.emoji;
-    document.getElementById('result-title').textContent = r.title;
-    document.getElementById('result-text').textContent = r.text;
-    res.classList.add('show');
+
+    if (questions) questions.style.display = 'none';
+    if (document.getElementById('result-emoji')) document.getElementById('result-emoji').textContent = r.emoji;
+    if (document.getElementById('result-title')) document.getElementById('result-title').textContent = r.title;
+    if (document.getElementById('result-text')) document.getElementById('result-text').textContent = r.text;
+
+    if (res) res.classList.add('show');
   }
+
+  document.addEventListener('DOMContentLoaded', renderQuizStep);
 
   // ── PRICE POPUP ──
   function openPricePopup() {
