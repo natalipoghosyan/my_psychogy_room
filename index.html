@@ -1,995 +1,1697 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyRoute Travel</title>
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --accent: #f59e0b;
-      --green: #10b981;
-      --dark: #0f172a;
-      --text: #334155;
-      --muted: #64748b;
-      --light: #f8fafc;
-      --white: #ffffff;
-      --border: #e2e8f0;
-      --shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      color: var(--text);
-      background: var(--white);
-      line-height: 1.55;
-    }
-
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      width: min(92%, var(--max));
-      margin: 0 auto;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border: none;
-      border-radius: 999px;
-      padding: 14px 24px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.25s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-primary:hover { transform: translateY(-2px); }
-
-    .btn-light {
-      background: #eef4ff;
-      color: var(--primary);
-    }
-
-    .top-strip {
-      background: linear-gradient(90deg, var(--dark), #1e293b);
-      color: #fff;
-      text-align: center;
-      padding: 10px 16px;
-      font-size: 14px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 16px 0;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--dark);
-    }
-
-    .logo-mark {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--primary), #60a5fa);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-size: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    .hero {
-      position: relative;
-      background:
-        linear-gradient(rgba(10, 18, 33, 0.42), rgba(10, 18, 33, 0.42)),
-        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover;
-      padding: 78px 0 120px;
-      color: #fff;
-    }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      font-size: clamp(38px, 6vw, 68px);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-      max-width: 700px;
-    }
-
-    .hero p {
-      max-width: 640px;
-      font-size: 18px;
-      margin: 0 0 32px;
-      color: rgba(255,255,255,0.92);
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    .hero-badge {
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.18);
-      backdrop-filter: blur(8px);
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .search-wrap {
-      margin-top: -72px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .search-card {
-      background: #fff;
-      border-radius: 30px;
-      box-shadow: 0 28px 60px rgba(15, 23, 42, 0.14);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      overflow: hidden;
-    }
-
-    .search-tabs {
-      display: flex;
-      gap: 10px;
-      padding: 20px 22px 0;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      border: none;
-      background: #f1f5f9;
-      color: var(--dark);
-      font-weight: 700;
-      padding: 12px 16px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .tab-btn.active {
-      background: #e0ecff;
-      color: var(--primary);
-    }
-
-    .tab-panel {
-      display: none;
-      padding: 22px;
-    }
-
-    .tab-panel.active { display: block; }
-
-    .search-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 0.9fr auto;
-      gap: 14px;
-      align-items: end;
-    }
-
-    .field label {
-      display: block;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: #fff;
-      padding: 15px 16px;
-      font-size: 15px;
-      font-family: inherit;
-      outline: none;
-      transition: 0.2s ease;
-    }
-
-    .field input:focus,
-    .field select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-    }
-
-    .mini-switches {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 0 22px 20px;
-    }
-
-    .mini-check {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    section { padding: 88px 0; }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 34px;
-    }
-
-    .section-head h2 {
-      margin: 0 0 8px;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.08;
-      color: var(--dark);
-      letter-spacing: -0.03em;
-    }
-
-    .section-head p {
-      margin: 0;
-      max-width: 640px;
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    .deals-grid,
-    .services-grid,
-    .why-grid,
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .deal-card,
-    .service-card,
-    .why-card,
-    .review-card {
-      background: #fff;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      transition: 0.25s ease;
-    }
-
-    .deal-card:hover,
-    .service-card:hover,
-    .why-card:hover,
-    .review-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .deal-image {
-      aspect-ratio: 1.15 / 1;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .deal-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .deal-badge {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: #fff;
-      color: var(--dark);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .deal-content {
-      padding: 22px;
-    }
-
-    .deal-top {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .deal-title {
-      font-size: 23px;
-      font-weight: 800;
-      color: var(--dark);
-      margin: 0;
-    }
-
-    .rating {
-      background: #ecfdf5;
-      color: #047857;
-      font-weight: 800;
-      border-radius: 12px;
-      padding: 7px 10px;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .deal-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .price small {
-      display: block;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .price strong {
-      font-size: 28px;
-      color: var(--dark);
-      line-height: 1;
-    }
-
-    .service-card,
-    .why-card,
-    .review-card {
-      padding: 26px;
-    }
-
-    .icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      font-size: 25px;
-      color: #fff;
-      margin-bottom: 18px;
-    }
-
-    .blue { background: linear-gradient(135deg, var(--primary), #60a5fa); }
-    .gold { background: linear-gradient(135deg, var(--accent), #fcd34d); }
-    .green { background: linear-gradient(135deg, var(--green), #34d399); }
-
-    .service-card h3,
-    .why-card h3 {
-      margin: 0 0 10px;
-      color: var(--dark);
-      font-size: 22px;
-    }
-
-    .promo {
-      background: linear-gradient(135deg, #eff6ff, #f8fafc 60%, #effdf7);
-    }
-
-    .promo-box {
-      background: #fff;
-      border-radius: 32px;
-      box-shadow: var(--shadow);
-      padding: 36px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 30px;
-      align-items: center;
-      border: 1px solid rgba(148, 163, 184, 0.14);
-    }
-
-    .promo-box h2 {
-      margin: 0 0 12px;
-      font-size: clamp(30px, 4vw, 46px);
-      line-height: 1.08;
-      color: var(--dark);
-      letter-spacing: -0.03em;
-    }
-
-    .promo-points {
-      display: grid;
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .promo-point {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #f8fafc;
-      border-radius: 16px;
-      padding: 14px 16px;
-      font-weight: 600;
-    }
-
-    .promo-visual {
-      min-height: 380px;
-      border-radius: 26px;
-      background:
-        linear-gradient(rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.12)),
-        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80') center/cover;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .floating-note {
-      position: absolute;
-      right: 18px;
-      bottom: 18px;
-      background: rgba(255,255,255,0.95);
-      color: var(--dark);
-      padding: 16px;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      max-width: 220px;
-      font-weight: 700;
-    }
-
-    .review-card {
-      border-left: 4px solid var(--primary);
-    }
-
-    .review-card strong {
-      display: block;
-      margin-top: 18px;
-      color: var(--dark);
-    }
-
-    footer {
-      background: #0f172a;
-      color: rgba(255,255,255,0.8);
-      padding: 64px 0 28px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr 0.8fr 0.9fr;
-      gap: 26px;
-      margin-bottom: 28px;
-    }
-
-    .footer-title {
-      color: #fff;
-      font-size: 17px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .footer-links {
-      display: grid;
-      gap: 10px;
-    }
-
-    .footer-bar {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 18px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 1100px) {
-      .search-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .search-grid .field:last-child,
-      .search-grid .search-action {
-        grid-column: span 1;
-      }
-
-      .promo-box,
-      .footer-grid,
-      .deals-grid,
-      .services-grid,
-      .why-grid,
-      .reviews-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .nav-links { display: none; }
-      .hero { padding: 56px 0 96px; }
-      .search-wrap { margin-top: -56px; }
-      .search-grid,
-      .promo-box,
-      .footer-grid,
-      .deals-grid,
-      .services-grid,
-      .why-grid,
-      .reviews-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .tab-panel,
-      .search-tabs,
-      .mini-switches { padding-left: 16px; padding-right: 16px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Նատալի Պողոսյան — Հոգեբան</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --warm: #F0E9DE;
+    --blush: #E8D5C4;
+    --rose: #C4846A;
+    --deep: #2C2420;
+    --mid: #6B5047;
+    --sage: #8A9B8A;
+    --gold: #B89A7A;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    background: var(--deep);
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 82px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    max-width: 380px;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--rose);
+    color: var(--white);
+    text-decoration: none;
+    padding: 18px 36px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .hero-cta:hover::before { transform: translateX(0); }
+  .hero-cta span { position: relative; z-index: 1; }
+  .hero-cta svg { position: relative; z-index: 1; transition: transform 0.3s; }
+  .hero-cta:hover svg { transform: translateX(4px); }
+
+  .hero-right {
+    background: var(--warm);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--blush) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+  }
+
+  .hero-photo-placeholder {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .photo-frame {
+    width: 280px;
+    height: 360px;
+    border: 1px solid var(--blush);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+  }
+
+  .photo-icon {
+    font-size: 64px;
+    margin-bottom: 12px;
+  }
+
+  .photo-note {
+    font-size: 11px;
+    color: var(--mid);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-stat-bar {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 32px;
+    background: var(--white);
+    padding: 20px 36px;
+    box-shadow: 0 20px 60px rgba(44,36,32,0.12);
+    z-index: 3;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.2s;
+  }
+
+  .stat { text-align: center; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 4px;
+  }
+  .stat-divider {
+    width: 1px;
+    background: var(--blush);
+    align-self: stretch;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 0; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--rose);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--deep);
+    margin-bottom: 24px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  /* ── WHY ME ── */
+  .why-section { background: var(--white); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .why-text p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--mid);
+    margin-bottom: 20px;
+  }
+
+  .why-quote {
+    border-left: 2px solid var(--rose);
+    padding: 20px 28px;
+    background: var(--cream);
+    margin-top: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--deep);
+  }
+
+  .why-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pillar {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--warm);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    cursor: default;
+    transition: all 0.3s;
+  }
+  .pillar:first-child { border-top: 1px solid var(--warm); }
+
+  .pillar:hover { padding-left: 12px; }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--blush);
+    line-height: 1;
+    min-width: 44px;
+    transition: color 0.3s;
+  }
+  .pillar:hover .pillar-num { color: var(--rose); }
+
+  .pillar-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--deep);
+    margin-bottom: 6px;
+  }
+  .pillar-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--mid);
+  }
+
+  /* ── SERVICES ── */
+  .services-section { background: var(--deep); }
+  .services-section .section-label { color: var(--gold); }
+  .services-section .section-label::before { background: var(--gold); }
+  .services-section .section-title { color: var(--white); }
+
+  .services-intro {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    max-width: 600px;
+    margin-bottom: 64px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.04);
+    padding: 44px 36px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--rose);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-4px);
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 36px;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .service-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── WHO IS THIS FOR ── */
+  .for-section { background: var(--cream); }
+
+  .for-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 52px;
+  }
+
+  .for-card {
+    background: var(--white);
+    padding: 36px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .for-card:hover {
+    border-left-color: var(--rose);
+    transform: translateX(4px);
+    box-shadow: 0 20px 60px rgba(44,36,32,0.08);
+  }
+
+  .for-emoji { font-size: 28px; margin-bottom: 16px; display: block; }
+
+  .for-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--deep);
+    margin-bottom: 8px;
+  }
+
+  .for-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--mid);
+  }
+
+  /* ── APPROACH ── */
+  .approach-section { background: var(--warm); }
+
+  .approach-methods {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 52px;
+  }
+
+  .method-tag {
+    padding: 12px 24px;
+    border: 1px solid var(--gold);
+    font-size: 13px;
+    color: var(--deep);
+    letter-spacing: 0.5px;
+    cursor: default;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .method-tag::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--rose);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .method-tag:hover { color: var(--white); border-color: var(--rose); }
+  .method-tag:hover::before { transform: translateY(0); }
+  .method-tag span { position: relative; z-index: 1; }
+
+  .approach-text {
+    margin-top: 52px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .approach-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--mid);
+  }
+
+  /* ── CERTIFICATES ── */
+  .certs-section { background: var(--white); }
+
+  .certs-scroll {
+    margin-top: 52px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .cert-card {
+    background: var(--cream);
+    padding: 32px 28px;
+    border-bottom: 3px solid var(--blush);
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .cert-card:hover {
+    border-bottom-color: var(--rose);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(44,36,32,0.08);
+  }
+
+  .cert-year {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--rose);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .cert-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--deep);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .cert-issuer {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  /* ── INTERACTIVE: QUIZ ── */
+  .quiz-section { background: var(--deep); padding: 100px 0; }
+  .quiz-section .section-label { color: var(--gold); }
+  .quiz-section .section-label::before { background: var(--gold); }
+  .quiz-section .section-title { color: var(--white); }
+
+  .quiz-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 52px;
+    line-height: 1.7;
+    max-width: 500px;
+  }
+
+  .quiz-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 52px;
+    max-width: 700px;
+  }
+
+  .quiz-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 32px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quiz-option {
+    padding: 16px 24px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: left;
+    background: transparent;
+    width: 100%;
+    letter-spacing: 0.3px;
+  }
+
+  .quiz-option:hover {
+    border-color: var(--rose);
+    color: var(--white);
+    background: rgba(196,132,106,0.1);
+  }
+
+  .quiz-option.selected {
+    border-color: var(--rose);
+    background: var(--rose);
+    color: var(--white);
+  }
+
+  .quiz-nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    align-items: center;
+  }
+
+  .quiz-btn {
+    padding: 14px 32px;
+    background: var(--rose);
+    color: var(--white);
+    border: none;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+  }
+
+  .quiz-btn:hover { background: var(--gold); }
+  .quiz-btn.secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); }
+  .quiz-btn.secondary:hover { border-color: var(--rose); }
+
+  .quiz-progress {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.3);
+    margin-left: auto;
+  }
+
+  .quiz-result {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .quiz-result.show { display: block; }
+
+  .result-emoji { font-size: 56px; margin-bottom: 20px; }
+
+  .result-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .result-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── MEMBERSHIP ── */
+  .pricing-section { background: var(--cream); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 52px;
+  }
+
+  .price-card {
+    background: var(--white);
+    padding: 44px 36px;
+    position: relative;
+    transition: all 0.3s;
+    cursor: default;
+    border: 1px solid transparent;
+  }
+
+  .price-card:hover {
+    border-color: var(--blush);
+    box-shadow: 0 30px 80px rgba(44,36,32,0.1);
+    transform: translateY(-6px);
+  }
+
+  .price-card.featured {
+    background: var(--deep);
+    color: var(--white);
+    transform: translateY(-12px);
+  }
+
+  .price-card.featured:hover { transform: translateY(-18px); }
+
+  .price-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--rose);
+    color: var(--white);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    white-space: nowrap;
+  }
+
+  .price-type {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 20px;
+  }
+
+  .price-card.featured .price-type { color: var(--gold); }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .price-card.featured .price-amount { color: var(--white); }
+
+  .price-currency {
+    font-size: 18px;
+    vertical-align: super;
+    font-weight: 400;
+  }
+
+  .price-per {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 32px;
+  }
+
+  .price-card.featured .price-per { color: rgba(255,255,255,0.5); }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 36px;
+  }
+
+  .price-features li {
+    font-size: 13px;
+    color: var(--mid);
+    padding: 9px 0;
+    border-bottom: 1px solid var(--warm);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .price-card.featured .price-features li {
+    color: rgba(255,255,255,0.65);
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+
+  .price-features li::before {
+    content: '✓';
+    color: var(--rose);
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .price-cta {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .price-card:not(.featured) .price-cta {
+    border: 1px solid var(--deep);
+    color: var(--deep);
+  }
+  .price-card:not(.featured) .price-cta:hover {
+    background: var(--deep);
+    color: var(--white);
+  }
+
+  .price-card.featured .price-cta {
+    background: var(--rose);
+    color: var(--white);
+  }
+  .price-card.featured .price-cta:hover { background: var(--gold); }
+
+  /* ── ACCORDION FAQ ── */
+  .faq-section { background: var(--warm); }
+
+  .faq-list { margin-top: 52px; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--blush);
+  }
+
+  .faq-q {
+    width: 100%;
+    text-align: left;
+    padding: 24px 0;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--deep);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    transition: color 0.3s;
+  }
+
+  .faq-q:hover { color: var(--rose); }
+
+  .faq-arrow {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--blush);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+    transition: all 0.3s;
+    color: var(--rose);
+  }
+
+  .faq-item.open .faq-arrow {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: var(--white);
+    transform: rotate(45deg);
+  }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--mid);
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-bottom: 24px;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--rose);
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-band::after {
+    content: '';
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.07);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-band-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-band-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 44px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-telegram {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--white);
+    color: var(--rose);
+    text-decoration: none;
+    padding: 18px 44px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-telegram:hover {
+    background: var(--deep);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 60px rgba(44,36,32,0.3);
+  }
+
+  /* ── MEMBERSHIP ── */
+  .member-section { background: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    padding: 60px 0 40px;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 52px;
+  }
+
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .footer-brand-sub {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .footer-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .footer-links { list-style: none; }
+  .footer-links li {
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .footer-links li:hover { color: var(--white); }
+
+  .footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .footer-contact-icon {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-member {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── KEYFRAMES ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ── STICKY NAV ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s;
+  }
+
+  .nav.scrolled {
+    background: rgba(44,36,32,0.95);
+    backdrop-filter: blur(20px);
+    padding: 14px 40px;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .nav-tel {
+    font-size: 13px;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 1px;
+    border: 1px solid rgba(184,154,122,0.4);
+    padding: 10px 20px;
+    transition: all 0.3s;
+  }
+
+  .nav-tel:hover {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: var(--white);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 120px 32px 80px; }
+    .hero-left::after { display: none; }
+    .hero-right { min-height: 400px; }
+    .hero-stat-bar { position: static; transform: none; margin: 0 auto; width: fit-content; }
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .for-grid { grid-template-columns: 1fr; }
+    .approach-text { grid-template-columns: 1fr; }
+    .certs-scroll { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .price-card.featured { transform: none; }
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .nav { padding: 16px 20px; }
+    .container { padding: 0 24px; }
+    section { padding: 72px 0; }
+    .quiz-box { padding: 32px 24px; }
+  }
+
+  @media (max-width: 600px) {
+    .certs-scroll { grid-template-columns: 1fr; }
+    .hero-stat-bar { flex-direction: column; gap: 16px; padding: 24px; }
+    .stat-divider { width: 60px; height: 1px; }
+  }
+</style>
 </head>
 <body>
-  <div class="top-strip">Limited-time deals on flights, hotels, tours, and vacation packages.</div>
 
-  <header>
-    <div class="container nav">
-      <a href="#" class="logo">
-        <span class="logo-mark">✈</span>
-        <span>SkyRoute</span>
-      </a>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">Նատալի Պողոսյան</div>
+  <a href="https://t.me/+37494400089" class="nav-tel" target="_blank">Telegram կապ</a>
+</nav>
 
-      <nav class="nav-links">
-        <a href="#deals">Deals</a>
-        <a href="#services">Services</a>
-        <a href="#why-us">Why Us</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <a href="#search-box" class="btn btn-primary">Start Booking</a>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-      <div class="hero-badges">
-        <div class="hero-badge">Best price packages</div>
-        <div class="hero-badge">Flight + hotel deals</div>
-        <div class="hero-badge">Easy booking experience</div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">Կլինիկական հոգեբան · Հոգեթերապևտ</div>
+    <h1 class="hero-name">Նատալի<br><em>Պողոսյան</em></h1>
+    <div class="hero-title">Կանանց և աղջիկների հոգեբան</div>
+    <p class="hero-desc">Ես չեմ «բուժում» ու ձեզ «ուղղում»։ Ես ձեր կողքին եմ այն ճանապարհին, որտեղ դուք հայտնաբերում եք ինքներդ ձեզ — ամբողջական, ուժեղ ու արժանի։</p>
+    <a href="https://t.me/+37494400089" class="hero-cta" target="_blank">
+      <span>Գրել Telegram-ով</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-circle"></div>
+    <div class="hero-photo-placeholder">
+      <div class="photo-frame">
+        <div class="photo-icon">🌸</div>
+        <div class="photo-note">Ձեր լուսանկարը</div>
       </div>
-      <h1>Book your next trip with an Expedia-style experience.</h1>
-      <p>Modern travel website design with flights, hotels, packages, tours, and a strong booking layout that feels premium, fast, and trustworthy.</p>
-      <a href="#search-box" class="btn btn-primary">Explore Destinations</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="search-wrap" id="search-box">
-    <div class="container">
-      <div class="search-card">
-        <div class="search-tabs">
-          <button class="tab-btn active" data-tab="hotels">Hotels</button>
-          <button class="tab-btn" data-tab="flights">Flights</button>
-          <button class="tab-btn" data-tab="packages">Packages</button>
-          <button class="tab-btn" data-tab="tours">Tours</button>
+<!-- STATS BAR -->
+<div style="background:#fff; padding:0; display:flex; justify-content:center;">
+  <div class="hero-stat-bar" style="position:static; transform:none; opacity:1; animation:none; box-shadow: 0 4px 40px rgba(44,36,32,0.08);">
+    <div class="stat">
+      <div class="stat-number">4+</div>
+      <div class="stat-label">Թրեյնինգային<br>մոդել</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">120</div>
+      <div class="stat-label">Ժամ պրակտիկ<br>ուսուցում</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">ԵՊՀ</div>
+      <div class="stat-label">Մագիստրոս<br>Հոգեբանություն</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">Կողքդ ամբողջ<br>ճանապարհին</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY ME -->
+<section class="why-section" id="about">
+  <div class="container">
+    <div class="section-label">Ո՞վ եմ ես</div>
+    <h2 class="section-title">Ինձ հետ դու<br><em>ապահով ես</em></h2>
+    <div class="why-grid">
+      <div class="why-text reveal">
+        <p>Ես Նատալի Պողոսյանն եմ — Երևանի Պետական Համալսարանի կառավարման հոգեբանության մագիստրոս, ԵՊՀ Կիրառական հոգեբանության կենտրոնի ու «Կենաց Ծառ» կենտրոնի ուսուցյալ թերապևտ, Հայաստանի Հոգեբանների Միության անդամ։</p>
+        <p>Ես մասնագիտացել եմ կանանց ու աղջիկների հոգեկան առողջությամբ — տագնապ, ինքնաճանաչում, հարաբերություններ, ինքնագնահատական, դեռահասային ճգնաժամ։ Ամեն մի հանդիպում ապահով, ոչ դատողական, և ամբողջովին ձեզ նվիրված տարածք է։</p>
+        <div class="why-quote">
+          «Թերապիան ուժ ունեցողների համար չէ — այն բուն ճանապարհն է ուժ գտնելու։»
         </div>
-
-        <div class="tab-panel active" id="hotels">
-          <div class="search-grid">
-            <div class="field">
-              <label>Destination</label>
-              <input type="text" placeholder="Where are you going?" />
-            </div>
-            <div class="field">
-              <label>Check-in</label>
-              <input type="date" />
-            </div>
-            <div class="field">
-              <label>Check-out</label>
-              <input type="date" />
-            </div>
-            <div class="field">
-              <label>Travelers</label>
-              <select>
-                <option>2 travelers, 1 room</option>
-                <option>1 traveler, 1 room</option>
-                <option>2 travelers, 2 rooms</option>
-                <option>Family room</option>
-              </select>
-            </div>
-            <div class="search-action">
-              <button class="btn btn-primary" style="width:100%;">Search</button>
-            </div>
+      </div>
+      <div class="why-pillars reveal reveal-delay-2">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div>
+            <div class="pillar-title">Ոչ դատողական տարածք</div>
+            <div class="pillar-desc">Այստեղ ամեն ինչ, ինչ ասում ես, մնում է ապահով ու գաղտնի։ Ոչ մի դատողություն, ոչ մի պիտակ։</div>
           </div>
         </div>
-
-        <div class="tab-panel" id="flights">
-          <div class="search-grid">
-            <div class="field">
-              <label>From</label>
-              <input type="text" placeholder="Departure city" />
-            </div>
-            <div class="field">
-              <label>To</label>
-              <input type="text" placeholder="Arrival city" />
-            </div>
-            <div class="field">
-              <label>Departure</label>
-              <input type="date" />
-            </div>
-            <div class="field">
-              <label>Passengers</label>
-              <select>
-                <option>1 adult</option>
-                <option>2 adults</option>
-                <option>Family</option>
-              </select>
-            </div>
-            <div class="search-action">
-              <button class="btn btn-primary" style="width:100%;">Search</button>
-            </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div>
+            <div class="pillar-title">Ապացուցված մեթոդներ</div>
+            <div class="pillar-desc">ԿՎՎ, էքզիստենցիալ, այցելու-կենտրոն — ոչ թե «ուղղություն» ես, այլ ճիշտ մոտեցում ապահովող մասնագետ։</div>
           </div>
         </div>
-
-        <div class="tab-panel" id="packages">
-          <div class="search-grid">
-            <div class="field">
-              <label>Destination</label>
-              <input type="text" placeholder="Choose a destination" />
-            </div>
-            <div class="field">
-              <label>Start Date</label>
-              <input type="date" />
-            </div>
-            <div class="field">
-              <label>End Date</label>
-              <input type="date" />
-            </div>
-            <div class="field">
-              <label>Package Type</label>
-              <select>
-                <option>Flight + Hotel</option>
-                <option>Luxury Escape</option>
-                <option>Family Vacation</option>
-              </select>
-            </div>
-            <div class="search-action">
-              <button class="btn btn-primary" style="width:100%;">Search</button>
-            </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div>
+            <div class="pillar-title">Կողքդ ամբողջ ճանապարհին</div>
+            <div class="pillar-desc">Թերապիան գործընթաց է, ոչ մեկ նիստ։ Ես ամեն փուլում կողքդ եմ, ըստ քո ռիթմի։</div>
           </div>
         </div>
-
-        <div class="tab-panel" id="tours">
-          <div class="search-grid">
-            <div class="field">
-              <label>Tour Type</label>
-              <input type="text" placeholder="Adventure, city, beach..." />
-            </div>
-            <div class="field">
-              <label>Date</label>
-              <input type="date" />
-            </div>
-            <div class="field">
-              <label>Guests</label>
-              <select>
-                <option>2 guests</option>
-                <option>1 guest</option>
-                <option>4 guests</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Budget</label>
-              <select>
-                <option>$500 - $1000</option>
-                <option>$1000 - $2500</option>
-                <option>$2500+</option>
-              </select>
-            </div>
-            <div class="search-action">
-              <button class="btn btn-primary" style="width:100%;">Search</button>
-            </div>
+        <div class="pillar">
+          <div class="pillar-num">04</div>
+          <div>
+            <div class="pillar-title">Կանանց ֆոկուս</div>
+            <div class="pillar-desc">Կանայք ու աղջիկներ — իմ հիմնական ուղղությունը։ Հասկանում եմ ձեր աշխարհը ներսից։</div>
           </div>
-        </div>
-
-        <div class="mini-switches">
-          <label class="mini-check"><input type="checkbox" /> Add airport transfer</label>
-          <label class="mini-check"><input type="checkbox" /> Include breakfast</label>
-          <label class="mini-check"><input type="checkbox" /> Flexible dates</label>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <section id="deals">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Popular travel deals</h2>
-          <p>Inspired by the best online travel booking layouts, this section highlights destinations, ratings, trip details, and pricing in a premium card format.</p>
-        </div>
-        <a href="#" class="btn btn-light">View all deals</a>
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-label">Ծառայություններ</div>
+    <h2 class="section-title">Ինչո՞վ կարող եմ<br><em>օգնել</em></h2>
+    <p class="services-intro reveal">Ամեն մի ծառայություն կառուցված է կնոջ կյանքի իրական մարտահրավերների շուրջ — ոչ թեորիա, այլ ձեր փոփոխության ճանապարհ։</p>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-icon">🌿</span>
+        <div class="service-name">Անհատական<br>հոգեթերապիա</div>
+        <div class="service-desc">Անձնական տարածք, որտեղ կարող ես խոսել ամեն ինչի մասին — առանց դատողության, ամբողջ ուշադրությամբ ու ջերմությամբ։</div>
       </div>
-
-      <div class="deals-grid">
-        <article class="deal-card">
-          <div class="deal-image">
-            <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80" alt="Maldives" />
-            <div class="deal-badge">Top beach escape</div>
-          </div>
-          <div class="deal-content">
-            <div class="deal-top">
-              <h3 class="deal-title">Maldives</h3>
-              <div class="rating">9.4 / 10</div>
-            </div>
-            <div class="deal-meta">
-              <span>5 nights</span>
-              <span>Flight included</span>
-              <span>Breakfast</span>
-            </div>
-            <p>Luxury water villas, ocean views, and premium resort experiences for a dream vacation.</p>
-            <div class="price-row">
-              <div class="price">
-                <small>From</small>
-                <strong>$11111111111</strong>
-              </div>
-              <a href="#" class="btn btn-primary">Book now</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="deal-card">
-          <div class="deal-image">
-            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=900&q=80" alt="Paris" />
-            <div class="deal-badge">City break</div>
-          </div>
-          <div class="deal-content">
-            <div class="deal-top">
-              <h3 class="deal-title">Paris</h3>
-              <div class="rating">8.9 / 10</div>
-            </div>
-            <div class="deal-meta">
-              <span>4 nights</span>
-              <span>Hotel + flight</span>
-              <span>Central stay</span>
-            </div>
-            <p>Stylish hotel packages near top landmarks, shopping, and romantic city experiences.</p>
-            <div class="price-row">
-              <div class="price">
-                <small>From</small>
-                <strong>$920</strong>
-              </div>
-              <a href="#" class="btn btn-primary">Book now</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="deal-card">
-          <div class="deal-image">
-            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80" alt="Dubai" />
-            <div class="deal-badge">Best value</div>
-          </div>
-          <div class="deal-content">
-            <div class="deal-top">
-              <h3 class="deal-title">Dubai</h3>
-              <div class="rating">9.1 / 10</div>
-            </div>
-            <div class="deal-meta">
-              <span>6 nights</span>
-              <span>Hotel + transfer</span>
-              <span>Family friendly</span>
-            </div>
-            <p>Modern luxury, city adventures, shopping, and desert experiences in one package.</p>
-            <div class="price-row">
-              <div class="price">
-                <small>From</small>
-                <strong>$1,140</strong>
-              </div>
-              <a href="#" class="btn btn-primary">Book now</a>
-            </div>
-          </div>
-        </article>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-icon">🌸</span>
+        <div class="service-name">Դեռահաս<br>աղջիկների հետ</div>
+        <div class="service-desc">Հատուկ մոտեցում 13-18 տ. աղջիկների համար — ինքնաճանաչում, ինքնագնահատական, հարաբերություններ, ճնշում ու ներքին ձայն։</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-icon">💻</span>
+        <div class="service-name">Օնլայն<br>խորհրդատվություն</div>
+        <div class="service-desc">Ուզածդ վայրից, ուզածդ ժամին — ապահով թվային տարածք, որտեղ հեռավորությունը խոչընդոտ չէ։</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-icon">🧠</span>
+        <div class="service-name">Տագնապ ու<br>ստրես</div>
+        <div class="service-desc">ԿՎՎ ու էքզիստենցիալ մոտեցումներով — հասկանալ, ինչ է կատարվում, և գտնել ճանապարհ ադ ներսից դեպի հանդարտություն։</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-icon">💞</span>
+        <div class="service-name">Ինքնագնահատական<br>ու ինքնաճանաչում</div>
+        <div class="service-desc">Ո՞վ ես դու, ի՞նչ ես ուզում, ինչ արժե ու ինչ չարժե քո կյանքում — ջերմ ու կառուցողական ուղղությամբ։</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-icon">🤝</span>
+        <div class="service-name">Հարաբերություններ<br>ու սահմաններ</div>
+        <div class="service-desc">Ընտանիք, սեր, ընկերություն — ինչ ե՞ք ուզում, ինչ ե՞ք ստանում, ու ինչպե՞ս ասել «ոչ» առանց մեղքի զգացողության։</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="promo">
-    <div class="container">
-      <div class="promo-box">
-        <div>
-          <h2>Build trust fast with a high-converting travel layout</h2>
-          <p>This homepage structure is designed for travel agencies that want an Expedia-like feel: clear booking tabs, strong destination cards, modern trust signals, and easy call-to-action flow.</p>
-          <div class="promo-points">
-            <div class="promo-point">✔ Clean booking interface for flights, hotels, packages, and tours</div>
-            <div class="promo-point">✔ Premium destination sections with pricing and ratings</div>
-            <div class="promo-point">✔ Fully responsive layout for desktop, tablet, and mobile</div>
+<!-- WHO IS THIS FOR -->
+<section class="for-section" id="for">
+  <div class="container">
+    <div class="section-label">Ո՞ւմ համար</div>
+    <h2 class="section-title reveal">Սա <em>քո</em> տեղն է, եթե...</h2>
+    <div class="for-grid">
+      <div class="for-card reveal reveal-delay-1">
+        <span class="for-emoji">😔</span>
+        <div class="for-title">Ամեն ինչ լավ է, բայց ինչ-որ բան պակաս է</div>
+        <div class="for-desc">Կան ժամանակներ, երբ արտաքուստ ամեն ինչ ճիշտ է, բայց ներսից — ձայն, որ ասում է «սա ես չեմ»։</div>
+      </div>
+      <div class="for-card reveal reveal-delay-2">
+        <span class="for-emoji">🌀</span>
+        <div class="for-title">Տագնապ, որ հեռու չի գնում</div>
+        <div class="for-desc">Անդադար մտքեր, ուժեղ ըմռոշ, վախ ապագայի մասին — ուզում ես հասկանալ, թե ի՞նչ է կատարվում։</div>
+      </div>
+      <div class="for-card reveal reveal-delay-3">
+        <span class="for-emoji">💔</span>
+        <div class="for-title">Հարաբերություններ, որ ցավ բերում են</div>
+        <div class="for-desc">Սահմաններ դնելը դժվար է, «ոչ» ասելը — դեռ ավելի։ Ուզում ես հասկանալ, ու վերջ, ապա փոխվել։</div>
+      </div>
+      <div class="for-card reveal reveal-delay-4">
+        <span class="for-emoji">🌱</span>
+        <div class="for-title">Ուզում ես աճ, ոչ ճգնաժամ</div>
+        <div class="for-desc">Թերապիան ոչ թե միայն «ախտորոշման» համար է — շատ կանայք գալիս են ուղղակի ավելի ճանաչելու ինքն իրենց։</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach-section" id="approach">
+  <div class="container">
+    <div class="section-label">Մոտեցում</div>
+    <h2 class="section-title reveal">Ի՞նչ մեթոդներ<br><em>եմ կիրառում</em></h2>
+    <div class="approach-methods">
+      <div class="method-tag"><span>Կոգնիտիվ-Վարքաբանական Թերապիա (ԿՎՎ)</span></div>
+      <div class="method-tag"><span>Էքզիստենցիալ Հոգեթերապիա</span></div>
+      <div class="method-tag"><span>Այցելու-Կենտրոն Հոգեթերապիա</span></div>
+      <div class="method-tag"><span>Հոգեբուժության Հիմունքներ</span></div>
+      <div class="method-tag"><span>Տագնապային Խանգարումների Թրեյնինգ</span></div>
+      <div class="method-tag"><span>Դեռահաս Խորհրդատվություն</span></div>
+    </div>
+    <div class="approach-text">
+      <p class="reveal">ԿՎՎ-ն (CBT) օգնում է հասկանալ, թե ինչ կապ ունեն մտքերը, հույզերը ու վարքը — ու ինչպես փոխել բացասական շրջանները։ Ես կիրառում եմ ֆակտ-վրա-հիմնված, ձեր կյանքի կոնկրետ պատկեր ստեղծող մոտեցում։</p>
+      <p class="reveal reveal-delay-2">Էքզիստենցիալ ու Այցելու-կենտրոն թերապիաները ձեր ամբողջ անձնավորությամբ են հետաքրքրված — ոչ ախտանիշով, այլ ձեր էությամբ, կյանքի իմաստով, ու ձեր ուզածով։</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section class="certs-section" id="certs">
+  <div class="container">
+    <div class="section-label">Կրթություն ու Սերտիֆիկատներ</div>
+    <h2 class="section-title reveal">Մասնագիտական<br><em>ճանապարհ</em></h2>
+    <div class="certs-scroll">
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-year">2022 – 2024</div>
+        <div class="cert-name">Մագիստրոս — Կառավարման Հոգեբանություն</div>
+        <div class="cert-issuer">Երևանի Պետական Համալսարան</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-2">
+        <div class="cert-year">02.2025</div>
+        <div class="cert-name">Էքզիստենցիալ Հոգեթերապիա (4 փուլ)</div>
+        <div class="cert-issuer">ԵՊՀ Կիրառական Հոգեբանության Կենտրոն</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-3">
+        <div class="cert-year">02.2024</div>
+        <div class="cert-name">Այցելու-Կենտրոն Հոգեթերապիա (3 փուլ · 120 ժ.)</div>
+        <div class="cert-issuer">«Կենաց Ծառ» Հոգեբանական Կենտրոն</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-year">03.2024</div>
+        <div class="cert-name">Դեռահասների Խորհրդատվության Թրեյնինգ</div>
+        <div class="cert-issuer">«Կենաց Ծառ» Հոգեբանական Կենտրոն</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-2">
+        <div class="cert-year">07.2025</div>
+        <div class="cert-name">Տագնապային Խանգարումների Թրեյնինգ</div>
+        <div class="cert-issuer">«Անահիտ Արզումանյան» Հոգեբանական Կենտրոն</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-3">
+        <div class="cert-year">06.2025</div>
+        <div class="cert-name">Հոգեբուժության Հիմունքներ Հոգեբանների Համար</div>
+        <div class="cert-issuer">Հայկական Հոգեբուժական Ասոցիացիա + Recovery College</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-year">06.2025</div>
+        <div class="cert-name">ԿՎՎ Տեխնիկաներ Երեխաների ու Դեռահասների Հետ</div>
+        <div class="cert-issuer">Հայկական Հոգեբուժական Ասոցիացիա + Recovery College</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-2">
+        <div class="cert-year">2024 — մինչ օրս</div>
+        <div class="cert-name">Անդամ — Հայաստանի Հոգեբանների Միություն</div>
+        <div class="cert-issuer">Պաշտոնական մասնագիտական անդամություն</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-3">
+        <div class="cert-year">Ընթացքում</div>
+        <div class="cert-name">SBT (Schema-Based Therapy)</div>
+        <div class="cert-issuer">Մասնագիտական վերապատրաստում</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE QUIZ -->
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <div class="section-label">Ինքնաստուգում</div>
+    <h2 class="section-title">Ի՞նչ ես <em>զգում</em><br>հիմա</h2>
+    <p class="quiz-subtitle">3 հարց — և կիմանաս, թե ինչ ուղղությամբ կարող ենք սկսել։</p>
+
+    <div class="quiz-box">
+      <div id="quiz-questions">
+        <!-- Q1 -->
+        <div class="quiz-step" data-step="0">
+          <div class="quiz-question">Ինչպե՞ս կնկարագրեիր ներկա պահի հոգեկան վիճակդ:</div>
+          <div class="quiz-options">
+            <button class="quiz-option" onclick="selectOption(this, 0, 0)"><span>Անդադար մտհոգ եմ, անգամ «ռեժիմ անջատելը» չի ստացվում</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 0, 1)"><span>Ամեն ինչ նորմալ է, բայց ինչ-որ բան բաց-թողնված եմ զգում</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 0, 2)"><span>Կոնֆլիկտ ու ճնշում՝ արտաքին հարաբերությունների հետ</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 0, 3)"><span>Ուզում եմ ուղղակի ավելի հասկանալ ինձ</span></button>
           </div>
         </div>
-        <div class="promo-visual">
-          <div class="floating-note">Perfect for agencies that want a premium and familiar booking style.</div>
+
+        <!-- Q2 -->
+        <div class="quiz-step" data-step="1" style="display:none">
+          <div class="quiz-question">Ե՞րբ ես վերջին անգամ ամբողջությամբ ու անկաշկանդ ժամանակ անցկացրել ինքդ քեզ հետ:</div>
+          <div class="quiz-options">
+            <button class="quiz-option" onclick="selectOption(this, 1, 0)"><span>Հիշել չեմ կարողանում — ամբողջ ժամանակ ուրիշների համար եմ</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 1, 1)"><span>Երբեմն ունենամ, բայց մեղք եմ զգում</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 1, 2)"><span>Ժամանակ ունեմ, բայց ուղղակի ի՞նչ անեմ</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 1, 3)"><span>Կարողանում եմ, բայց ուզում եմ ավելի</span></button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-step" data-step="2" style="display:none">
+          <div class="quiz-question">Ի՞նչ ես ուզում ստանալ թերապիայից:</div>
+          <div class="quiz-options">
+            <button class="quiz-option" onclick="selectOption(this, 2, 0)"><span>Հանդարտություն ու տագնապից ազատում</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 2, 1)"><span>Ավելի լավ հասկանալ ու սիրել ինձ</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 2, 2)"><span>Ավելի առողջ հարաբերություններ կառուցել</span></button>
+            <button class="quiz-option" onclick="selectOption(this, 2, 3)"><span>Ապրել ավելի գիտակից ու իմաստավոր</span></button>
+          </div>
+        </div>
+
+        <div class="quiz-nav">
+          <button class="quiz-btn secondary" id="quiz-prev" onclick="quizPrev()" style="display:none">← Հետ</button>
+          <button class="quiz-btn" id="quiz-next" onclick="quizNext()">Հաջորդ →</button>
+          <div class="quiz-progress" id="quiz-prog">1 / 3</div>
+        </div>
+      </div>
+
+      <div class="quiz-result" id="quiz-result">
+        <div class="result-emoji" id="result-emoji">🌿</div>
+        <div class="result-title" id="result-title"></div>
+        <div class="result-text" id="result-text"></div>
+        <a href="https://t.me/+37494400089" class="quiz-btn" target="_blank" style="display:inline-block; text-decoration:none; padding:16px 36px;">Գրիր ինձ Telegram-ով</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-label">Արժեք</div>
+    <h2 class="section-title reveal">Ներդրում<br><em>ինք դ քեզ մեջ</em></h2>
+    <div class="pricing-grid">
+      <div class="price-card reveal reveal-delay-1">
+        <div class="price-type">Ծանոթություն</div>
+        <div class="price-amount"><span class="price-currency">֏</span>0</div>
+        <div class="price-per">Առաջին 15 րոպե</div>
+        <ul class="price-features">
+          <li>Ներածական զրույց</li>
+          <li>Ձեր հարցի ուրվագիծ</li>
+          <li>Ուղղության որոշում</li>
+        </ul>
+        <a href="https://t.me/+37494400089" class="price-cta" target="_blank">Անվճար գրանցում</a>
+      </div>
+
+      <div class="price-card featured reveal reveal-delay-2">
+        <div class="price-badge">Հիմնական</div>
+        <div class="price-type">Անհատական Նիստ</div>
+        <div class="price-amount"><span class="price-currency">֏</span>—</div>
+        <div class="price-per">Կապ հաստատեք գնի համար</div>
+        <ul class="price-features">
+          <li>50-60 րոպե անհատական թերապիա</li>
+          <li>ԿՎՎ, Էքզիստ., Այցելու-կ. մոտ.</li>
+          <li>Անձնական թռիչք ու վերլուծություն</li>
+          <li>Ամբողջ գաղտնիություն</li>
+        </ul>
+        <a href="https://t.me/+37494400089" class="price-cta" target="_blank">Գրանցվել</a>
+      </div>
+
+      <div class="price-card reveal reveal-delay-3">
+        <div class="price-type">Փաթեթ</div>
+        <div class="price-amount"><span class="price-currency">֏</span>—</div>
+        <div class="price-per">4 նիստ · Հատուկ գին</div>
+        <ul class="price-features">
+          <li>4 անհատական հանդիպում</li>
+          <li>Ճամփորդություն ու հետևողականություն</li>
+          <li>Մշտական հետադարձ կապ</li>
+          <li>Ճկուն ժամանակացույց</li>
+        </ul>
+        <a href="https://t.me/+37494400089" class="price-cta" target="_blank">Կապ հաստատել</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-label">Հաճախ տրվող հարցեր</div>
+    <h2 class="section-title reveal">Ի՞նչ ուզում ես<br><em>իմանալ</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Հ՞արկ է, որ ինձ «ինչ-որ բան» լինի, որ գամ թերապիայի?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Ոչ! Շատ կանայք գալիս են ոչ թե «ախտանիշի», այլ ուղղակի ավելի ճանաչելու ու հասկանալու ինքն իրենց։ Թերապիան ոչ միայն ճգնաժամի, այլ անձի աճի, ինքնագիտակցության ու կյանքի որակի բարելավման հնարավորություն է։</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Ամեն ինչ, ինչ ասեմ, կմնա՞ ձեր մոտ
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Ամբողջ գաղտնիությունը հոգեբանի էթիկայի հիմքն է։ Ձեր ասածը ոչ ոքի հետ չի կիսվի — ոչ ընտանիքի, ոչ ծանոթի, ոչ ոչ ոքի։ Ձեր անվտանգությունը ու վստահությունը իմ ամենաբարձր արժեքն է։</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Ո՞ւ կան հանդիպումները — կենդանի թե՞ օնլայն
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Կարող ենք կազմակերպել ե՛կ կենդանի Երևանում, ե՛կ օնլայն — Zoom, Google Meet կամ ուրիշ հարմար պլատֆորմ։ Կարևոր է ձեր հարմարավետությունը, ոչ վայրը։</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Ե՞ րբ կտեսնեմ արդյունք
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Ոմանք արդեն առաջին 2-3 նիստից նկատում են փոփոխություն — ավելի թեթև, ավելի հասկանալի, ավելի ինքնավստահ։ Երկարաժամկետ փոփոխությունն ավելի խորն է — ու բոլորովին ձեր անձնական ռիթմով։</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Ինչ կատարվում է առաջին հանդիպումին
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Առաջին նիստը ծանոթության նիստ է — ես ձեզ հարց կտամ, դուք կզգաք, թե ի՞նչ տեղ ու ի՞նչ ատմոսֆերա ենք ստեղծում։ Ոչ մի ախտորոշում, ոչ մի ճնշում — ուղղակի ջերմ, անկեղծ ու ապահով ծանոթություն։</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-title">Սկսիր հենց հիմա</div>
+  <p class="cta-band-sub">Ամենաերկար ճանապարհն էլ սկսվում է առաջին քայլից։<br>Գրիր — ու մենք կորոշենք հաջորդ քայլն արդեն միասին։</p>
+  <a href="https://t.me/+37494400089" class="cta-telegram" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.012 9.478c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.28 14.617l-2.95-.924c-.641-.203-.654-.641.136-.948l11.52-4.443c.534-.194 1.001.13.576 1.946z"/></svg>
+    Telegram-ով գրել
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-name">Նատալի Պողոսյան</div>
+        <div class="footer-brand-sub">Հոգեբան · Հոգեթերապևտ</div>
+        <p class="footer-desc">Կանանց ու աղջիկների հոգեկան առողջություն — ապահով, ջերմ ու արդյունավետ տարածք ձեր ճանապարհի համար։</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Ծառայություններ</div>
+        <ul class="footer-links">
+          <li>Անհատական Թերապիա</li>
+          <li>Դեռահաս Աղջիկներ</li>
+          <li>Օնլայն Խորհրդատվություն</li>
+          <li>Տագնապ ու Ստրես</li>
+          <li>Ինքնագնահատական</li>
+          <li>Հարաբերություններ</li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Կոնտակտ</div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">✉</div>
+          natali.poghosyan.1981@gmail.com
+        </div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">✈</div>
+          @+37494400089
+        </div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">📍</div>
+          Երևան, Հայաստան
         </div>
       </div>
     </div>
-  </section>
-
-  <section id="services">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Travel services</h2>
-          <p>Use this section to show what your agency offers and make the website feel complete and professional.</p>
-        </div>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="icon blue">🏨</div>
-          <h3>Hotel Booking</h3>
-          <p>Offer hotel searches, city stays, resort packages, and last-minute booking options with a clean interface.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon gold">✈️</div>
-          <h3>Flight Reservations</h3>
-          <p>Show round-trip and one-way options, flexible travel dates, and add-on services for a better booking flow.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon green">🧳</div>
-          <h3>Vacation Packages</h3>
-          <p>Bundle flights, hotels, airport transfers, and local experiences into one easy-to-book package.</p>
-        </div>
-      </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Նատալի Պողոսյան — Բոլոր իրավունքները պաշտպանված են</div>
+      <div class="footer-member">Հայաստանի Հոգեբանների Միության Անդամ · 2024</div>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <section id="why-us">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Why travelers choose us</h2>
-          <p>Strong trust-building blocks that match what users expect from top travel websites.</p>
-        </div>
-      </div>
+<script>
+  // ── NAV SCROLL ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
 
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="icon blue">💳</div>
-          <h3>Secure booking flow</h3>
-          <p>Modern layout with clear actions and space for payment, support, and trust messaging.</p>
-        </div>
-        <div class="why-card">
-          <div class="icon green">📞</div>
-          <h3>Fast customer support</h3>
-          <p>Add your phone number, WhatsApp, or live chat to help travelers book with confidence.</p>
-        </div>
-        <div class="why-card">
-          <div class="icon gold">⭐</div>
-          <h3>Best-value offers</h3>
-          <p>Highlight exclusive prices, seasonal discounts, and curated packages to increase conversions.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
 
-  <section id="reviews">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Traveler reviews</h2>
-          <p>Social proof section to help your website feel more trusted and conversion-ready.</p>
-        </div>
-      </div>
+  // ── FAQ ──
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
 
-      <div class="reviews-grid">
-        <div class="review-card">
-          <p>“Very smooth booking process and the hotel options looked premium and clear. The site feels modern and trustworthy.”</p>
-          <strong>— Anna M.</strong>
-        </div>
-        <div class="review-card">
-          <p>“I liked how easy it was to compare offers and see the important details quickly. It feels like a big travel brand website.”</p>
-          <strong>— David R.</strong>
-        </div>
-        <div class="review-card">
-          <p>“The layout is clean, mobile-friendly, and makes booking feel simple. Perfect style for a travel agency.”</p>
-          <strong>— Lilit S.</strong>
-        </div>
-      </div>
-    </div>
-  </section>
+  // ── QUIZ ──
+  let quizStep = 0;
+  const answers = [null, null, null];
 
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="logo" style="color:#fff; margin-bottom:14px;">
-            <span class="logo-mark">✈</span>
-            <span>SkyRoute</span>
-          </div>
-          <p>Modern travel agency website design inspired by premium online booking platforms.</p>
-        </div>
-        <div>
-          <div class="footer-title">Navigation</div>
-          <div class="footer-links">
-            <a href="#deals">Deals</a>
-            <a href="#services">Services</a>
-            <a href="#why-us">Why us</a>
-            <a href="#reviews">Reviews</a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-title">Contact</div>
-          <div class="footer-links">
-            <a href="tel:+37400000000">+374 00 00 00 00</a>
-            <a href="mailto:info@skyroute.com">info@skyroute.com</a>
-            <span>Yerevan, Armenia</span>
-          </div>
-        </div>
-        <div>
-          <div class="footer-title">Support</div>
-          <div class="footer-links">
-            <a href="#">Booking help</a>
-            <a href="#">Travel policies</a>
-            <a href="#">Terms & conditions</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bar">© 2026 SkyRoute Travel. All rights reserved.</div>
-    </div>
-  </footer>
+  function selectOption(btn, step, idx) {
+    document.querySelectorAll(`.quiz-step[data-step="${step}"] .quiz-option`).forEach(o => o.classList.remove('selected'));
+    btn.classList.add('selected');
+    answers[step] = idx;
+  }
 
-  <script>
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
+  function quizNext() {
+    if (answers[quizStep] === null) {
+      const opts = document.querySelectorAll(`.quiz-step[data-step="${quizStep}"] .quiz-option`);
+      opts.forEach(o => { o.style.borderColor = 'rgba(196,132,106,0.5)'; });
+      setTimeout(() => opts.forEach(o => { o.style.borderColor = ''; }), 800);
+      return;
+    }
+    if (quizStep < 2) {
+      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'none';
+      quizStep++;
+      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'block';
+      document.getElementById('quiz-prev').style.display = 'inline-flex';
+      document.getElementById('quiz-prog').textContent = `${quizStep + 1} / 3`;
+      if (quizStep === 2) document.getElementById('quiz-next').textContent = 'Ավարտ →';
+    } else {
+      showResult();
+    }
+  }
 
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const target = button.dataset.tab;
+  function quizPrev() {
+    if (quizStep > 0) {
+      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'none';
+      quizStep--;
+      document.querySelector(`.quiz-step[data-step="${quizStep}"]`).style.display = 'block';
+      document.getElementById('quiz-prog').textContent = `${quizStep + 1} / 3`;
+      if (quizStep === 0) document.getElementById('quiz-prev').style.display = 'none';
+      document.getElementById('quiz-next').textContent = 'Հաջորդ →';
+    }
+  }
 
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabPanels.forEach(panel => panel.classList.remove('active'));
-
-        button.classList.add('active');
-        document.getElementById(target).classList.add('active');
-      });
-    });
-  </script>
+  function showResult() {
+    const results = [
+      { emoji: '🌊', title: 'Հանդարտության կարիք', text: 'Տագնապ ու անդադար ուղեղ — շատ ծանոթ պատկեր։ ԿՎՎ ու թուլացող մոտեցումները կարող են բառացիորեն փոխել ամեն ինչ։ Մենք կսկսենք հենց այնտեղ, որտեղ ամենաշատ ճնշում ես զգում։' },
+      { emoji: '🌸', title: 'Ինքնաճանաչման ճամփորդ', text: 'Ուզում ես ճանաչել ու սիրել քեզ ավելի — ու դա ոչ թե «ինքնախաբեություն» է, այլ ամենահամարձակ բանը, ինչ կարելի է ընտրել։ Ես կողքդ կլինեմ ամբողջ ճանապարհին։' },
+      { emoji: '💞', title: 'Հարաբերությունների ուղղություն', text: 'Մարդկային կապ, սահման ու ինքնագնահատական — ամեն ինչ կապված է։ Կհասկանանք, ինչ ես ուզում հարաբերություններից, ու ինչ ես ստանում, ու ինչ կարող ես փոխել։' },
+      { emoji: '✨', title: 'Ինքնաճանաչման ճամփ', text: 'Ապրել ավելի գիտակից ու ամբողջական — Էքզիստենցիալ ու Այցելու-կ. մոտեցումը ճիշտ ձեզ համար է։ Ձեր ամբողջ անձնավորությամբ ու կյանքի իմաստով կկամ ձեր կողքին։' }
+    ];
+    const dominant = answers[2] !== null ? answers[2] : (answers[0] !== null ? answers[0] : 0);
+    const r = results[dominant];
+    document.getElementById('quiz-questions').style.display = 'none';
+    const res = document.getElementById('quiz-result');
+    document.getElementById('result-emoji').textContent = r.emoji;
+    document.getElementById('result-title').textContent = r.title;
+    document.getElementById('result-text').textContent = r.text;
+    res.classList.add('show');
+  }
+</script>
 </body>
 </html>
