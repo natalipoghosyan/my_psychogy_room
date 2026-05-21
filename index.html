@@ -1,685 +1,857 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Luxury Travel Agency</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f3ed;
-      color: #2f2f2f;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .travel-page {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 95vh;
-      background:
-        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
-      background-position: center;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      padding: 40px 8%;
-      position: relative;
-    }
-
-    .hero-content {
-      max-width: 720px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.35);
-      padding: 10px 18px;
-      border-radius: 50px;
-      font-size: 14px;
-      margin-bottom: 24px;
-      backdrop-filter: blur(8px);
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 7vw, 86px);
-      line-height: 1;
-      margin-bottom: 24px;
-      letter-spacing: -2px;
-    }
-
-    .hero p {
-      font-size: 19px;
-      max-width: 580px;
-      margin-bottom: 34px;
-      color: #f1f1f1;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 15px 28px;
-      border-radius: 50px;
-      font-weight: 700;
-      transition: 0.3s ease;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: #ffffff;
-      color: #1f1f1f;
-    }
-
-    .btn-primary:hover {
-      background: #d7b56d;
-      color: #fff;
-    }
-
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.6);
-      color: #fff;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.18);
-    }
-
-    /* SEARCH BOX */
-    .search-box {
-      background: #fff;
-      max-width: 1100px;
-      margin: -65px auto 80px;
-      border-radius: 28px;
-      padding: 30px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-      position: relative;
-      z-index: 5;
-    }
-
-    .search-item {
-      background: #f7f3ed;
-      padding: 18px;
-      border-radius: 18px;
-    }
-
-    .search-item span {
-      display: block;
-      font-size: 13px;
-      color: #777;
-      margin-bottom: 6px;
-    }
-
-    .search-item strong {
-      font-size: 17px;
-    }
-
-    .search-button {
-      background: #1f1f1f;
-      color: #fff;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .search-button:hover {
-      background: #d7b56d;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 80px 8%;
-    }
-
-    .section-header {
-      max-width: 720px;
-      margin-bottom: 45px;
-    }
-
-    .section-header span {
-      color: #b28b47;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-size: 13px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.05;
-      margin: 12px 0 18px;
-    }
-
-    .section-header p {
-      color: #666;
-      font-size: 18px;
-    }
-
-    /* DESTINATIONS */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
-    }
-
-    .destination-card {
-      background: #fff;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.08);
-      transition: 0.3s ease;
-    }
-
-    .destination-card:hover {
-      transform: translateY(-8px);
-    }
-
-    .destination-card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 24px;
-    }
-
-    .card-content h3 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .card-content p {
-      color: #666;
-      margin-bottom: 18px;
-    }
-
-    .price {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 700;
-    }
-
-    .price span {
-      color: #b28b47;
-      font-size: 20px;
-    }
-
-    /* BENEFITS */
-    .benefits {
-      background: #1f1f1f;
-      color: #fff;
-      border-radius: 40px;
-      margin: 40px 8%;
-      padding: 70px 6%;
-    }
-
-    .benefits .section-header p {
-      color: #ccc;
-    }
-
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-
-    .benefit-card {
-      background: rgba(255,255,255,0.08);
-      padding: 28px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .benefit-card .icon {
-      font-size: 34px;
-      margin-bottom: 18px;
-    }
-
-    .benefit-card h3 {
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
-
-    .benefit-card p {
-      color: #ccc;
-      font-size: 15px;
-    }
-
-    /* EXPERIENCE */
-    .experience {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .experience img {
-      width: 100%;
-      border-radius: 36px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-    }
-
-    .experience-content h2 {
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.08;
-      margin-bottom: 22px;
-    }
-
-    .experience-content p {
-      color: #666;
-      font-size: 18px;
-      margin-bottom: 24px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 30px;
-    }
-
-    .stat {
-      background: #fff;
-      padding: 22px;
-      border-radius: 20px;
-      text-align: center;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 30px;
-      color: #b28b47;
-    }
-
-    .stat span {
-      font-size: 14px;
-      color: #666;
-    }
-
-    /* TESTIMONIALS */
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .testimonial {
-      background: #fff;
-      padding: 30px;
-      border-radius: 28px;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.06);
-    }
-
-    .testimonial p {
-      color: #555;
-      margin-bottom: 22px;
-    }
-
-    .testimonial strong {
-      display: block;
-      font-size: 18px;
-    }
-
-    .testimonial span {
-      color: #888;
-      font-size: 14px;
-    }
-
-    /* CTA */
-    .cta {
-      margin: 60px 8%;
-      border-radius: 42px;
-      padding: 80px 8%;
-      color: #fff;
-      text-align: center;
-      background:
-        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
-      background-position: center;
-    }
-
-    .cta h2 {
-      font-size: clamp(36px, 6vw, 64px);
-      line-height: 1.05;
-      margin-bottom: 20px;
-    }
-
-    .cta p {
-      max-width: 620px;
-      margin: 0 auto 30px;
-      color: #eee;
-      font-size: 18px;
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 40px 8%;
-      background: #111;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    footer p {
-      color: #aaa;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: #ddd;
-    }
-
-    .footer-links a:hover {
-      color: #d7b56d;
-    }
-
-    /* MOBILE */
-    @media (max-width: 900px) {
-      .search-box {
-        grid-template-columns: 1fr 1fr;
-        margin: -45px 20px 60px;
-      }
-
-      .cards-grid,
-      .testimonial-grid,
-      .benefit-grid,
-      .experience {
-        grid-template-columns: 1fr;
-      }
-
-      .benefits {
-        margin: 30px 20px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .hero {
-        padding: 30px 6%;
-      }
-
-      .search-box {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 60px 6%;
-      }
-
-      .cta {
-        margin: 40px 20px;
-        padding: 60px 24px;
-      }
-
-      footer {
-        flex-direction: column;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Luxury Travel Agency</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f7f3ed;
+  color:#2f2f2f;
+  overflow-x:hidden;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.travel-page{
+  width:100%;
+}
+
+/* TOP BAR */
+
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:999;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(12px);
+}
+
+.logo{
+  color:#fff;
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.language-switcher{
+  display:flex;
+  gap:10px;
+}
+
+.language-switcher button{
+  border:none;
+  background:rgba(255,255,255,0.14);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:50px;
+  cursor:pointer;
+  font-weight:700;
+  transition:0.3s;
+}
+
+.language-switcher button:hover{
+  background:#d4af37;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+  url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  padding:120px 8% 80px;
+  color:#fff;
+}
+
+.hero-content{
+  max-width:720px;
+}
+
+.hero-badge{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.25);
+  margin-bottom:24px;
+  font-size:14px;
+}
+
+.hero h1{
+  font-size:clamp(42px,7vw,88px);
+  line-height:1;
+  margin-bottom:24px;
+}
+
+.hero p{
+  font-size:19px;
+  color:#f0f0f0;
+  margin-bottom:34px;
+  max-width:600px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:16px 30px;
+  border-radius:60px;
+  font-weight:700;
+  transition:0.3s;
+  display:inline-block;
+}
+
+.btn-primary{
+  background:#fff;
+  color:#1f1f1f;
+}
+
+.btn-primary:hover{
+  background:#d4af37;
+  color:#fff;
+}
+
+.btn-secondary{
+  border:1px solid rgba(255,255,255,0.5);
+  color:#fff;
+}
+
+.btn-secondary:hover{
+  background:rgba(255,255,255,0.1);
+}
+
+/* SEARCH BOX */
+
+.search-box{
+  max-width:1100px;
+  margin:-60px auto 80px;
+  background:#fff;
+  border-radius:28px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  position:relative;
+  z-index:5;
+  box-shadow:0 25px 60px rgba(0,0,0,0.12);
+}
+
+.search-item{
+  background:#f7f3ed;
+  padding:18px;
+  border-radius:18px;
+}
+
+.search-item span{
+  display:block;
+  font-size:13px;
+  color:#777;
+  margin-bottom:6px;
+}
+
+.search-item strong{
+  font-size:17px;
+}
+
+.search-button{
+  background:#1f1f1f;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:18px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.search-button:hover{
+  background:#d4af37;
+}
+
+/* SECTIONS */
+
+section{
+  padding:80px 8%;
+}
+
+.section-header{
+  max-width:700px;
+  margin-bottom:50px;
+}
+
+.section-header span{
+  color:#b28b47;
+  font-size:13px;
+  text-transform:uppercase;
+  font-weight:700;
+}
+
+.section-header h2{
+  font-size:clamp(34px,5vw,60px);
+  line-height:1.05;
+  margin:12px 0 18px;
+}
+
+.section-header p{
+  font-size:18px;
+  color:#666;
+}
+
+/* DESTINATIONS */
+
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:26px;
+}
+
+.destination-card{
+  background:#fff;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.destination-card:hover{
+  transform:translateY(-8px);
+}
+
+.destination-card img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:24px;
+}
+
+.card-content h3{
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.card-content p{
+  color:#666;
+  margin-bottom:18px;
+}
+
+.price{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:700;
+}
+
+.price span{
+  color:#b28b47;
+}
+
+/* BENEFITS */
+
+.benefits{
+  background:#1f1f1f;
+  color:#fff;
+  border-radius:40px;
+  margin:40px 8%;
+}
+
+.benefits .section-header p{
+  color:#ccc;
+}
+
+.benefit-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.benefit-card{
+  background:rgba(255,255,255,0.06);
+  padding:28px;
+  border-radius:24px;
+}
+
+.benefit-card .icon{
+  font-size:36px;
+  margin-bottom:18px;
+}
+
+.benefit-card h3{
+  margin-bottom:12px;
+}
+
+.benefit-card p{
+  color:#ccc;
+  font-size:15px;
+}
+
+/* CTA */
+
+.cta{
+  border-radius:42px;
+  margin:60px 8%;
+  padding:90px 8%;
+  text-align:center;
+  color:#fff;
+  background:
+  linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+  url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
+}
+
+.cta h2{
+  font-size:clamp(36px,6vw,68px);
+  line-height:1.05;
+  margin-bottom:20px;
+}
+
+.cta p{
+  max-width:650px;
+  margin:0 auto 32px;
+  color:#eee;
+  font-size:18px;
+}
+
+/* FOOTER */
+
+footer{
+  background:#111;
+  color:#fff;
+  padding:40px 8%;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.footer-links{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+}
+
+.footer-links a{
+  color:#ddd;
+}
+
+.footer-links a:hover{
+  color:#d4af37;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .cards-grid,
+  .benefit-grid{
+    grid-template-columns:1fr;
+  }
+
+  .search-box{
+    grid-template-columns:1fr 1fr;
+    margin:-40px 20px 60px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .hero{
+    padding:120px 6% 70px;
+  }
+
+  .search-box{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:60px 6%;
+  }
+
+  .cta{
+    margin:40px 20px;
+    padding:60px 24px;
+  }
+
+  footer{
+    flex-direction:column;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="travel-page">
+<div class="travel-page">
 
-    <!-- HERO -->
-    <header class="hero">
-      <div class="hero-content">
-        <div class="hero-badge">Luxury Travel Experiences</div>
-        <h1>Discover the world with comfort and style.</h1>
-        <p>
-          Premium travel packages, handpicked destinations, and unforgettable experiences designed for people who want more than just a trip.
-        </p>
+  <!-- TOPBAR -->
 
-        <div class="hero-buttons">
-          <a href="#destinations" class="btn btn-primary">Explore Destinations</a>
-          <a href="#contact" class="btn btn-secondary">Plan My Trip</a>
-        </div>
-      </div>
-    </header>
+  <div class="topbar">
 
-    <!-- SEARCH BOX -->
-    <div class="search-box">
-      <div class="search-item">
-        <span>Destination</span>
-        <strong>Maldives</strong>
-      </div>
-
-      <div class="search-item">
-        <span>Travel Type</span>
-        <strong>Luxury Escape</strong>
-      </div>
-
-      <div class="search-item">
-        <span>Duration</span>
-        <strong>7 Days</strong>
-      </div>
-
-      <div class="search-button">
-        Search Trips
-      </div>
+    <div class="logo">
+      LUXTRAVEL
     </div>
 
-    <!-- DESTINATIONS -->
-    <section id="destinations">
-      <div class="section-header">
-        <span>Top Destinations</span>
-        <h2>Curated places for your next dream vacation.</h2>
-        <p>
-          From tropical islands to European city escapes, we create trips that feel personal, smooth, and unforgettable.
-        </p>
-      </div>
-
-      <div class="cards-grid">
-        <div class="destination-card">
-          <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=900&q=80" alt="Maldives">
-          <div class="card-content">
-            <h3>Maldives Escape</h3>
-            <p>Private villas, crystal-clear water, romantic sunsets, and peaceful island luxury.</p>
-            <div class="price">
-              <span>From $1,850</span>
-              <a href="#">View Trip →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="destination-card">
-          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=80" alt="Greece">
-          <div class="card-content">
-            <h3>Greek Islands</h3>
-            <p>White houses, blue domes, sea views, local food, and elegant Mediterranean charm.</p>
-            <div class="price">
-              <span>From $1,250</span>
-              <a href="#">View Trip →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="destination-card">
-          <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80" alt="Paris">
-          <div class="card-content">
-            <h3>Paris Weekend</h3>
-            <p>Luxury hotels, iconic views, fine dining, museums, shopping, and romantic streets.</p>
-            <div class="price">
-              <span>From $980</span>
-              <a href="#">View Trip →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BENEFITS -->
-    <section class="benefits">
-      <div class="section-header">
-        <span>Why Choose Us</span>
-        <h2>Travel planning without stress.</h2>
-        <p>
-          We handle the details, so you can focus on enjoying every moment of your journey.
-        </p>
-      </div>
-
-      <div class="benefit-grid">
-        <div class="benefit-card">
-          <div class="icon">✈️</div>
-          <h3>Custom Trips</h3>
-          <p>Every journey is planned around your budget, style, and travel goals.</p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="icon">🏨</div>
-          <h3>Premium Hotels</h3>
-          <p>We select trusted hotels with great location, comfort, and service.</p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="icon">🗺️</div>
-          <h3>Local Experiences</h3>
-          <p>Enjoy authentic tours, hidden gems, and unique cultural moments.</p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="icon">🤝</div>
-          <h3>Full Support</h3>
-          <p>From booking to return, our team supports you during the full trip.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="experience">
-      <div>
-        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1000&q=80" alt="Travel experience">
-      </div>
-
-      <div class="experience-content">
-        <h2>More than travel. A complete experience.</h2>
-        <p>
-          We believe a perfect trip is not only about the destination. It is about comfort, timing, atmosphere, and the small details that make everything feel effortless.
-        </p>
-        <p>
-          Our team creates smooth travel plans for couples, families, solo travelers, and business clients.
-        </p>
-
-        <div class="stats">
-          <div class="stat">
-            <strong>12+</strong>
-            <span>Years Experience</span>
-          </div>
-
-          <div class="stat">
-            <strong>4.9</strong>
-            <span>Client Rating</span>
-          </div>
-
-          <div class="stat">
-            <strong>80+</strong>
-            <span>Destinations</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section>
-      <div class="section-header">
-        <span>Client Stories</span>
-        <h2>People travel with us again and again.</h2>
-      </div>
-
-      <div class="testimonial-grid">
-        <div class="testimonial">
-          <p>
-            “Everything was organized perfectly. The hotel, transfers, and tours were exactly what we wanted.”
-          </p>
-          <strong>Anna M.</strong>
-          <span>Maldives Trip</span>
-        </div>
-
-        <div class="testimonial">
-          <p>
-            “Our Greece vacation felt premium but still very comfortable. We didn’t have to worry about anything.”
-          </p>
-          <strong>David K.</strong>
-          <span>Greek Islands</span>
-        </div>
-
-        <div class="testimonial">
-          <p>
-            “The best travel agency experience. Very professional, fast, and attentive to small details.”
-          </p>
-          <strong>Sophie L.</strong>
-          <span>Paris Weekend</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta" id="contact">
-      <h2>Ready to plan your next unforgettable trip?</h2>
-      <p>
-        Tell us where you want to go, and we will create a beautiful travel plan that matches your style, budget, and expectations.
-      </p>
-      <a href="#" class="btn btn-primary">Start Planning</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div>
-        <h3>Luxury Travel</h3>
-        <p>Premium travel planning for unforgettable experiences.</p>
-      </div>
-
-      <div class="footer-links">
-        <a href="#">Destinations</a>
-        <a href="#">Packages</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </div>
-    </footer>
+    <div class="language-switcher">
+      <button onclick="changeLanguage('en')">EN</button>
+      <button onclick="changeLanguage('ru')">RU</button>
+      <button onclick="changeLanguage('am')">AM</button>
+    </div>
 
   </div>
+
+  <!-- HERO -->
+
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-badge" data-key="badge">
+        Luxury Travel Experiences
+      </div>
+
+      <h1 data-key="heroTitle">
+        Discover the world with comfort and style.
+      </h1>
+
+      <p data-key="heroText">
+        Premium travel packages, handpicked destinations, and unforgettable experiences designed for people who want more than just a trip.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary" data-key="exploreBtn">
+          Explore Destinations
+        </a>
+
+        <a href="#" class="btn btn-secondary" data-key="planBtn">
+          Plan My Trip
+        </a>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <div class="search-item">
+      <span data-key="destinationLabel">Destination</span>
+      <strong>Maldives</strong>
+    </div>
+
+    <div class="search-item">
+      <span data-key="travelTypeLabel">Travel Type</span>
+      <strong data-key="travelType">Luxury Escape</strong>
+    </div>
+
+    <div class="search-item">
+      <span data-key="durationLabel">Duration</span>
+      <strong>7 Days</strong>
+    </div>
+
+    <div class="search-button" data-key="searchBtn">
+      Search Trips
+    </div>
+
+  </div>
+
+  <!-- DESTINATIONS -->
+
+  <section>
+
+    <div class="section-header">
+
+      <span data-key="destinationsSmall">
+        Top Destinations
+      </span>
+
+      <h2 data-key="destinationsTitle">
+        Curated places for your next dream vacation.
+      </h2>
+
+      <p data-key="destinationsText">
+        From tropical islands to European city escapes, we create trips that feel personal, smooth, and unforgettable.
+      </p>
+
+    </div>
+
+    <div class="cards-grid">
+
+      <div class="destination-card">
+
+        <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=900&q=80">
+
+        <div class="card-content">
+
+          <h3>Maldives Escape</h3>
+
+          <p data-key="maldivesText">
+            Private villas, crystal-clear water, romantic sunsets, and peaceful island luxury.
+          </p>
+
+          <div class="price">
+            <span>From $1,850</span>
+            <a href="#" data-key="viewTrip">View Trip →</a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="destination-card">
+
+        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=80">
+
+        <div class="card-content">
+
+          <h3>Greek Islands</h3>
+
+          <p data-key="greeceText">
+            White houses, blue domes, sea views, local food, and elegant Mediterranean charm.
+          </p>
+
+          <div class="price">
+            <span>From $1,250</span>
+            <a href="#" data-key="viewTrip">View Trip →</a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="destination-card">
+
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80">
+
+        <div class="card-content">
+
+          <h3>Paris Weekend</h3>
+
+          <p data-key="parisText">
+            Luxury hotels, iconic views, fine dining, museums, shopping, and romantic streets.
+          </p>
+
+          <div class="price">
+            <span>From $980</span>
+            <a href="#" data-key="viewTrip">View Trip →</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- BENEFITS -->
+
+  <section class="benefits">
+
+    <div class="section-header">
+
+      <span data-key="whyUsSmall">
+        Why Choose Us
+      </span>
+
+      <h2 data-key="whyUsTitle">
+        Travel planning without stress.
+      </h2>
+
+      <p data-key="whyUsText">
+        We handle the details, so you can focus on enjoying every moment of your journey.
+      </p>
+
+    </div>
+
+    <div class="benefit-grid">
+
+      <div class="benefit-card">
+        <div class="icon">✈️</div>
+        <h3 data-key="customTrips">Custom Trips</h3>
+        <p data-key="customTripsText">
+          Every journey is planned around your budget, style, and travel goals.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="icon">🏨</div>
+        <h3 data-key="premiumHotels">Premium Hotels</h3>
+        <p data-key="premiumHotelsText">
+          We select trusted hotels with great location, comfort, and service.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="icon">🗺️</div>
+        <h3 data-key="localExperience">Local Experiences</h3>
+        <p data-key="localExperienceText">
+          Enjoy authentic tours, hidden gems, and unique cultural moments.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="icon">🤝</div>
+        <h3 data-key="fullSupport">Full Support</h3>
+        <p data-key="fullSupportText">
+          From booking to return, our team supports you during the full trip.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <h2 data-key="ctaTitle">
+      Ready to plan your next unforgettable trip?
+    </h2>
+
+    <p data-key="ctaText">
+      Tell us where you want to go, and we will create a beautiful travel plan that matches your style and expectations.
+    </p>
+
+    <a href="#" class="btn btn-primary" data-key="ctaBtn">
+      Start Planning
+    </a>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div>
+      <h3>LUXTRAVEL</h3>
+      <p data-key="footerText">
+        Premium travel planning for unforgettable experiences.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#" data-key="footerDestinations">Destinations</a>
+      <a href="#" data-key="footerPackages">Packages</a>
+      <a href="#" data-key="footerAbout">About</a>
+      <a href="#" data-key="footerContact">Contact</a>
+    </div>
+
+  </footer>
+
+</div>
+
+<script>
+
+const translations = {
+
+  en: {
+
+    badge:"Luxury Travel Experiences",
+    heroTitle:"Discover the world with comfort and style.",
+    heroText:"Premium travel packages, handpicked destinations, and unforgettable experiences designed for people who want more than just a trip.",
+    exploreBtn:"Explore Destinations",
+    planBtn:"Plan My Trip",
+    destinationLabel:"Destination",
+    travelTypeLabel:"Travel Type",
+    travelType:"Luxury Escape",
+    durationLabel:"Duration",
+    searchBtn:"Search Trips",
+
+    destinationsSmall:"Top Destinations",
+    destinationsTitle:"Curated places for your next dream vacation.",
+    destinationsText:"From tropical islands to European city escapes, we create trips that feel personal, smooth, and unforgettable.",
+
+    maldivesText:"Private villas, crystal-clear water, romantic sunsets, and peaceful island luxury.",
+    greeceText:"White houses, blue domes, sea views, local food, and elegant Mediterranean charm.",
+    parisText:"Luxury hotels, iconic views, fine dining, museums, shopping, and romantic streets.",
+
+    viewTrip:"View Trip →",
+
+    whyUsSmall:"Why Choose Us",
+    whyUsTitle:"Travel planning without stress.",
+    whyUsText:"We handle the details, so you can focus on enjoying every moment of your journey.",
+
+    customTrips:"Custom Trips",
+    customTripsText:"Every journey is planned around your budget, style, and travel goals.",
+
+    premiumHotels:"Premium Hotels",
+    premiumHotelsText:"We select trusted hotels with great location, comfort, and service.",
+
+    localExperience:"Local Experiences",
+    localExperienceText:"Enjoy authentic tours, hidden gems, and unique cultural moments.",
+
+    fullSupport:"Full Support",
+    fullSupportText:"From booking to return, our team supports you during the full trip.",
+
+    ctaTitle:"Ready to plan your next unforgettable trip?",
+    ctaText:"Tell us where you want to go, and we will create a beautiful travel plan that matches your style and expectations.",
+    ctaBtn:"Start Planning",
+
+    footerText:"Premium travel planning for unforgettable experiences.",
+    footerDestinations:"Destinations",
+    footerPackages:"Packages",
+    footerAbout:"About",
+    footerContact:"Contact"
+
+  },
+
+  ru: {
+
+    badge:"Роскошные путешествия",
+    heroTitle:"Откройте мир с комфортом и стилем.",
+    heroText:"Премиальные туры, лучшие направления и незабываемые впечатления для тех, кто хочет больше, чем просто поездку.",
+    exploreBtn:"Смотреть направления",
+    planBtn:"Спланировать поездку",
+    destinationLabel:"Направление",
+    travelTypeLabel:"Тип отдыха",
+    travelType:"Роскошный отдых",
+    durationLabel:"Длительность",
+    searchBtn:"Найти тур",
+
+    destinationsSmall:"Популярные направления",
+    destinationsTitle:"Лучшие места для вашего идеального отпуска.",
+    destinationsText:"От тропических островов до европейских городов — мы создаем путешествия мечты.",
+
+    maldivesText:"Частные виллы, кристально чистая вода и роскошный отдых.",
+    greeceText:"Белые дома, морские виды и атмосфера Средиземноморья.",
+    parisText:"Роскошные отели, рестораны и романтические улицы Парижа.",
+
+    viewTrip:"Подробнее →",
+
+    whyUsSmall:"Почему мы",
+    whyUsTitle:"Путешествия без стресса.",
+    whyUsText:"Мы берем все организационные детали на себя.",
+
+    customTrips:"Индивидуальные туры",
+    customTripsText:"Каждое путешествие создается под ваши пожелания.",
+
+    premiumHotels:"Премиальные отели",
+    premiumHotelsText:"Только лучшие отели с высоким уровнем сервиса.",
+
+    localExperience:"Местный опыт",
+    localExperienceText:"Настоящие эмоции и уникальные впечатления.",
+
+    fullSupport:"Полная поддержка",
+    fullSupportText:"Мы рядом с вами на протяжении всей поездки.",
+
+    ctaTitle:"Готовы к путешествию мечты?",
+    ctaText:"Расскажите, куда вы хотите отправиться, и мы организуем идеальный отдых.",
+    ctaBtn:"Начать",
+
+    footerText:"Премиальные путешествия по всему миру.",
+    footerDestinations:"Направления",
+    footerPackages:"Туры",
+    footerAbout:"О нас",
+    footerContact:"Контакты"
+
+  },
+
+  am: {
+
+    badge:"Պրեմիում ճանապարհորդություններ",
+    heroTitle:"Բացահայտիր աշխարհը հարմարավետությամբ և ոճով։",
+    heroText:"Պրեմիում ճանապարհորդական փաթեթներ և անմոռանալի փորձառություններ նրանց համար, ովքեր ուզում են ավելին, քան պարզապես ուղևորություն։",
+    exploreBtn:"Բացահայտել ուղղությունները",
+    planBtn:"Պլանավորել ուղևորություն",
+    destinationLabel:"Ուղղություն",
+    travelTypeLabel:"Ճամփորդության տեսակ",
+    travelType:"Luxury հանգիստ",
+    durationLabel:"Տևողություն",
+    searchBtn:"Փնտրել տուր",
+
+    destinationsSmall:"Լավագույն ուղղություններ",
+    destinationsTitle:"Ընտրված վայրեր ձեր երազանքի հանգստի համար։",
+    destinationsText:"Արևադարձային կղզիներից մինչև եվրոպական քաղաքներ՝ մենք ստեղծում ենք անմոռանալի ուղևորություններ։",
+
+    maldivesText:"Մասնավոր վիլլաներ, մաքուր ջուր և հանգիստ շքեղություն։",
+    greeceText:"Սպիտակ տներ, ծովային տեսարաններ և միջերկրածովյան մթնոլորտ։",
+    parisText:"Շքեղ հյուրանոցներ, ռեստորաններ և ռոմանտիկ փողոցներ։",
+
+    viewTrip:"Տեսնել →",
+
+    whyUsSmall:"Ինչու ընտրել մեզ",
+    whyUsTitle:"Ճամփորդություն առանց սթրեսի։",
+    whyUsText:"Մենք հոգում ենք բոլոր մանրամասների մասին։",
+
+    customTrips:"Անհատական տուրեր",
+    customTripsText:"Յուրաքանչյուր ուղևորություն ստեղծվում է ձեր ցանկություններին համապատասխան։",
+
+    premiumHotels:"Պրեմիում հյուրանոցներ",
+    premiumHotelsText:"Լավագույն հյուրանոցներ բարձր սպասարկմամբ։",
+
+    localExperience:"Տեղական փորձառություններ",
+    localExperienceText:"Իրական էմոցիաներ և յուրահատուկ պահեր։",
+
+    fullSupport:"Լիարժեք աջակցություն",
+    fullSupportText:"Մենք ձեզ հետ ենք ամբողջ ճանապարհորդության ընթացքում։",
+
+    ctaTitle:"Պատրա՞ստ եք ձեր հաջորդ ուղևորությանը։",
+    ctaText:"Պարզապես ասեք՝ ուր եք ուզում գնալ, և մենք կկազմակերպենք ամեն ինչ։",
+    ctaBtn:"Սկսել",
+
+    footerText:"Պրեմիում ճանապարհորդություններ ամբողջ աշխարհում։",
+    footerDestinations:"Ուղղություններ",
+    footerPackages:"Փաթեթներ",
+    footerAbout:"Մեր մասին",
+    footerContact:"Կապ"
+
+  }
+
+};
+
+function changeLanguage(language){
+
+  document.querySelectorAll("[data-key]").forEach(element => {
+
+    const key = element.getAttribute("data-key");
+
+    if(translations[language][key]){
+      element.innerHTML = translations[language][key];
+    }
+
+  });
+
+}
+
+</script>
 
 </body>
 </html>
