@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-
 <html class="scroll-smooth" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Aura Brew | Artisanal Coffee Experience</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
@@ -105,6 +103,7 @@
         .glass-panel { backdrop-filter: blur(12px); background: rgba(255, 248, 246, 0.85); }
         .hover-lift { transition: transform 0.3s ease; }
         .hover-lift:hover { transform: translateY(-8px); }
+        .star-row span{ color:#e9c349; }
     </style>
 </head>
 <body class="bg-background text-on-background selection:bg-secondary-container selection:text-on-secondary-container overflow-x-hidden">
@@ -134,121 +133,196 @@
 <script>
 (function() {
   const container = document.getElementById('threejs-container-ANIMATION_2');
-  const devicePixelRatio = window.devicePixelRatio || 1;
-  
-// Three.js Floating Coffee Cups Scene
-// Colors derived from Aura Brew Design System: #2c1e1a (Espresso), #d4a373 (Gold), #fff8f6 (Cream)
+  let scene, camera, renderer, cups = [];
+  const cupCount = 7;
+  let mouseX = 0, mouseY = 0;
+  let targetMouseX = 0, targetMouseY = 0;
 
-let scene, camera, renderer, cups = [];
-const cupCount = 5;
+  // Three.js Floating Coffee Cups Scene — enhanced
+  // Colors derived from Aura Brew Design System: #2c1e1a (Espresso), #d4a373 (Gold), #fff8f6 (Cream)
 
-function init() {
+  function createSteam(parent) {
+    const steamGroup = new THREE.Group();
+    for (let s = 0; s < 3; s++) {
+      const geom = new THREE.PlaneGeometry(0.18, 0.5, 1, 8);
+      const mat = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.08,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+      const plane = new THREE.Mesh(geom, mat);
+      plane.position.set((s - 1) * 0.08, 0.75 + s * 0.15, 0);
+      plane.userData = { phase: Math.random() * Math.PI * 2, speed: 0.6 + Math.random() * 0.4 };
+      steamGroup.add(plane);
+    }
+    parent.add(steamGroup);
+  }
+
+  function init() {
     scene = new THREE.Scene();
-    
+    scene.fog = new THREE.FogExp2(0xfff8f6, 0.05);
+
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
-    
+
     camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.z = 6;
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    // Lighting — key + rim instead of a single point light, for a
+    // more dimensional, premium ceramic look.
+    const ambientLight = new THREE.AmbientLight(0xfff3e8, 0.65);
     scene.add(ambientLight);
-    
-    const pointLight = new THREE.PointLight(0xd4a373, 1.2);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
 
-    // Create Coffee Cup Groups (Simplified geometry to represent cups)
+    const keyLight = new THREE.PointLight(0xd4a373, 1.4, 20);
+    keyLight.position.set(5, 5, 6);
+    scene.add(keyLight);
+
+    const rimLight = new THREE.PointLight(0xffffff, 0.75, 20);
+    rimLight.position.set(-6, -3, -4);
+    scene.add(rimLight);
+
     for (let i = 0; i < cupCount; i++) {
-        const cupGroup = new THREE.Group();
-        
-        // Cup Body
-        const bodyGeom = new THREE.CylinderGeometry(0.5, 0.4, 0.8, 32);
-        const bodyMat = new THREE.MeshPhongMaterial({ color: 0xfff8f6 });
-        const body = new THREE.Mesh(bodyGeom, bodyMat);
-        cupGroup.add(body);
-        
-        // Cup Handle
-        const handleGeom = new THREE.TorusGeometry(0.2, 0.05, 16, 32, Math.PI);
-        const handleMat = new THREE.MeshPhongMaterial({ color: 0xfff8f6 });
-        const handle = new THREE.Mesh(handleGeom, handleMat);
-        handle.position.set(0.45, 0, 0);
-        handle.rotation.z = Math.PI / 2;
-        cupGroup.add(handle);
+      const cupGroup = new THREE.Group();
+      const scale = 0.7 + Math.random() * 0.6;
+      cupGroup.scale.setScalar(scale);
 
-        // Coffee inside
-        const coffeeGeom = new THREE.CircleGeometry(0.45, 32);
-        const coffeeMat = new THREE.MeshBasicMaterial({ color: 0x2c1e1a });
-        const coffee = new THREE.Mesh(coffeeGeom, coffeeMat);
-        coffee.rotation.x = -Math.PI / 2;
-        coffee.position.y = 0.41;
-        cupGroup.add(coffee);
+      const bodyGeom = new THREE.CylinderGeometry(0.5, 0.4, 0.8, 32);
+      const bodyMat = new THREE.MeshPhysicalMaterial({
+        color: 0xfff8f6,
+        roughness: 0.25,
+        metalness: 0.05,
+        clearcoat: 0.6,
+        clearcoatRoughness: 0.3
+      });
+      const body = new THREE.Mesh(bodyGeom, bodyMat);
+      cupGroup.add(body);
 
-        // Random Position
-        cupGroup.position.set(
-            (Math.random() - 0.5) * 8,
-            (Math.random() - 0.5) * 6,
-            (Math.random() - 0.5) * 4
-        );
-        
-        cupGroup.rotation.set(
-            Math.random() * Math.PI,
-            Math.random() * Math.PI,
-            0
-        );
+      const handleGeom = new THREE.TorusGeometry(0.2, 0.05, 16, 32, Math.PI);
+      const handle = new THREE.Mesh(handleGeom, bodyMat);
+      handle.position.set(0.45, 0, 0);
+      handle.rotation.z = Math.PI / 2;
+      cupGroup.add(handle);
 
-        // Movement metadata
-        cupGroup.userData = {
-            floatSpeed: 0.005 + Math.random() * 0.01,
-            rotSpeed: 0.002 + Math.random() * 0.005,
-            offset: Math.random() * Math.PI * 2
-        };
+      const coffeeGeom = new THREE.CircleGeometry(0.45, 32);
+      const coffeeMat = new THREE.MeshStandardMaterial({ color: 0x2c1e1a, roughness: 0.15, metalness: 0.1 });
+      const coffee = new THREE.Mesh(coffeeGeom, coffeeMat);
+      coffee.rotation.x = -Math.PI / 2;
+      coffee.position.y = 0.41;
+      cupGroup.add(coffee);
 
-        cups.push(cupGroup);
-        scene.add(cupGroup);
+      // Every other cup gets a saucer — breaks up the uniformity of
+      // the original, which used identical geometry for every cup.
+      if (i % 2 === 0) {
+        const saucerGeom = new THREE.CylinderGeometry(0.75, 0.75, 0.05, 32);
+        const saucer = new THREE.Mesh(saucerGeom, bodyMat);
+        saucer.position.y = -0.42;
+        cupGroup.add(saucer);
+      }
+
+      createSteam(cupGroup);
+
+      const baseX = (Math.random() - 0.5) * 9;
+      const baseY = (Math.random() - 0.5) * 6;
+      const baseZ = (Math.random() - 0.5) * 5;
+      cupGroup.position.set(baseX, baseY, baseZ);
+      cupGroup.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+
+      cupGroup.userData = {
+        baseX, baseY,
+        baseRotZ: cupGroup.rotation.z,
+        floatSpeed: 0.3 + Math.random() * 0.4,
+        floatAmp: 0.25 + Math.random() * 0.25,
+        rotSpeed: 0.002 + Math.random() * 0.004,
+        orbitRadius: 0.15 + Math.random() * 0.2,
+        orbitSpeed: 0.15 + Math.random() * 0.2,
+        offset: Math.random() * Math.PI * 2,
+        // Scroll influence — same idea as before, but now applied
+        // relative to an anchor point every frame instead of being
+        // subtracted cumulatively.
+        parallax: 0.0009 * (i + 1)
+      };
+
+      cups.push(cupGroup);
+      scene.add(cupGroup);
     }
 
-    animate();
-    
     window.addEventListener('resize', onWindowResize);
-}
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
 
-function onWindowResize() {
+    animate();
+  }
+
+  function onMouseMove(e) {
+    targetMouseX = (e.clientX / window.innerWidth - 0.5);
+    targetMouseY = (e.clientY / window.innerHeight - 0.5);
+  }
+
+  function onWindowResize() {
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-}
+  }
 
-function animate() {
+  function animate() {
     requestAnimationFrame(animate);
-    
     const time = Date.now() * 0.001;
-    const scrollY = window.scrollY || window.pageYOffset;
-    
-    cups.forEach((cup, i) => {
-        // Ambient floating
-        cup.position.y += Math.sin(time + cup.userData.offset) * cup.userData.floatSpeed;
-        cup.rotation.x += cup.userData.rotSpeed;
-        cup.rotation.y += cup.userData.rotSpeed;
-        
-        // Scroll reaction
-        cup.position.y -= scrollY * 0.002 * (i + 1) * 0.2; // Differential scrolling for depth
-        cup.rotation.z += scrollY * 0.0005;
+
+    // THE FIX: clamp how far scroll can push the scene, and — more
+    // importantly — every cup's position is rebuilt fresh each frame
+    // from its stored base position (userData.baseX/baseY), not
+    // mutated in place. The original code did
+    //   cup.position.y -= scrollY * factor
+    // inside the render loop, which re-subtracts based on the
+    // *absolute* scroll position on every single frame — so the
+    // longer the page stayed scrolled, the further the cups drifted,
+    // and scrolling back to the top never restored them because
+    // nothing was anchored to an original position. Anchoring to
+    // baseX/baseY and recomputing (not accumulating) means scrolling
+    // back up always returns the cups exactly to where they started.
+    const rawScroll = window.scrollY || window.pageYOffset;
+    const scrollY = Math.max(-1200, Math.min(1200, rawScroll));
+
+    mouseX += (targetMouseX - mouseX) * 0.05;
+    mouseY += (targetMouseY - mouseY) * 0.05;
+    camera.position.x = mouseX * 0.6;
+    camera.position.y = -mouseY * 0.4;
+    camera.lookAt(0, 0, 0);
+
+    cups.forEach((cup) => {
+      const d = cup.userData;
+      const bob = Math.sin(time * d.floatSpeed + d.offset) * d.floatAmp;
+      const orbitX = Math.cos(time * d.orbitSpeed + d.offset) * d.orbitRadius;
+
+      cup.position.y = d.baseY + bob - scrollY * d.parallax;
+      cup.position.x = d.baseX + orbitX;
+      cup.rotation.x += d.rotSpeed;
+      cup.rotation.y += d.rotSpeed;
+      cup.rotation.z = d.baseRotZ + scrollY * 0.0004;
+
+      cup.children.forEach((child) => {
+        if (child.type === 'Group') {
+          child.children.forEach((plane) => {
+            const sway = Math.sin(time * plane.userData.speed + plane.userData.phase);
+            plane.position.x = sway * 0.05;
+            plane.material.opacity = 0.05 + sway * 0.03;
+          });
+        }
+      });
     });
 
     renderer.render(scene, camera);
-}
+  }
 
-init();
-
+  init();
 })();
 </script>
 </div>
@@ -367,6 +441,93 @@ init();
 </div>
 </div>
 </section>
+
+<!-- Testimonials — new section -->
+<section class="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="text-center mb-20 reveal">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4 block">Word Of Mouth</span>
+<h2 class="font-display-lg text-headline-md md:text-display-lg text-primary">Loved By Our Community</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 reveal" style="transition-delay: 100ms;">
+<div class="star-row mb-4" aria-label="5 out of 5 stars">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 italic">"The Midnight Roast changed how I think about coffee. Rich, never bitter, and the packaging alone feels like a gift."</p>
+<div class="font-label-md text-label-md text-primary">Elena Marchetti</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Milan, Italy</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 reveal" style="transition-delay: 200ms;">
+<div class="star-row mb-4" aria-label="5 out of 5 stars">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 italic">"You can taste the sourcing standards. The Golden Sunrise is my Sunday-morning ritual now, without fail."</p>
+<div class="font-label-md text-label-md text-primary">Jonah Whitfield</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Austin, TX</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 reveal" style="transition-delay: 300ms;">
+<div class="star-row mb-4" aria-label="5 out of 5 stars">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 italic">"Ordered The Velvet Latte blend on a whim. Now it's the only thing my espresso machine sees."</p>
+<div class="font-label-md text-label-md text-primary">Priya Sharma</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Vancouver, Canada</div>
+</div>
+</div>
+</section>
+
+<!-- Visit Us — new section. Address/hours below are placeholders — replace with the real roastery details. -->
+<section class="bg-surface-container-low py-32 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="reveal">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4 block">Visit Us</span>
+<h2 class="font-headline-md text-headline-md text-primary mb-8">The Roastery &amp; Tasting Room</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10 leading-relaxed">Step inside where the roasting happens. Sample single origins fresh off the drum, guided by the people who source them.</p>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-1">Address</div>
+<div class="font-body-md text-body-md text-primary">123 Artisan Lane, Portland, OR 97209</div>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-1">Hours</div>
+<div class="font-body-md text-body-md text-primary">Mon – Fri: 7:00 – 18:00</div>
+<div class="font-body-md text-body-md text-primary">Sat – Sun: 8:00 – 16:00</div>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">call</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-1">Phone</div>
+<div class="font-body-md text-body-md text-primary">(503) 555-0148</div>
+</div>
+</div>
+</div>
+<button class="mt-10 bg-primary text-on-primary px-8 py-3 font-label-md text-label-md rounded-full hover-lift shadow-lg hover:shadow-xl transition-all">Get Directions</button>
+</div>
+<div class="relative h-[480px] reveal" style="transition-delay: 150ms;">
+<div class="absolute inset-0 bg-secondary-container/10 rounded-xl rotate-2 scale-105"></div>
+<iframe class="w-full h-full rounded-xl shadow-2xl relative z-10 border-0" src="https://www.google.com/maps?q=123+Artisan+Lane,+Portland,+OR&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</div>
+</section>
+
 <!-- Footer -->
 <footer class="bg-surface-container-lowest dark:bg-tertiary-container w-full py-16 border-t border-outline-variant/20">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
@@ -423,7 +584,6 @@ init();
         const observerOptions = {
             threshold: 0.1
         };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -431,9 +591,7 @@ init();
                 }
             });
         }, observerOptions);
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
         // Header transparency logic
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
