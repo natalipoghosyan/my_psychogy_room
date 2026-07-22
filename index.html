@@ -1,607 +1,1626 @@
 <!DOCTYPE html>
-<html class="scroll-smooth" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Aura Brew | Artisanal Coffee Experience</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/index.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/index.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5.0.14/index.min.css">
+<link href="https://fonts.cdnfonts.com/css/material-symbols-outlined" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "secondary-fixed-dim": "#e9c349",
-                    "on-tertiary-fixed": "#1d1b16",
-                    "secondary": "#735c00",
-                    "secondary-fixed": "#ffe088",
-                    "error-container": "#ffdad6",
-                    "outline": "#817471",
-                    "on-primary-fixed": "#261814",
-                    "on-secondary": "#ffffff",
-                    "surface": "#fff8f6",
-                    "on-surface-variant": "#4f4542",
-                    "tertiary-container": "#23211c",
-                    "inverse-on-surface": "#fdeee9",
-                    "primary-container": "#2c1e1a",
-                    "on-primary-container": "#99847e",
-                    "on-error": "#ffffff",
-                    "surface-bright": "#fff8f6",
-                    "inverse-primary": "#dac1bb",
-                    "on-tertiary": "#ffffff",
-                    "surface-dim": "#e6d7d3",
-                    "on-secondary-container": "#745c00",
-                    "background": "#fff8f6",
-                    "tertiary": "#0c0a06",
-                    "surface-container-lowest": "#ffffff",
-                    "outline-variant": "#d2c3bf",
-                    "error": "#ba1a1a",
-                    "on-primary-fixed-variant": "#54433e",
-                    "tertiary-fixed-dim": "#cbc6bd",
-                    "on-secondary-fixed": "#241a00",
-                    "on-primary": "#ffffff",
-                    "surface-container-high": "#f4e5e1",
-                    "surface-container-highest": "#eedfdb",
-                    "surface-tint": "#6d5a55",
-                    "on-tertiary-fixed-variant": "#494640",
-                    "surface-container": "#faebe6",
-                    "on-tertiary-container": "#8c8881",
-                    "primary-fixed-dim": "#dac1bb",
-                    "secondary-container": "#fed65b",
-                    "primary": "#130805",
-                    "on-background": "#211a18",
-                    "surface-container-low": "#fff1ed",
-                    "on-surface": "#211a18",
-                    "surface-variant": "#eedfdb",
-                    "inverse-surface": "#372f2c",
-                    "on-error-container": "#93000a",
-                    "primary-fixed": "#f7ddd6",
-                    "on-secondary-fixed-variant": "#574500",
-                    "tertiary-fixed": "#e7e2d9"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "spacing": {
-                    "margin-mobile": "20px",
-                    "unit": "8px",
-                    "container-max": "1280px",
-                    "margin-desktop": "64px",
-                    "gutter": "24px"
-            },
-            "fontFamily": {
-                    "headline-md": ["Libre Caslon Text"],
-                    "display-lg": ["Libre Caslon Text"],
-                    "label-md": ["Hanken Grotesk"],
-                    "body-md": ["Hanken Grotesk"],
-                    "headline-sm": ["Libre Caslon Text"],
-                    "body-lg": ["Hanken Grotesk"],
-                    "display-lg-mobile": ["Libre Caslon Text"],
-                    "label-sm": ["Hanken Grotesk"]
-            },
-            "fontSize": {
-                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
-            }
-          },
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          cream: "#faf5ef",
+          espresso: "#1a0f0a",
+          mocha: "#3d2817",
+          caramel: "#c89b6c",
+          gold: "#d4a373",
+          "gold-bright": "#e9c349",
+          latte: "#e8d5c4",
+          "surface-dim": "#e6d7d3",
+          "surface-bright": "#fff8f6"
         },
+        fontFamily: {
+          display: ['"Playfair Display"', 'serif'],
+          serif: ['"Cormorant Garamond"', 'serif'],
+          sans: ['Inter', 'sans-serif']
+        },
+        letterSpacing: {
+          widestest: '0.25em'
+        }
       }
-    </script>
-<style>
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .glass-panel { backdrop-filter: blur(12px); background: rgba(255, 248, 246, 0.85); }
-        .hover-lift { transition: transform 0.3s ease; }
-        .hover-lift:hover { transform: translateY(-8px); }
-        .star-row span{ color:#e9c349; }
-    </style>
-</head>
-<body class="bg-background text-on-background selection:bg-secondary-container selection:text-on-secondary-container overflow-x-hidden">
-<!-- Header: TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md bg-tertiary-container/10">
-<nav class="flex justify-between items-center px-margin-desktop py-unit max-w-container-max mx-auto h-20">
-<div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">
-                Aura Brew
-            </div>
-<div class="hidden md:flex items-center space-x-8">
-<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim border-b-2 border-secondary pb-1 transition-all duration-300" href="#">The Experience</a>
-<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-secondary transition-colors transition-all duration-300 ease-in-out" href="#">Our Beans</a>
-<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-secondary transition-colors transition-all duration-300 ease-in-out" href="#">Menu</a>
-<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-secondary transition-colors transition-all duration-300 ease-in-out" href="#">Find Us</a>
-</div>
-<button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-md text-label-md rounded-full scale-95 active:scale-90 transition-transform hover:opacity-80">
-                Order Now
-            </button>
-</nav>
-</header>
-<!-- Hero Section -->
-<section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-surface">
-<!-- STITCH_THREEJS_START:ANIMATION_2 class="absolute inset-0 w-full h-full opacity-60" -->
-<div class="absolute inset-0 w-full h-full opacity-60" style="display:block;">
-<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
-<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
-<script>
-(function() {
-  const container = document.getElementById('threejs-container-ANIMATION_2');
-  let scene, camera, renderer, cups = [];
-  const cupCount = 7;
-  let mouseX = 0, mouseY = 0;
-  let targetMouseX = 0, targetMouseY = 0;
-
-  // Three.js Floating Coffee Cups Scene — enhanced
-  // Colors derived from Aura Brew Design System: #2c1e1a (Espresso), #d4a373 (Gold), #fff8f6 (Cream)
-
-  function createSteam(parent) {
-    const steamGroup = new THREE.Group();
-    for (let s = 0; s < 3; s++) {
-      const geom = new THREE.PlaneGeometry(0.18, 0.5, 1, 8);
-      const mat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.08,
-        side: THREE.DoubleSide,
-        depthWrite: false
-      });
-      const plane = new THREE.Mesh(geom, mat);
-      plane.position.set((s - 1) * 0.08, 0.75 + s * 0.15, 0);
-      plane.userData = { phase: Math.random() * Math.PI * 2, speed: 0.6 + Math.random() * 0.4 };
-      steamGroup.add(plane);
     }
-    parent.add(steamGroup);
+  }
+</script>
+<style>
+  * { -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #faf5ef;
+    color: #1a0f0a;
+    cursor: none;
+    overflow-x: hidden;
+  }
+  .font-display { font-family: 'Playfair Display', serif; }
+  .font-serif-alt { font-family: 'Cormorant Garamond', serif; }
+
+  /* Custom cursor */
+  .cursor-dot, .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: #e9c349;
+    border-radius: 50%;
+    transition: transform 0.1s ease;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(233, 195, 73, 0.6);
+    border-radius: 50%;
+    transition: transform 0.25s ease, width 0.3s, height 0.3s, border-color 0.3s;
+  }
+  .cursor-ring.hover { width: 60px; height: 60px; border-color: #e9c349; background: rgba(233,195,73,0.08); }
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+    .cursor-dot, .cursor-ring { display: none; }
   }
 
-  function init() {
-    scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0xfff8f6, 0.05);
+  /* Scroll progress */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: linear-gradient(90deg, #d4a373, #e9c349);
+    z-index: 100;
+    transition: width 0.1s ease-out;
+  }
 
-    const width = container.clientWidth || window.innerWidth;
-    const height = container.clientHeight || window.innerHeight;
+  /* Loader */
+  .loader {
+    position: fixed; inset: 0;
+    background: #1a0f0a;
+    z-index: 10000;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  .loader.hidden { opacity: 0; visibility: hidden; }
+  .loader-logo {
+    font-family: 'Playfair Display', serif;
+    color: #e9c349;
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+  .loader-bar {
+    width: 200px; height: 1px;
+    background: rgba(233, 195, 73, 0.2);
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .loader-bar::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: #e9c349;
+    animation: loadBar 2s ease forwards;
+  }
+  @keyframes loadBar { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 6;
+  /* Marquee */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: flex;
+    animation: marquee 30s linear infinite;
+    gap: 4rem;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.active { opacity: 1; transform: translateY(0); }
 
-    // Lighting — key + rim instead of a single point light, for a
-    // more dimensional, premium ceramic look.
-    const ambientLight = new THREE.AmbientLight(0xfff3e8, 0.65);
-    scene.add(ambientLight);
+  /* Glass */
+  .glass-panel {
+    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(250, 245, 239, 0.75);
+    border-bottom: 1px solid rgba(26, 15, 10, 0.06);
+  }
 
-    const keyLight = new THREE.PointLight(0xd4a373, 1.4, 20);
-    keyLight.position.set(5, 5, 6);
-    scene.add(keyLight);
+  /* Product card */
+  .product-card {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px -20px rgba(26, 15, 10, 0.2);
+  }
+  .product-card:hover .product-img { transform: scale(1.08); }
+  .product-img { transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
 
-    const rimLight = new THREE.PointLight(0xffffff, 0.75, 20);
-    rimLight.position.set(-6, -3, -4);
-    scene.add(rimLight);
+  /* Hover lift */
+  .hover-lift { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+  .hover-lift:hover { transform: translateY(-4px); }
 
-    for (let i = 0; i < cupCount; i++) {
-      const cupGroup = new THREE.Group();
-      const scale = 0.7 + Math.random() * 0.6;
-      cupGroup.scale.setScalar(scale);
+  /* Noise overlay */
+  .noise {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 
-      const bodyGeom = new THREE.CylinderGeometry(0.5, 0.4, 0.8, 32);
-      const bodyMat = new THREE.MeshPhysicalMaterial({
-        color: 0xfff8f6,
-        roughness: 0.25,
-        metalness: 0.05,
-        clearcoat: 0.6,
-        clearcoatRoughness: 0.3
+  /* Tasting wheel */
+  .taste-segment {
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+  .taste-segment:hover { opacity: 1 !important; }
+  .taste-segment.active { opacity: 1 !important; }
+
+  /* Timeline */
+  .timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #c89b6c, transparent);
+  }
+
+  /* Button */
+  .btn-primary {
+    background: #1a0f0a;
+    color: #faf5ef;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid #1a0f0a;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #d4a373;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+  .btn-primary:hover::before { transform: translateY(0); }
+  .btn-primary:hover { color: #1a0f0a; border-color: #d4a373; }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-outline {
+    background: transparent;
+    color: #1a0f0a;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    border: 1px solid #1a0f0a;
+    transition: all 0.4s ease;
+  }
+  .btn-outline:hover { background: #1a0f0a; color: #faf5ef; }
+
+  /* Section heading underline */
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: #d4a373;
+    margin-top: 1rem;
+  }
+  .section-label.center::after { margin: 1rem auto 0; }
+
+  /* Cart badge */
+  .cart-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: #e9c349;
+    color: #1a0f0a;
+    font-size: 10px;
+    font-weight: 600;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Hero text reveal */
+  .hero-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  .hero-word-inner {
+    display: inline-block;
+    transform: translateY(100%);
+    animation: heroReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes heroReveal {
+    to { transform: translateY(0); }
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3d2817;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .scroll-hint-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, #3d2817, transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.3); opacity: 0.3; }
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: #1a0f0a;
+    z-index: 90;
+    transform: translateX(100%);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .mobile-menu.open { transform: translateX(0); }
+
+  /* Process step */
+  .process-step {
+    transition: all 0.5s ease;
+  }
+  .process-step:hover .process-num {
+    color: #e9c349;
+    transform: scale(1.1);
+  }
+  .process-num {
+    transition: all 0.5s ease;
+  }
+
+  /* Testimonial */
+  .testimonial-card {
+    transition: all 0.5s ease;
+  }
+  .testimonial-card:hover {
+    background: #fff;
+    transform: translateY(-8px);
+  }
+
+  /* Star */
+  .star { color: #e9c349; }
+
+  /* Image mask */
+  .img-mask {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Three.js container */
+  #three-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Featured logos */
+  .featured-logo {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #3d2817;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+  .featured-logo:hover { opacity: 1; }
+
+  /* Counter */
+  .counter-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: #1a0f0a;
+  }
+
+  /* Smooth section divider */
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #c89b6c;
+  }
+  .divider-ornament::before, .divider-ornament::after {
+    content: '';
+    flex: 1;
+    max-width: 100px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.4;
+  }
+
+  /* Newsletter bg */
+  .newsletter-bg {
+    background: linear-gradient(135deg, #1a0f0a 0%, #3d2817 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .newsletter-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 30%, rgba(212, 163, 115, 0.15), transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(233, 195, 73, 0.1), transparent 50%);
+  }
+</style>
+</head>
+<body>
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-logo">AURA BREW</div>
+  <div class="loader-bar"></div>
+  <div style="color: rgba(233,195,73,0.6); margin-top: 1.5rem; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;">Crafting your experience</div>
+</div>
+
+<!-- Custom cursor -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Noise overlay -->
+<div class="noise"></div>
+
+<!-- Header -->
+<header id="header" class="fixed top-0 w-full z-50 transition-all duration-500">
+  <nav class="flex justify-between items-center px-6 md:px-12 lg:px-16 py-5 max-w-[1600px] mx-auto">
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-full bg-espresso flex items-center justify-center">
+        <span class="font-display text-gold-bright text-xl">A</span>
+      </div>
+      <div>
+        <div class="font-display text-xl text-espresso tracking-wide">Aura Brew</div>
+        <div class="text-[9px] tracking-widestest text-mocha/60 uppercase -mt-1">Est. 2014</div>
+      </div>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="#philosophy" class="text-xs tracking-widestest uppercase text-espresso/70 hover:text-espresso transition-colors">Philosophy</a>
+      <a href="#process" class="text-xs tracking-widestest uppercase text-espresso/70 hover:text-espresso transition-colors">Process</a>
+      <a href="#collection" class="text-xs tracking-widestest uppercase text-espresso/70 hover:text-espresso transition-colors">Collection</a>
+      <a href="#tasting" class="text-xs tracking-widestest uppercase text-espresso/70 hover:text-espresso transition-colors">Tasting</a>
+      <a href="#visit" class="text-xs tracking-widestest uppercase text-espresso/70 hover:text-espresso transition-colors">Visit</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <button class="relative hover-lift hidden md:block">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge">2</span>
+      </button>
+      <button class="btn-primary hidden md:block"><span>Order Now</span></button>
+      <button id="menuBtn" class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5">
+        <span class="w-6 h-px bg-espresso transition-all"></span>
+        <span class="w-6 h-px bg-espresso transition-all"></span>
+        <span class="w-4 h-px bg-espresso transition-all self-end"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="flex justify-between items-center px-6 py-5">
+    <div class="font-display text-2xl text-cream">Aura Brew</div>
+    <button id="closeMenu" class="text-cream">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="flex flex-col gap-8 px-6 py-16">
+    <a href="#philosophy" class="font-display text-4xl text-cream hover:text-gold transition-colors">Philosophy</a>
+    <a href="#process" class="font-display text-4xl text-cream hover:text-gold transition-colors">Process</a>
+    <a href="#collection" class="font-display text-4xl text-cream hover:text-gold transition-colors">Collection</a>
+    <a href="#tasting" class="font-display text-4xl text-cream hover:text-gold transition-colors">Tasting</a>
+    <a href="#visit" class="font-display text-4xl text-cream hover:text-gold transition-colors">Visit</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-cream">
+  <canvas id="three-canvas"></canvas>
+  
+  <!-- Gradient overlays -->
+  <div class="absolute inset-0 bg-gradient-to-b from-cream/20 via-transparent to-cream/80 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-cream/30 via-transparent to-cream/30 pointer-events-none"></div>
+
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <div class="inline-flex items-center gap-3 mb-8">
+      <span class="w-8 h-px bg-gold"></span>
+      <span class="text-xs tracking-widestest uppercase text-mocha">Single Origin · Small Batch · Since 2014</span>
+      <span class="w-8 h-px bg-gold"></span>
+    </div>
+    
+    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl text-espresso leading-[1.05] mb-8">
+      <span class="hero-word"><span class="hero-word-inner" style="animation-delay: 0.2s">Experience</span></span>
+      <span class="hero-word"><span class="hero-word-inner italic text-mocha" style="animation-delay: 0.4s">the</span></span>
+      <br/>
+      <span class="hero-word"><span class="hero-word-inner" style="animation-delay: 0.6s">Art</span></span>
+      <span class="hero-word"><span class="hero-word-inner" style="animation-delay: 0.8s">of</span></span>
+      <span class="hero-word"><span class="hero-word-inner italic text-caramel" style="animation-delay: 1s">Coffee</span></span>
+    </h1>
+    
+    <p class="font-serif-alt text-xl md:text-2xl text-mocha/80 mb-12 max-w-2xl mx-auto italic">
+      Where heritage meets precision. Every bean tells a story of craftsmanship, sustainability, and sensory perfection.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <button class="btn-primary"><span>Explore Collection</span></button>
+      <button class="btn-outline">Our Story</button>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-hint-line"></div>
+  </div>
+
+  <!-- Side stats -->
+  <div class="hidden lg:flex absolute left-12 top-1/2 -translate-y-1/2 flex-col gap-8 z-10">
+    <div>
+      <div class="font-display text-3xl text-espresso">12°N</div>
+      <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-1">Ethiopia · Yirgacheffe</div>
+    </div>
+    <div class="w-px h-12 bg-mocha/20"></div>
+    <div>
+      <div class="font-display text-3xl text-espresso">1850m</div>
+      <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-1">Altitude</div>
+    </div>
+  </div>
+
+  <div class="hidden lg:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-8 z-10 items-end">
+    <div class="text-right">
+      <div class="font-display text-3xl text-espresso">92</div>
+      <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-1">SCA Score</div>
+    </div>
+    <div class="w-px h-12 bg-mocha/20"></div>
+    <div class="text-right">
+      <div class="font-display text-3xl text-espresso">2024</div>
+      <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-1">Harvest Year</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED IN MARQUEE -->
+<section class="py-12 bg-espresso text-cream overflow-hidden">
+  <div class="text-center mb-8">
+    <span class="text-[10px] tracking-widestest uppercase text-gold/70">As Featured In</span>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="featured-logo text-cream text-2xl">Bon Appétit</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">The New York Times</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Food & Wine</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Eater</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Monocle</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Wallpaper*</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Bon Appétit</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">The New York Times</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Food & Wine</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Eater</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Monocle</span>
+      <span class="text-gold/40">✦</span>
+      <span class="featured-logo text-cream text-2xl">Wallpaper*</span>
+      <span class="text-gold/40">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="py-32 px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto relative">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+    <div class="lg:col-span-5 reveal">
+      <span class="section-label text-xs tracking-widestest uppercase text-gold mb-6 block">Our Philosophy</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-espresso leading-tight mb-8">
+        Crafted for the <em class="text-caramel">discerning</em> palate.
+      </h2>
+      <div class="space-y-6 text-lg text-mocha/80 leading-relaxed font-serif-alt">
+        <p>At Aura Brew, we believe coffee is more than a morning ritual — it is a sensory journey. Our Modern Heritage approach fuses the warmth of traditional artisanal roasting with the precision of luxury digital transparency.</p>
+        <p>We source exclusively from sustainable high-altitude micro-lots, ensuring each roast preserves the unique terroir of its origin. Every cup is a testament to the hands that nurtured the harvest and the baristas who master the pour.</p>
+      </div>
+      
+      <div class="mt-12 grid grid-cols-3 gap-6 pt-8 border-t border-mocha/10">
+        <div>
+          <div class="counter-value" data-target="100">0</div>
+          <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-2">% Ethical</div>
+        </div>
+        <div>
+          <div class="counter-value" data-target="12">0</div>
+          <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-2">Origins</div>
+        </div>
+        <div>
+          <div class="counter-value" data-target="48">0</div>
+          <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-2">Hours to Roast</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lg:col-span-7 relative reveal" style="transition-delay: 200ms">
+      <div class="relative aspect-[4/5] overflow-hidden rounded-sm">
+        <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80" alt="Roasted coffee beans"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent"></div>
+        <div class="absolute bottom-8 left-8 right-8 text-cream">
+          <div class="text-[10px] tracking-widestest uppercase text-gold mb-2">Current Harvest</div>
+          <div class="font-display text-2xl">Yirgacheffe · Ethiopia</div>
+          <div class="font-serif-alt italic text-cream/80 mt-1">Floral · Bergamot · Stone Fruit</div>
+        </div>
+      </div>
+      
+      <!-- Floating card -->
+      <div class="absolute -bottom-8 -left-8 bg-cream p-6 shadow-2xl max-w-[240px] hidden md:block">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="font-serif-alt italic text-sm text-mocha">"The finest single origin I've tasted in a decade."</p>
+        <div class="text-[10px] tracking-widestest uppercase text-mocha/60 mt-3">— James Hoffman</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="py-32 px-6 md:px-12 lg:px-20 bg-espresso text-cream relative overflow-hidden">
+  <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 20% 50%, #d4a373 0%, transparent 50%);"></div>
+  
+  <div class="max-w-[1600px] mx-auto relative">
+    <div class="text-center mb-20 reveal">
+      <span class="section-label center text-xs tracking-widestest uppercase text-gold mb-6 block">The Journey</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">From <em class="text-gold">seed</em> to cup.</h2>
+      <p class="font-serif-alt text-xl text-cream/60 mt-6 max-w-2xl mx-auto italic">Four stages of meticulous craftsmanship, each honoring the bean's origin story.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="process-step reveal" style="transition-delay: 100ms">
+        <div class="process-num font-display text-6xl text-cream/20 mb-6">01</div>
+        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e9c349" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="font-display text-2xl mb-3">Source</h3>
+        <p class="text-cream/60 leading-relaxed font-serif-alt text-lg">Direct relationships with farmers across Ethiopia, Colombia, and Guatemala. Every lot hand-selected.</p>
+      </div>
+      
+      <div class="process-step reveal" style="transition-delay: 200ms">
+        <div class="process-num font-display text-6xl text-cream/20 mb-6">02</div>
+        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e9c349" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 010 20M12 2a15 15 0 000 20M2 12h20"/></svg>
+        </div>
+        <h3 class="font-display text-2xl mb-3">Roast</h3>
+        <p class="text-cream/60 leading-relaxed font-serif-alt text-lg">Small-batch roasted in our Portland roastery. Each profile developed over months of cupping sessions.</p>
+      </div>
+      
+      <div class="process-step reveal" style="transition-delay: 300ms">
+        <div class="process-num font-display text-6xl text-cream/20 mb-6">03</div>
+        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e9c349" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3 class="font-display text-2xl mb-3">Rest</h3>
+        <p class="text-cream/60 leading-relaxed font-serif-alt text-lg">Degassed for 7–14 days in climate-controlled rooms. Patience unlocks complexity.</p>
+      </div>
+      
+      <div class="process-step reveal" style="transition-delay: 400ms">
+        <div class="process-num font-display text-6xl text-cream/20 mb-6">04</div>
+        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e9c349" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3 class="font-display text-2xl mb-3">Savor</h3>
+        <p class="text-cream/60 leading-relaxed font-serif-alt text-lg">Delivered within 48 hours of roasting. Freshness you can taste in every sip.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section id="collection" class="py-32 px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto">
+  <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6 reveal">
+    <div>
+      <span class="section-label text-xs tracking-widestest uppercase text-gold mb-6 block">The Collection</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-espresso leading-tight">Signature <em class="text-caramel">blends</em>.</h2>
+    </div>
+    <p class="font-serif-alt text-xl text-mocha/70 max-w-md italic">Curated for moments of stillness and celebration. Three expressions, infinite stories.</p>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Card 1 -->
+    <div class="product-card bg-cream border border-mocha/10 rounded-sm overflow-hidden reveal" style="transition-delay: 100ms">
+      <div class="relative aspect-[4/5] overflow-hidden bg-espresso">
+        <img class="product-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1559525839-d9acfd02c5b4?w=800&q=80" alt="Midnight Roast"/>
+        <div class="absolute top-4 left-4 bg-gold-bright text-espresso px-3 py-1 text-[10px] tracking-widestest uppercase font-semibold">Best Seller</div>
+        <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors cursor-pointer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+      </div>
+      <div class="p-8">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <div class="text-[10px] tracking-widestest uppercase text-mocha/50 mb-1">No. 01 · Dark</div>
+            <h3 class="font-display text-2xl text-espresso">The Midnight Roast</h3>
+          </div>
+          <span class="font-display text-2xl text-caramel">$28</span>
+        </div>
+        <p class="font-serif-alt text-lg text-mocha/70 italic mb-6">Bold intensity with notes of dark chocolate, toasted almond, and black cherry.</p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Bold</span>
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Nutty</span>
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Chocolate</span>
+        </div>
+        <div class="flex items-center justify-between pt-6 border-t border-mocha/10">
+          <div class="flex items-center gap-1">
+            <span class="star text-sm">★★★★★</span>
+            <span class="text-xs text-mocha/60">(248)</span>
+          </div>
+          <button class="text-xs tracking-widestest uppercase text-espresso hover:text-gold transition-colors flex items-center gap-2">
+            Add to Cart
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="product-card bg-cream border border-mocha/10 rounded-sm overflow-hidden reveal" style="transition-delay: 200ms">
+      <div class="relative aspect-[4/5] overflow-hidden bg-latte">
+        <img class="product-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=800&q=80" alt="Velvet Latte"/>
+        <div class="absolute top-4 left-4 bg-espresso text-cream px-3 py-1 text-[10px] tracking-widestest uppercase font-semibold">Limited</div>
+        <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors cursor-pointer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+      </div>
+      <div class="p-8">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <div class="text-[10px] tracking-widestest uppercase text-mocha/50 mb-1">No. 02 · Medium</div>
+            <h3 class="font-display text-2xl text-espresso">The Velvet Latte</h3>
+          </div>
+          <span class="font-display text-2xl text-caramel">$32</span>
+        </div>
+        <p class="font-serif-alt text-lg text-mocha/70 italic mb-6">Silky texture with floral undertones, vanilla bean, and a honey-like finish.</p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Smooth</span>
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Floral</span>
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Vanilla</span>
+        </div>
+        <div class="flex items-center justify-between pt-6 border-t border-mocha/10">
+          <div class="flex items-center gap-1">
+            <span class="star text-sm">★★★★★</span>
+            <span class="text-xs text-mocha/60">(186)</span>
+          </div>
+          <button class="text-xs tracking-widestest uppercase text-espresso hover:text-gold transition-colors flex items-center gap-2">
+            Add to Cart
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 3 -->
+    <div class="product-card bg-cream border border-mocha/10 rounded-sm overflow-hidden reveal" style="transition-delay: 300ms">
+      <div class="relative aspect-[4/5] overflow-hidden bg-caramel/20">
+        <img class="product-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80" alt="Golden Sunrise"/>
+        <div class="absolute top-4 left-4 bg-cream text-espresso px-3 py-1 text-[10px] tracking-widestest uppercase font-semibold border border-espresso/10">New</div>
+        <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors cursor-pointer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+      </div>
+      <div class="p-8">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <div class="text-[10px] tracking-widestest uppercase text-mocha/50 mb-1">No. 03 · Light</div>
+            <h3 class="font-display text-2xl text-espresso">The Golden Sunrise</h3>
+          </div>
+          <span class="font-display text-2xl text-caramel">$30</span>
+        </div>
+        <p class="font-serif-alt text-lg text-mocha/70 italic mb-6">Light roasted with citrus brightness, jasmine, and a clean honey finish.</p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Citrus</span>
+          <span class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Bright</span>
+          <span class="bg-espresso/5 text-espresso px-cream px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">Jasmine</span>
+        </div>
+        <div class="flex items-center justify-between pt-6 border-t border-mocha/10">
+          <div class="flex items-center gap-1">
+            <span class="star text-sm">★★★★★</span>
+            <span class="text-xs text-mocha/60">(312)</span>
+          </div>
+          <button class="text-xs tracking-widestest uppercase text-espresso hover:text-gold transition-colors flex items-center gap-2">
+            Add to Cart
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="text-center mt-16 reveal">
+    <button class="btn-outline">View All 12 Origins</button>
+  </div>
+</section>
+
+<!-- TASTING WHEEL -->
+<section id="tasting" class="py-32 px-6 md:px-12 lg:px-20 bg-latte/30">
+  <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <span class="section-label text-xs tracking-widestest uppercase text-gold mb-6 block">Tasting Notes</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-espresso leading-tight mb-8">
+        Discover your <em class="text-caramel">flavor</em> profile.
+      </h2>
+      <p class="font-serif-alt text-xl text-mocha/70 mb-10 italic">Our flavor wheel maps the sensory landscape of each origin. Hover to explore.</p>
+      
+      <div id="tasteInfo" class="bg-cream p-8 rounded-sm border border-mocha/10">
+        <div class="text-[10px] tracking-widestest uppercase text-gold mb-3">Selected Note</div>
+        <h3 id="tasteTitle" class="font-display text-3xl text-espresso mb-3">Select a note</h3>
+        <p id="tasteDesc" class="font-serif-alt text-lg text-mocha/70 italic">Hover over the wheel to explore our tasting profiles.</p>
+        <div class="flex gap-2 mt-6">
+          <span id="tasteTag1" class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">—</span>
+          <span id="tasteTag2" class="bg-espresso/5 text-espresso px-3 py-1 rounded-full text-[10px] tracking-widest uppercase">—</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reveal flex justify-center" style="transition-delay: 200ms">
+      <div class="relative w-[400px] h-[400px] md:w-[500px] md:h-[500px]">
+        <svg viewBox="0 0 500 500" class="w-full h-full">
+          <defs>
+            <radialGradient id="centerGrad">
+              <stop offset="0%" stop-color="#faf5ef"/>
+              <stop offset="100%" stop-color="#e8d5c4"/>
+            </radialGradient>
+          </defs>
+          
+          <!-- Segments -->
+          <g transform="translate(250, 250)">
+            <path class="taste-segment" data-title="Chocolate" data-desc="Rich, bittersweet notes found in our darker roasts. Evokes cacao, truffle, and roasted cocoa." data-tags="Dark,Bittersweet" d="M 0 0 L 0 -200 A 200 200 0 0 1 141 -141 Z" fill="#3d2817" opacity="0.7"/>
+            <path class="taste-segment" data-title="Caramel" data-desc="Sweet, buttery warmth from medium roasts. Reminiscent of brown sugar, toffee, and maple." data-tags="Sweet,Buttery" d="M 0 0 L 141 -141 A 200 200 0 0 1 200 0 Z" fill="#c89b6c" opacity="0.7"/>
+            <path class="taste-segment" data-title="Citrus" data-desc="Bright, zesty acidity in light roasts. Lemon, bergamot, and orange peel characteristics." data-tags="Bright,Acidic" d="M 0 0 L 200 0 A 200 200 0 0 1 141 141 Z" fill="#e9c349" opacity="0.7"/>
+            <path class="taste-segment" data-title="Floral" data-desc="Delicate aromatics from high-altitude origins. Jasmine, lavender, and rose notes." data-tags="Delicate,Aromatic" d="M 0 0 L 141 141 A 200 200 0 0 1 0 200 Z" fill="#d4a373" opacity="0.7"/>
+            <path class="taste-segment" data-title="Nutty" data-desc="Earthy, grounded flavors. Almond, hazelnut, and walnut tones with creamy body." data-tags="Earthy,Creamy" d="M 0 0 L 0 200 A 200 200 0 0 1 -141 141 Z" fill="#8b6f47" opacity="0.7"/>
+            <path class="taste-segment" data-title="Fruity" data-desc="Vibrant berry and stone fruit notes. Blueberry, cherry, and tropical characteristics." data-tags="Vibrant,Sweet" d="M 0 0 L -141 141 A 200 200 0 0 1 -200 0 Z" fill="#a0522d" opacity="0.7"/>
+            <path class="taste-segment" data-title="Spicy" data-desc="Warm, complex spices. Cinnamon, clove, cardamom, and black pepper undertones." data-tags="Warm,Complex" d="M 0 0 L -200 0 A 200 200 0 0 1 -141 -141 Z" fill="#6b3410" opacity="0.7"/>
+            <path class="taste-segment" data-title="Herbal" data-desc="Fresh, green notes. Sage, mint, and tea-like qualities from washed processing." data-tags="Fresh,Clean" d="M 0 0 L -141 -141 A 200 200 0 0 1 0 -200 Z" fill="#556b2f" opacity="0.7"/>
+            
+            <!-- Center -->
+            <circle r="70" fill="url(#centerGrad)"/>
+            <text text-anchor="middle" y="-5" class="font-display" fill="#1a0f0a" font-size="16" font-weight="600">AURA</text>
+            <text text-anchor="middle" y="15" class="font-serif-alt" fill="#3d2817" font-size="12" font-style="italic">Brew</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="py-32 px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="relative reveal order-2 lg:order-1">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="aspect-[3/4] overflow-hidden rounded-sm">
+          <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1524350876685-274059332603?w=600&q=80" alt="Coffee farm"/>
+        </div>
+        <div class="aspect-[3/4] overflow-hidden rounded-sm mt-12">
+          <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?w=600&q=80" alt="Farmer"/>
+        </div>
+      </div>
+      <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-espresso text-cream px-8 py-4 rounded-sm shadow-2xl">
+        <div class="flex items-center gap-6">
+          <div>
+            <div class="font-display text-3xl text-gold-bright">B Corp</div>
+            <div class="text-[10px] tracking-widestest uppercase text-cream/60">Certified 2019</div>
+          </div>
+          <div class="w-px h-12 bg-cream/20"></div>
+          <div>
+            <div class="font-display text-3xl text-gold-bright">Carbon</div>
+            <div class="text-[10px] tracking-widestest uppercase text-cream/60">Neutral Since 2022</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reveal order-1 lg:order-2">
+      <span class="section-label text-xs tracking-widestest uppercase text-gold mb-6 block">Sustainability</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-espresso leading-tight mb-8">
+        Coffee that <em class="text-caramel">gives back</em>.
+      </h2>
+      <p class="font-serif-alt text-xl text-mocha/70 mb-10 italic">Every bag supports the communities that grow it. We pay 40% above fair-trade minimums and reinvest 5% of revenue into farmer education.</p>
+      
+      <div class="space-y-6">
+        <div class="flex gap-4 pb-6 border-b border-mocha/10">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c89b6c" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h4 class="font-display text-xl text-espresso mb-1">Direct Trade</h4>
+            <p class="text-mocha/70 font-serif-alt">Long-term partnerships with 12 farming cooperatives across 4 countries.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 pb-6 border-b border-mocha/10">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c89b6c" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h4 class="font-display text-xl text-espresso mb-1">Regenerative Farming</h4>
+            <p class="text-mocha/70 font-serif-alt">Shade-grown, organic practices that restore soil health and biodiversity.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c89b6c" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          </div>
+          <div>
+            <h4 class="font-display text-xl text-espresso mb-1">Transparent Pricing</h4>
+            <p class="text-mocha/70 font-serif-alt">Full cost breakdown on every bag. You see exactly where your money goes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-32 px-6 md:px-12 lg:px-20 bg-espresso text-cream">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="text-center mb-16 reveal">
+      <span class="section-label center text-xs tracking-widestest uppercase text-gold mb-6 block">Word of Mouth</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">Loved by our <em class="text-gold">community</em>.</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="testimonial-card bg-cream/5 backdrop-blur-sm border border-cream/10 p-8 rounded-sm reveal" style="transition-delay: 100ms">
+        <div class="flex gap-1 mb-6">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="font-serif-alt text-xl italic text-cream/90 mb-8 leading-relaxed">"The Midnight Roast changed how I think about coffee. Rich, never bitter, and the packaging alone feels like a gift."</p>
+        <div class="flex items-center gap-4 pt-6 border-t border-cream/10">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-caramel flex items-center justify-center font-display text-espresso">EM</div>
+          <div>
+            <div class="font-display text-lg">Elena Marchetti</div>
+            <div class="text-[10px] tracking-widestest uppercase text-cream/50">Milan, Italy</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card bg-cream/5 backdrop-blur-sm border border-cream/10 p-8 rounded-sm reveal" style="transition-delay: 200ms">
+        <div class="flex gap-1 mb-6">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="font-serif-alt text-xl italic text-cream/90 mb-8 leading-relaxed">"You can taste the sourcing standards. The Golden Sunrise is my Sunday-morning ritual now, without fail."</p>
+        <div class="flex items-center gap-4 pt-6 border-t border-cream/10">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-caramel flex items-center justify-center font-display text-espresso">JW</div>
+          <div>
+            <div class="font-display text-lg">Jonah Whitfield</div>
+            <div class="text-[10px] tracking-widestest uppercase text-cream/50">Austin, TX</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card bg-cream/5 backdrop-blur-sm border border-cream/10 p-8 rounded-sm reveal" style="transition-delay: 300ms">
+        <div class="flex gap-1 mb-6">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="font-serif-alt text-xl italic text-cream/90 mb-8 leading-relaxed">"Ordered The Velvet Latte blend on a whim. Now it's the only thing my espresso machine sees."</p>
+        <div class="flex items-center gap-4 pt-6 border-t border-cream/10">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-caramel flex items-center justify-center font-display text-espresso">PS</div>
+          <div>
+            <div class="font-display text-lg">Priya Sharma</div>
+            <div class="text-[10px] tracking-widestest uppercase text-cream/50">Vancouver, Canada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="py-32 px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <span class="section-label text-xs tracking-widestest uppercase text-gold mb-6 block">Visit Us</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-espresso leading-tight mb-8">
+        The Roastery & <em class="text-caramel">Tasting Room</em>.
+      </h2>
+      <p class="font-serif-alt text-xl text-mocha/70 mb-10 italic">Step inside where the roasting happens. Sample single origins fresh off the drum, guided by the people who source them.</p>
+      
+      <div class="space-y-6">
+        <div class="flex items-start gap-4 pb-6 border-b border-mocha/10">
+          <div class="w-12 h-12 rounded-full bg-espresso/5 flex items-center justify-center flex-shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a0f0a" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="text-[10px] tracking-widestest uppercase text-mocha/50 mb-1">Address</div>
+            <div class="font-display text-lg text-espresso">123 Artisan Lane</div>
+            <div class="text-mocha/70">Portland, OR 97209</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 pb-6 border-b border-mocha/10">
+          <div class="w-12 h-12 rounded-full bg-espresso/5 flex items-center justify-center flex-shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a0f0a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="text-[10px] tracking-widestest uppercase text-mocha/50 mb-1">Hours</div>
+            <div class="font-display text-lg text-espresso">Mon – Fri · 7:00 – 18:00</div>
+            <div class="text-mocha/70">Sat – Sun · 8:00 – 16:00</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-espresso/5 flex items-center justify-center flex-shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a0f0a" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="text-[10px] tracking-widestest uppercase text-mocha/50 mb-1">Reservations</div>
+            <div class="font-display text-lg text-espresso">(503) 555-0148</div>
+            <div class="text-mocha/70">hello@aurabrew.co</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex gap-4 mt-10">
+        <button class="btn-primary"><span>Book a Tour</span></button>
+        <button class="btn-outline">Get Directions</button>
+      </div>
+    </div>
+    
+    <div class="relative reveal" style="transition-delay: 200ms">
+      <div class="aspect-square overflow-hidden rounded-sm relative">
+        <iframe class="w-full h-full" src="https://www.google.com/maps?q=Portland,+OR&output=embed" loading="lazy" style="border:0; filter: grayscale(30%) contrast(1.1);"></iframe>
+        <div class="absolute inset-0 pointer-events-none border border-mocha/10 rounded-sm"></div>
+      </div>
+      <div class="absolute -top-6 -right-6 bg-cream p-6 rounded-sm shadow-2xl hidden md:block">
+        <div class="text-[10px] tracking-widestest uppercase text-gold mb-2">Now Open</div>
+        <div class="font-display text-2xl text-espresso">Tasting Room</div>
+        <div class="text-xs text-mocha/60 mt-1">Free cuppings every Saturday</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-bg py-32 px-6 md:px-12 lg:px-20 text-cream relative">
+  <div class="max-w-3xl mx-auto text-center relative">
+    <div class="divider-ornament mb-8">
+      <span class="text-gold">✦</span>
+    </div>
+    <span class="text-xs tracking-widestest uppercase text-gold mb-6 block">The Journal</span>
+    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+      Join the <em class="text-gold">inner circle</em>.
+    </h2>
+    <p class="font-serif-alt text-xl text-cream/70 italic mb-10">First access to limited releases, brewing guides, and stories from origin. No spam, ever.</p>
+    
+    <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto" onsubmit="event.preventDefault(); this.querySelector('button').innerHTML='✓ Subscribed';">
+      <input type="email" required placeholder="your@email.com" class="flex-1 bg-transparent border-b border-cream/30 py-4 text-cream placeholder-cream/40 focus:border-gold outline-none transition-colors font-serif-alt text-lg"/>
+      <button type="submit" class="bg-gold-bright text-espresso px-8 py-4 text-xs tracking-widestest uppercase font-semibold hover:bg-cream transition-colors">Subscribe</button>
+    </form>
+    
+    <div class="flex justify-center gap-8 mt-12 text-xs tracking-widestest uppercase text-cream/50">
+      <span>Weekly Dispatches</span>
+      <span class="text-gold/40">✦</span>
+      <span>Early Access</span>
+      <span class="text-gold/40">✦</span>
+      <span>Unsubscribe Anytime</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-espresso text-cream pt-20 pb-8 px-6 md:px-12 lg:px-20">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+      <div class="md:col-span-4">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-gold-bright flex items-center justify-center">
+            <span class="font-display text-espresso text-xl">A</span>
+          </div>
+          <div>
+            <div class="font-display text-xl tracking-wide">Aura Brew</div>
+            <div class="text-[9px] tracking-widestest uppercase text-cream/50 -mt-1">Est. 2014 · Portland, OR</div>
+          </div>
+        </div>
+        <p class="font-serif-alt text-lg text-cream/60 italic mb-8 max-w-sm">Crafting experiences, one bean at a time. Join our community of coffee enthusiasts.</p>
+        <div class="flex gap-3">
+          <a href="#" class="w-10 h-10 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-espresso transition-all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-espresso transition-all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-espresso transition-all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="md:col-span-2">
+        <h4 class="text-[10px] tracking-widestest uppercase text-gold mb-6">Explore</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Philosophy</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Collection</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Brewing Guides</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Sustainability</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Journal</a></li>
+        </ul>
+      </div>
+      
+      <div class="md:col-span-2">
+        <h4 class="text-[10px] tracking-widestest uppercase text-gold mb-6">Company</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">About</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Careers</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Press</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Wholesale</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="md:col-span-2">
+        <h4 class="text-[10px] tracking-widestest uppercase text-gold mb-6">Support</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Shipping</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Returns</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">FAQ</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Privacy</a></li>
+          <li><a href="#" class="font-serif-alt text-lg text-cream/70 hover:text-gold transition-colors">Terms</a></li>
+        </ul>
+      </div>
+      
+      <div class="md:col-span-2">
+        <h4 class="text-[10px] tracking-widestest uppercase text-gold mb-6">Visit</h4>
+        <address class="not-italic font-serif-alt text-lg text-cream/70 leading-relaxed">
+          123 Artisan Lane<br/>
+          Portland, OR 97209<br/>
+          <br/>
+          <a href="tel:+15035550148" class="hover:text-gold transition-colors">(503) 555-0148</a><br/>
+          <a href="mailto:hello@aurabrew.co" class="hover:text-gold transition-colors">hello@aurabrew.co</a>
+        </address>
+      </div>
+    </div>
+    
+    <div class="pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-[10px] tracking-widestest uppercase text-cream/40">© 2026 Aura Brew Artisanal Coffee. Crafted for the discerning palate.</p>
+      <div class="flex gap-6 text-[10px] tracking-widestest uppercase text-cream/40">
+        <span>Made in Portland</span>
+        <span class="text-gold/40">✦</span>
+        <span>Roasted with care</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============ LOADER ============
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 2200);
+  });
+
+  // ============ CUSTOM CURSOR ============
+  const cursorDot = document.getElementById('cursorDot');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  });
+  
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+  
+  document.querySelectorAll('a, button, .taste-segment, .product-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+  });
+
+  // ============ SCROLL PROGRESS ============
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scrollProgress').style.width = scrolled + '%';
+  });
+
+  // ============ HEADER ============
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('glass-panel');
+    } else {
+      header.classList.remove('glass-panel');
+    }
+  });
+
+  // ============ MOBILE MENU ============
+  const menuBtn = document.getElementById('menuBtn');
+  const closeMenu = document.getElementById('closeMenu');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+  closeMenu.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // ============ REVEAL ON SCROLL ============
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ============ COUNTERS ============
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        let current = 0;
+        const step = target / 60;
+        const update = () => {
+          current += step;
+          if (current < target) {
+            el.textContent = Math.floor(current);
+            requestAnimationFrame(update);
+          } else {
+            el.textContent = target;
+          }
+        };
+        update();
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
+
+  // ============ TASTING WHEEL ============
+  const segments = document.querySelectorAll('.taste-segment');
+  const tasteTitle = document.getElementById('tasteTitle');
+  const tasteDesc = document.getElementById('tasteDesc');
+  const tasteTag1 = document.getElementById('tasteTag1');
+  const tasteTag2 = document.getElementById('tasteTag2');
+  
+  segments.forEach(seg => {
+    seg.addEventListener('mouseenter', () => {
+      segments.forEach(s => s.style.opacity = '0.3');
+      seg.style.opacity = '1';
+      tasteTitle.textContent = seg.dataset.title;
+      tasteDesc.textContent = seg.dataset.desc;
+      const tags = seg.dataset.tags.split(',');
+      tasteTag1.textContent = tags[0];
+      tasteTag2.textContent = tags[1];
+    });
+    seg.addEventListener('mouseleave', () => {
+      segments.forEach(s => s.style.opacity = '0.7');
+    });
+  });
+
+  // ============ THREE.JS — REALISTIC CUPS ============
+  (function() {
+    const canvas = document.getElementById('three-canvas');
+    const container = canvas.parentElement;
+    let scene, camera, renderer, cups = [], beans = [];
+    let mouseX = 0, mouseY = 0, targetMouseX = 0, targetMouseY = 0;
+
+    function init() {
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0xfaf5ef, 0.04);
+
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
+      camera.position.set(0, 0, 9);
+
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.1;
+
+      // Lighting — 3-point setup for realistic ceramics
+      const ambient = new THREE.AmbientLight(0xfff3e8, 0.5);
+      scene.add(ambient);
+
+      const keyLight = new THREE.DirectionalLight(0xffe4c4, 1.6);
+      keyLight.position.set(5, 8, 6);
+      keyLight.castShadow = true;
+      keyLight.shadow.mapSize.set(1024, 1024);
+      keyLight.shadow.camera.near = 0.5;
+      keyLight.shadow.camera.far = 30;
+      scene.add(keyLight);
+
+      const fillLight = new THREE.DirectionalLight(0xd4a373, 0.6);
+      fillLight.position.set(-6, 2, 4);
+      scene.add(fillLight);
+
+      const rimLight = new THREE.PointLight(0xe9c349, 1.2, 20);
+      rimLight.position.set(0, -4, -5);
+      scene.add(rimLight);
+
+      const topLight = new THREE.PointLight(0xffffff, 0.4, 20);
+      topLight.position.set(0, 10, 0);
+      scene.add(topLight);
+
+      // Create realistic cups
+      const cupCount = 5;
+      for (let i = 0; i < cupCount; i++) {
+        const cupGroup = createRealisticCup(i);
+        const scale = 0.8 + Math.random() * 0.5;
+        cupGroup.scale.setScalar(scale);
+
+        const angle = (i / cupCount) * Math.PI * 2 + Math.random() * 0.5;
+        const radius = 2.5 + Math.random() * 2;
+        const baseX = Math.cos(angle) * radius;
+        const baseY = (Math.random() - 0.5) * 3;
+        const baseZ = Math.sin(angle) * radius - 1;
+        
+        cupGroup.position.set(baseX, baseY, baseZ);
+        cupGroup.rotation.set(
+          (Math.random() - 0.5) * 0.3,
+          Math.random() * Math.PI * 2,
+          (Math.random() - 0.5) * 0.2
+        );
+
+        cupGroup.userData = {
+          baseX, baseY, baseZ,
+          baseRotY: cupGroup.rotation.y,
+          floatSpeed: 0.3 + Math.random() * 0.3,
+          floatAmp: 0.15 + Math.random() * 0.15,
+          rotSpeed: 0.001 + Math.random() * 0.002,
+          offset: Math.random() * Math.PI * 2,
+          parallax: 0.0005 * (i + 1)
+        };
+
+        cups.push(cupGroup);
+        scene.add(cupGroup);
+      }
+
+      // Floating coffee beans
+      for (let i = 0; i < 25; i++) {
+        const bean = createCoffeeBean();
+        const scale = 0.15 + Math.random() * 0.15;
+        bean.scale.setScalar(scale);
+        bean.position.set(
+          (Math.random() - 0.5) * 12,
+          (Math.random() - 0.5) * 6,
+          (Math.random() - 0.5) * 6
+        );
+        bean.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+        bean.userData = {
+          baseY: bean.position.y,
+          floatSpeed: 0.5 + Math.random() * 0.5,
+          floatAmp: 0.1 + Math.random() * 0.2,
+          rotSpeed: 0.005 + Math.random() * 0.01,
+          offset: Math.random() * Math.PI * 2
+        };
+        beans.push(bean);
+        scene.add(bean);
+      }
+
+      window.addEventListener('resize', onResize);
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      animate();
+    }
+
+    function createRealisticCup(index) {
+      const group = new THREE.Group();
+
+      // Ceramic material — realistic porcelain
+      const ceramicMat = new THREE.MeshPhysicalMaterial({
+        color: index % 2 === 0 ? 0xfaf5ef : 0xe8d5c4,
+        roughness: 0.2,
+        metalness: 0.02,
+        clearcoat: 0.9,
+        clearcoatRoughness: 0.15,
+        reflectivity: 0.5
       });
-      const body = new THREE.Mesh(bodyGeom, bodyMat);
-      cupGroup.add(body);
 
-      const handleGeom = new THREE.TorusGeometry(0.2, 0.05, 16, 32, Math.PI);
-      const handle = new THREE.Mesh(handleGeom, bodyMat);
-      handle.position.set(0.45, 0, 0);
+      // Cup body using LatheGeometry for realistic tapered shape
+      const profile = [];
+      const segments = 24;
+      // Bottom curve
+      profile.push(new THREE.Vector2(0, 0));
+      profile.push(new THREE.Vector2(0.38, 0));
+      profile.push(new THREE.Vector2(0.40, 0.02));
+      // Body with gentle outward curve
+      for (let i = 0; i <= segments; i++) {
+        const t = i / segments;
+        const y = 0.02 + t * 0.85;
+        const r = 0.40 + t * 0.15 + Math.pow(t, 2) * 0.05;
+        profile.push(new THREE.Vector2(r, y));
+      }
+      // Rim — thick lip
+      profile.push(new THREE.Vector2(0.62, 0.88));
+      profile.push(new THREE.Vector2(0.63, 0.90));
+      profile.push(new THREE.Vector2(0.62, 0.92));
+      profile.push(new THREE.Vector2(0.58, 0.92));
+      // Inner wall going down
+      for (let i = segments; i >= 0; i--) {
+        const t = i / segments;
+        const y = 0.02 + t * 0.85;
+        const r = 0.37 + t * 0.14 + Math.pow(t, 2) * 0.04;
+        profile.push(new THREE.Vector2(r, y));
+      }
+      profile.push(new THREE.Vector2(0.35, 0.02));
+      profile.push(new THREE.Vector2(0, 0.02));
+
+      const cupGeom = new THREE.LatheGeometry(profile, 48);
+      const cup = new THREE.Mesh(cupGeom, ceramicMat);
+      cup.castShadow = true;
+      cup.receiveShadow = true;
+      group.add(cup);
+
+      // Handle
+      const handleGeom = new THREE.TorusGeometry(0.22, 0.055, 16, 32, Math.PI * 1.3);
+      const handle = new THREE.Mesh(handleGeom, ceramicMat);
+      handle.position.set(0.58, 0.45, 0);
       handle.rotation.z = Math.PI / 2;
-      cupGroup.add(handle);
+      handle.rotation.y = Math.PI / 2;
+      handle.castShadow = true;
+      group.add(handle);
 
-      const coffeeGeom = new THREE.CircleGeometry(0.45, 32);
-      const coffeeMat = new THREE.MeshStandardMaterial({ color: 0x2c1e1a, roughness: 0.15, metalness: 0.1 });
+      // Coffee liquid inside
+      const coffeeGeom = new THREE.CircleGeometry(0.55, 48);
+      const coffeeMat = new THREE.MeshPhysicalMaterial({
+        color: 0x2a1810,
+        roughness: 0.15,
+        metalness: 0.3,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        reflectivity: 0.8
+      });
       const coffee = new THREE.Mesh(coffeeGeom, coffeeMat);
       coffee.rotation.x = -Math.PI / 2;
-      coffee.position.y = 0.41;
-      cupGroup.add(coffee);
+      coffee.position.y = 0.85;
+      group.add(coffee);
 
-      // Every other cup gets a saucer — breaks up the uniformity of
-      // the original, which used identical geometry for every cup.
-      if (i % 2 === 0) {
-        const saucerGeom = new THREE.CylinderGeometry(0.75, 0.75, 0.05, 32);
-        const saucer = new THREE.Mesh(saucerGeom, bodyMat);
-        saucer.position.y = -0.42;
-        cupGroup.add(saucer);
-      }
+      // Crema swirl on top
+      const cremaGeom = new THREE.RingGeometry(0.15, 0.5, 48);
+      const cremaMat = new THREE.MeshPhysicalMaterial({
+        color: 0xc89b6c,
+        roughness: 0.4,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.7
+      });
+      const crema = new THREE.Mesh(cremaGeom, cremaMat);
+      crema.rotation.x = -Math.PI / 2;
+      crema.position.y = 0.852;
+      group.add(crema);
 
-      createSteam(cupGroup);
+      // Saucer
+      const saucerProfile = [];
+      saucerProfile.push(new THREE.Vector2(0, 0));
+      saucerProfile.push(new THREE.Vector2(0.85, 0));
+      saucerProfile.push(new THREE.Vector2(0.88, 0.02));
+      saucerProfile.push(new THREE.Vector2(0.88, 0.05));
+      saucerProfile.push(new THREE.Vector2(0.85, 0.06));
+      saucerProfile.push(new THREE.Vector2(0.45, 0.06));
+      saucerProfile.push(new THREE.Vector2(0.42, 0.04));
+      saucerProfile.push(new THREE.Vector2(0, 0.04));
 
-      const baseX = (Math.random() - 0.5) * 9;
-      const baseY = (Math.random() - 0.5) * 6;
-      const baseZ = (Math.random() - 0.5) * 5;
-      cupGroup.position.set(baseX, baseY, baseZ);
-      cupGroup.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      const saucerGeom = new THREE.LatheGeometry(saucerProfile, 48);
+      const saucer = new THREE.Mesh(saucerGeom, ceramicMat);
+      saucer.position.y = -0.05;
+      saucer.castShadow = true;
+      saucer.receiveShadow = true;
+      group.add(saucer);
 
-      cupGroup.userData = {
-        baseX, baseY,
-        baseRotZ: cupGroup.rotation.z,
-        floatSpeed: 0.3 + Math.random() * 0.4,
-        floatAmp: 0.25 + Math.random() * 0.25,
-        rotSpeed: 0.002 + Math.random() * 0.004,
-        orbitRadius: 0.15 + Math.random() * 0.2,
-        orbitSpeed: 0.15 + Math.random() * 0.2,
-        offset: Math.random() * Math.PI * 2,
-        // Scroll influence — same idea as before, but now applied
-        // relative to an anchor point every frame instead of being
-        // subtracted cumulatively.
-        parallax: 0.0009 * (i + 1)
-      };
+      // Steam particles
+      createSteam(group);
 
-      cups.push(cupGroup);
-      scene.add(cupGroup);
+      return group;
     }
 
-    window.addEventListener('resize', onWindowResize);
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-
-    animate();
-  }
-
-  function onMouseMove(e) {
-    targetMouseX = (e.clientX / window.innerWidth - 0.5);
-    targetMouseY = (e.clientY / window.innerHeight - 0.5);
-  }
-
-  function onWindowResize() {
-    const width = container.clientWidth || window.innerWidth;
-    const height = container.clientHeight || window.innerHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const time = Date.now() * 0.001;
-
-    // THE FIX: clamp how far scroll can push the scene, and — more
-    // importantly — every cup's position is rebuilt fresh each frame
-    // from its stored base position (userData.baseX/baseY), not
-    // mutated in place. The original code did
-    //   cup.position.y -= scrollY * factor
-    // inside the render loop, which re-subtracts based on the
-    // *absolute* scroll position on every single frame — so the
-    // longer the page stayed scrolled, the further the cups drifted,
-    // and scrolling back to the top never restored them because
-    // nothing was anchored to an original position. Anchoring to
-    // baseX/baseY and recomputing (not accumulating) means scrolling
-    // back up always returns the cups exactly to where they started.
-    const rawScroll = window.scrollY || window.pageYOffset;
-    const scrollY = Math.max(-1200, Math.min(1200, rawScroll));
-
-    mouseX += (targetMouseX - mouseX) * 0.05;
-    mouseY += (targetMouseY - mouseY) * 0.05;
-    camera.position.x = mouseX * 0.6;
-    camera.position.y = -mouseY * 0.4;
-    camera.lookAt(0, 0, 0);
-
-    cups.forEach((cup) => {
-      const d = cup.userData;
-      const bob = Math.sin(time * d.floatSpeed + d.offset) * d.floatAmp;
-      const orbitX = Math.cos(time * d.orbitSpeed + d.offset) * d.orbitRadius;
-
-      cup.position.y = d.baseY + bob - scrollY * d.parallax;
-      cup.position.x = d.baseX + orbitX;
-      cup.rotation.x += d.rotSpeed;
-      cup.rotation.y += d.rotSpeed;
-      cup.rotation.z = d.baseRotZ + scrollY * 0.0004;
-
-      cup.children.forEach((child) => {
-        if (child.type === 'Group') {
-          child.children.forEach((plane) => {
-            const sway = Math.sin(time * plane.userData.speed + plane.userData.phase);
-            plane.position.x = sway * 0.05;
-            plane.material.opacity = 0.05 + sway * 0.03;
-          });
-        }
-      });
-    });
-
-    renderer.render(scene, camera);
-  }
-
-  init();
-})();
-</script>
-</div>
-<!-- STITCH_THREEJS_END:ANIMATION_2 -->
-<div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop">
-<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-8 max-w-4xl mx-auto reveal active">
-                Experience the Art of Coffee
-            </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto reveal active" style="transition-delay: 200ms;">
-                Where heritage meets precision. Every bean tells a story of craftsmanship, sustainability, and sensory perfection.
-            </p>
-<div class="reveal active" style="transition-delay: 400ms;">
-<button class="bg-primary text-on-primary px-10 py-4 font-label-md text-label-md rounded-full hover-lift shadow-lg hover:shadow-xl transition-all">
-                    Explore the Collection
-                </button>
-</div>
-</div>
-<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-<span class="material-symbols-outlined text-primary">expand_more</span>
-</div>
-</section>
-<!-- About Section -->
-<section class="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-hidden">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-<div class="md:col-span-5 reveal">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4 block">Our Philosophy</span>
-<h2 class="font-headline-md text-headline-md text-primary mb-8">Crafted for the Discerning Palate</h2>
-<div class="space-y-6 font-body-md text-body-md text-on-surface-variant leading-relaxed">
-<p>
-                        At Aura Brew, we believe coffee is more than a morning ritual—it is a sensory journey. Our "Modern Heritage" approach fuses the warmth of traditional artisanal roasting with the precision of luxury digital transparency.
-                    </p>
-<p>
-                        We source exclusively from sustainable high-altitude micro-lots, ensuring each roast preserves the unique terroir of its origin. Every cup is a testament to the hands that nurtured the harvest and the baristas who master the pour.
-                    </p>
-</div>
-<div class="mt-12 flex items-center gap-6">
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-primary">100%</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Ethical Sourcing</span>
-</div>
-<div class="w-[1px] h-12 bg-outline-variant/30"></div>
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-primary">12+</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Single Origins</span>
-</div>
-</div>
-</div>
-<div class="md:col-span-7 relative h-[600px] reveal" style="transition-delay: 200ms;">
-<div class="absolute inset-0 bg-secondary-container/5 rounded-xl -rotate-2 scale-105"></div>
-<img class="w-full h-full object-cover rounded-xl shadow-2xl relative z-10" data-alt="A high-end, macro close-up photograph of roasted coffee beans with a rich oily sheen. The lighting is dramatic and warm, emphasizing the textures and deep espresso colors. Soft golden highlights catch the edges of the beans against a minimalist, cream-colored surface, reflecting a luxury artisanal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC444fpIMxKPlvPdrz8xPPEy2ReVDj84rGIGHAuv5TMLJDWYWgNuVodu9Sqe14MHxce_TEw9hLBQNQZFrZWfG3DBu4vNOhiwxBbv_gO7L6gJFFEzORM_UCmYE3HdfJmuJIFG4-DgGpbDtUWQWbDvqd5iBb5aGc-lXbroZIrMXTzUqCiTLOu2WVW_A3bqc3fn3V-7C7flZcXtEuQuHpXPCzazQgjz7k8q0ydRLenRfH2XS4yh870ki_Zm7fBrJgrQMueAkEQsVXV9JA"/>
-</div>
-</div>
-</section>
-<!-- Product Showcase -->
-<section class="bg-surface-container-low py-32 px-margin-mobile md:px-margin-desktop">
-<div class="max-w-container-max mx-auto">
-<div class="text-center mb-20 reveal">
-<h2 class="font-display-lg text-headline-md md:text-display-lg text-primary mb-4">The Collection</h2>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">Signature blends curated for moments of stillness and celebration.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-<!-- Card 1 -->
-<div class="group bg-surface-container-lowest p-unit rounded-xl hover-lift border border-outline-variant/10 reveal" style="transition-delay: 100ms;">
-<div class="aspect-[4/5] mb-8 overflow-hidden rounded-lg">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A premium bag of Aura Brew 'The Midnight Roast' coffee beans placed on a dark marble countertop. The packaging is minimalist black with gold embossed typography. Nearby, a single stream of light illuminates a few scattered dark-roasted beans and a silver espresso spoon. Sophisticated, dark, and moody atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjQPAr3pnZhSR7ItA1E_tuzHFL_YRXiyBSEnRfPTZJ6WtnOX-i8uvmzXT_Za6l2SKQA5qQBfvanWsLV1JlPS_SxoJ7UihU_15RHX0VEb5vbIuqlbPALeyPFf5HFxnP5lRJ4BWz8uwx3O-PgitPlZ45wlAZweOlHuWCK0GY5b6EPieehzfi8iZq2_Brl2RruRxdfSq1TyASzQIkEDHNno7cS1lcsoGSxORToHuWpz-MHrrbJSFpxSo7_rU0YNXvE_4g_fCWi2qyaM"/>
-</div>
-<div class="px-4 pb-4">
-<div class="flex justify-between items-start mb-2">
-<h3 class="font-headline-sm text-headline-sm text-primary">The Midnight Roast</h3>
-<span class="font-label-md text-label-md text-secondary">$28</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">A bold, intense profile with notes of dark chocolate and toasted almond.</p>
-<div class="flex flex-wrap gap-2 mb-8">
-<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Bold</span>
-<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Nutty</span>
-</div>
-<button class="w-full border border-secondary text-secondary py-3 font-label-md text-label-md hover:bg-secondary hover:text-white transition-colors duration-300 rounded">Add to Collection</button>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="group bg-surface-container-lowest p-unit rounded-xl hover-lift border border-outline-variant/10 reveal" style="transition-delay: 200ms;">
-<div class="aspect-[4/5] mb-8 overflow-hidden rounded-lg">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An elegant glass of 'The Velvet Latte' with perfect latte art in a heart shape on top. The foam is creamy and dense. The drink sits on a light wooden table next to a small sprig of dried lavender. Soft, ethereal morning light streams in, creating a calm and welcoming feeling with light cream and gold tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQTcEwzfZJ-MI_W2TNQWkrTeShD5AHNNS-Q-9xP2RmFFvJR7AbAYfwLnNbHYtt7dkS3LLX-DYgHEOoK9M9eXsliV1viTtjLfkKT35tD-__mUW4VD8hfpHxQcvc0wB5nYeu86rx8X6-glQAEqUr4-zCxZsS8b2ocF2ZEQiz_aPHsKKH88NWZixPR9oJq_X4zZ2JaK5yvPhzC5FMT4I3WhKcKYcOvRqTrBwsQBbRCcRBvSunO4snYrmwmB7yZhkwvaSWSkkskpYsK1k"/>
-</div>
-<div class="px-4 pb-4">
-<div class="flex justify-between items-start mb-2">
-<h3 class="font-headline-sm text-headline-sm text-primary">The Velvet Latte</h3>
-<span class="font-label-md text-label-md text-secondary">$32</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Smooth, silky texture with floral undertones and a hint of organic vanilla.</p>
-<div class="flex flex-wrap gap-2 mb-8">
-<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Smooth</span>
-<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Floral</span>
-</div>
-<button class="w-full border border-secondary text-secondary py-3 font-label-md text-label-md hover:bg-secondary hover:text-white transition-colors duration-300 rounded">Add to Collection</button>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="group bg-surface-container-lowest p-unit rounded-xl hover-lift border border-outline-variant/10 reveal" style="transition-delay: 300ms;">
-<div class="aspect-[4/5] mb-8 overflow-hidden rounded-lg">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A bag of 'The Golden Sunrise' coffee beans illuminated by bright, warm morning sunlight. The scene includes a fresh croissant and a white porcelain cup of coffee. The overall aesthetic is bright, airy, and optimistic, with soft shadows and a focus on high-quality morning rituals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG1ZToze3vPA5zGp7BAiB7Vx3YTj0ioD8z8I102DTWNtLWbhNKroQQAzaLwSQdTMapDb_7TsTE3RWtYIQSLCp8R6B5s_CjmhdT7OIjVXNQAuOzwiUcSRchB9MPsT0o8wuqXS1f-Dmh_iOQNNCvT8vjhaQsTILmhmuRPrklum5ssn4N_pA9lVMUUe5TM0p9g-9bYfV1rD2n_4PT9r340bSfd5RA-ovlEhsl2OwU4v9ENd66G4GtzAveO7H2e9T5y8rV21UTuummmEA"/>
-</div>
-<div class="px-4 pb-4">
-<div class="flex justify-between items-start mb-2">
-<h3 class="font-headline-sm text-headline-sm text-primary">The Golden Sunrise</h3>
-<span class="font-label-md text-label-md text-secondary">$30</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Light roasted beans with citrus brightness and a honey-like finish.</p>
-<div class="flex flex-wrap gap-2 mb-8">
-<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Citrus</span>
-<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Bright</span>
-</div>
-<button class="w-full border border-secondary text-secondary py-3 font-label-md text-label-md hover:bg-secondary hover:text-white transition-colors duration-300 rounded">Add to Collection</button>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Testimonials — new section -->
-<section class="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="text-center mb-20 reveal">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4 block">Word Of Mouth</span>
-<h2 class="font-display-lg text-headline-md md:text-display-lg text-primary">Loved By Our Community</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 reveal" style="transition-delay: 100ms;">
-<div class="star-row mb-4" aria-label="5 out of 5 stars">
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 italic">"The Midnight Roast changed how I think about coffee. Rich, never bitter, and the packaging alone feels like a gift."</p>
-<div class="font-label-md text-label-md text-primary">Elena Marchetti</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">Milan, Italy</div>
-</div>
-<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 reveal" style="transition-delay: 200ms;">
-<div class="star-row mb-4" aria-label="5 out of 5 stars">
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 italic">"You can taste the sourcing standards. The Golden Sunrise is my Sunday-morning ritual now, without fail."</p>
-<div class="font-label-md text-label-md text-primary">Jonah Whitfield</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">Austin, TX</div>
-</div>
-<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 reveal" style="transition-delay: 300ms;">
-<div class="star-row mb-4" aria-label="5 out of 5 stars">
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 italic">"Ordered The Velvet Latte blend on a whim. Now it's the only thing my espresso machine sees."</p>
-<div class="font-label-md text-label-md text-primary">Priya Sharma</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">Vancouver, Canada</div>
-</div>
-</div>
-</section>
-
-<!-- Visit Us — new section. Address/hours below are placeholders — replace with the real roastery details. -->
-<section class="bg-surface-container-low py-32 px-margin-mobile md:px-margin-desktop">
-<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
-<div class="reveal">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4 block">Visit Us</span>
-<h2 class="font-headline-md text-headline-md text-primary mb-8">The Roastery &amp; Tasting Room</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mb-10 leading-relaxed">Step inside where the roasting happens. Sample single origins fresh off the drum, guided by the people who source them.</p>
-<div class="space-y-6">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-secondary">location_on</span>
-<div>
-<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-1">Address</div>
-<div class="font-body-md text-body-md text-primary">123 Artisan Lane, Portland, OR 97209</div>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-secondary">schedule</span>
-<div>
-<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-1">Hours</div>
-<div class="font-body-md text-body-md text-primary">Mon – Fri: 7:00 – 18:00</div>
-<div class="font-body-md text-body-md text-primary">Sat – Sun: 8:00 – 16:00</div>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-secondary">call</span>
-<div>
-<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-1">Phone</div>
-<div class="font-body-md text-body-md text-primary">(503) 555-0148</div>
-</div>
-</div>
-</div>
-<button class="mt-10 bg-primary text-on-primary px-8 py-3 font-label-md text-label-md rounded-full hover-lift shadow-lg hover:shadow-xl transition-all">Get Directions</button>
-</div>
-<div class="relative h-[480px] reveal" style="transition-delay: 150ms;">
-<div class="absolute inset-0 bg-secondary-container/10 rounded-xl rotate-2 scale-105"></div>
-<iframe class="w-full h-full rounded-xl shadow-2xl relative z-10 border-0" src="https://www.google.com/maps?q=123+Artisan+Lane,+Portland,+OR&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-</div>
-</section>
-
-<!-- Footer -->
-<footer class="bg-surface-container-lowest dark:bg-tertiary-container w-full py-16 border-t border-outline-variant/20">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
-<div class="col-span-1 md:col-span-1">
-<div class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed mb-6">Aura Brew</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-8">Crafting experiences, one bean at a time. Join our community of coffee enthusiasts.</p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
-<span class="material-symbols-outlined text-on-surface text-lg">public</span>
-</a>
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
-<span class="material-symbols-outlined text-on-surface text-lg">interests</span>
-</a>
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
-<span class="material-symbols-outlined text-on-surface text-lg">local_cafe</span>
-</a>
-</div>
-</div>
-<div>
-<h4 class="font-label-md text-label-md text-primary font-bold mb-6">Explore</h4>
-<ul class="space-y-4">
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">The Experience</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Our Beans</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Brewing Guides</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Sustainability</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-label-md text-label-md text-primary font-bold mb-6">Policies</h4>
-<ul class="space-y-4">
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Shipping &amp; Returns</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Careers</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-label-md text-label-md text-primary font-bold mb-6">Stay Informed</h4>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6">Subscribe for exclusive releases and brewing tips.</p>
-<div class="relative">
-<input class="w-full bg-transparent border-b border-outline-variant/40 py-2 font-body-md focus:border-secondary transition-colors outline-none" placeholder="Email Address" type="email"/>
-<button class="absolute right-0 bottom-2 text-secondary">
-<span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-<div class="mt-20 pt-8 border-t border-outline-variant/10 text-center px-margin-desktop max-w-container-max mx-auto">
-<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Aura Brew Artisanal Coffee. Crafted for the discerning palate.</p>
-</div>
-</footer>
-<script>
-        // Scroll Animation Logic
-        const observerOptions = {
-            threshold: 0.1
-        };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        // Header transparency logic
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('glass-panel', 'shadow-sm');
-                header.classList.remove('bg-transparent');
-            } else {
-                header.classList.remove('glass-panel', 'shadow-sm');
-                header.classList.add('bg-transparent');
-            }
+    function createSteam(parent) {
+      const steamGroup = new THREE.Group();
+      for (let i = 0; i < 8; i++) {
+        const geom = new THREE.PlaneGeometry(0.15, 0.4, 1, 6);
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.06,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
         });
-    </script>
-</body></html>
+        const plane = new THREE.Mesh(geom, mat);
+        plane.position.set(
+          (Math.random() - 0.5) * 0.2,
+          0.9 + Math.random() * 0.5,
+          (Math.random() - 0.5) * 0.2
+        );
+        plane.userData = {
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.5 + Math.random() * 0.5,
+          baseY: plane.position.y
+        };
+        steamGroup.add(plane);
+      }
+      parent.add(steamGroup);
+    }
+
+    function createCoffeeBean() {
+      const group = new THREE.Group();
+      const beanGeom = new THREE.SphereGeometry(1, 16, 12);
+      // Squash into bean shape
+      const positions = beanGeom.attributes.position;
+      for (let i = 0; i < positions.count; i++) {
+        const x = positions.getX(i);
+        const y = positions.getY(i);
+        const z = positions.getZ(i);
+        positions.setX(i, x * 0.7);
+        positions.setY(i, y * 1.2);
+        positions.setZ(i, z * 0.5);
+        // Crease down middle
+        if (Math.abs(x) < 0.15) {
+          positions.setZ(i, z * 0.5 - 0.15);
+        }
+      }
+      beanGeom.computeVertexNormals();
+
+      const beanMat = new THREE.MeshPhysicalMaterial({
+        color: 0x3d2817,
+        roughness: 0.4,
+        metalness: 0.1,
+        clearcoat: 0.3,
+        clearcoatRoughness: 0.6
+      });
+      const bean = new THREE.Mesh(beanGeom, beanMat);
+      bean.castShadow = true;
+      group.add(bean);
+      return group;
+    }
+
+    function onMouseMove(e) {
+      targetMouseX = (e.clientX / window.innerWidth - 0.5);
+      targetMouseY = (e.clientY / window.innerHeight - 0.5);
+    }
+
+    function onResize() {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = Date.now() * 0.001;
+
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
+      camera.position.x = mouseX * 0.8;
+      camera.position.y = -mouseY * 0.5;
+      camera.lookAt(0, 0, 0);
+
+      const scrollY = Math.min(1000, window.scrollY || 0);
+
+      cups.forEach((cup) => {
+        const d = cup.userData;
+        const bob = Math.sin(time * d.floatSpeed + d.offset) * d.floatAmp;
+        cup.position.y = d.baseY + bob - scrollY * d.parallax;
+        cup.rotation.y = d.baseRotY + time * d.rotSpeed;
+        cup.rotation.x = Math.sin(time * 0.3 + d.offset) * 0.05;
+
+        // Animate steam
+        cup.children.forEach(child => {
+          if (child.type === 'Group') {
+            child.children.forEach(plane => {
+              if (plane.userData.phase !== undefined) {
+                const sway = Math.sin(time * plane.userData.speed + plane.userData.phase);
+                plane.position.y = plane.userData.baseY + (time * 0.2 + plane.userData.phase) % 1.2;
+                plane.position.x = sway * 0.1;
+                plane.material.opacity = 0.04 + Math.abs(sway) * 0.04;
+                plane.rotation.z = sway * 0.2;
+                if (plane.position.y > plane.userData.baseY + 1.2) {
+                  plane.position.y = plane.userData.baseY;
+                }
+              }
+            });
+          }
+        });
+      });
+
+      beans.forEach(bean => {
+        const d = bean.userData;
+        bean.position.y = d.baseY + Math.sin(time * d.floatSpeed + d.offset) * d.floatAmp;
+        bean.rotation.x += d.rotSpeed;
+        bean.rotation.y += d.rotSpeed * 0.7;
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    init();
+  })();
+
+  // ============ GSAP SCROLL ANIMATIONS ============
+  gsap.registerPlugin(ScrollTrigger);
+  
+  gsap.utils.toArray('.product-card').forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 85%'
+      },
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      delay: i * 0.1,
+      ease: 'power3.out'
+    });
+  });
+</script>
+
+</body>
+</html>
