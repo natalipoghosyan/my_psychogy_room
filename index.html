@@ -1,1 +1,449 @@
+<!DOCTYPE html>
 
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Brew | Artisanal Coffee Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#e9c349",
+                    "on-tertiary-fixed": "#1d1b16",
+                    "secondary": "#735c00",
+                    "secondary-fixed": "#ffe088",
+                    "error-container": "#ffdad6",
+                    "outline": "#817471",
+                    "on-primary-fixed": "#261814",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fff8f6",
+                    "on-surface-variant": "#4f4542",
+                    "tertiary-container": "#23211c",
+                    "inverse-on-surface": "#fdeee9",
+                    "primary-container": "#2c1e1a",
+                    "on-primary-container": "#99847e",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#fff8f6",
+                    "inverse-primary": "#dac1bb",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#e6d7d3",
+                    "on-secondary-container": "#745c00",
+                    "background": "#fff8f6",
+                    "tertiary": "#0c0a06",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#d2c3bf",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#54433e",
+                    "tertiary-fixed-dim": "#cbc6bd",
+                    "on-secondary-fixed": "#241a00",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#f4e5e1",
+                    "surface-container-highest": "#eedfdb",
+                    "surface-tint": "#6d5a55",
+                    "on-tertiary-fixed-variant": "#494640",
+                    "surface-container": "#faebe6",
+                    "on-tertiary-container": "#8c8881",
+                    "primary-fixed-dim": "#dac1bb",
+                    "secondary-container": "#fed65b",
+                    "primary": "#130805",
+                    "on-background": "#211a18",
+                    "surface-container-low": "#fff1ed",
+                    "on-surface": "#211a18",
+                    "surface-variant": "#eedfdb",
+                    "inverse-surface": "#372f2c",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#f7ddd6",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-fixed": "#e7e2d9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "unit": "8px",
+                    "container-max": "1280px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Libre Caslon Text"],
+                    "display-lg": ["Libre Caslon Text"],
+                    "label-md": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-sm": ["Libre Caslon Text"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "display-lg-mobile": ["Libre Caslon Text"],
+                    "label-sm": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .glass-panel { backdrop-filter: blur(12px); background: rgba(255, 248, 246, 0.85); }
+        .hover-lift { transition: transform 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-8px); }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-secondary-container selection:text-on-secondary-container overflow-x-hidden">
+<!-- Header: TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md bg-tertiary-container/10">
+<nav class="flex justify-between items-center px-margin-desktop py-unit max-w-container-max mx-auto h-20">
+<div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">
+                Aura Brew
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim border-b-2 border-secondary pb-1 transition-all duration-300" href="#">The Experience</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-secondary transition-colors transition-all duration-300 ease-in-out" href="#">Our Beans</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-secondary transition-colors transition-all duration-300 ease-in-out" href="#">Menu</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-secondary transition-colors transition-all duration-300 ease-in-out" href="#">Find Us</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-md text-label-md rounded-full scale-95 active:scale-90 transition-transform hover:opacity-80">
+                Order Now
+            </button>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-surface">
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="absolute inset-0 w-full h-full opacity-60" -->
+<div class="absolute inset-0 w-full h-full opacity-60" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  
+// Three.js Floating Coffee Cups Scene
+// Colors derived from Aura Brew Design System: #2c1e1a (Espresso), #d4a373 (Gold), #fff8f6 (Cream)
+
+let scene, camera, renderer, cups = [];
+const cupCount = 5;
+
+function init() {
+    scene = new THREE.Scene();
+    
+    const width = container.clientWidth || window.innerWidth;
+    const height = container.clientHeight || window.innerHeight;
+    
+    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 5;
+
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+    
+    const pointLight = new THREE.PointLight(0xd4a373, 1.2);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
+
+    // Create Coffee Cup Groups (Simplified geometry to represent cups)
+    for (let i = 0; i < cupCount; i++) {
+        const cupGroup = new THREE.Group();
+        
+        // Cup Body
+        const bodyGeom = new THREE.CylinderGeometry(0.5, 0.4, 0.8, 32);
+        const bodyMat = new THREE.MeshPhongMaterial({ color: 0xfff8f6 });
+        const body = new THREE.Mesh(bodyGeom, bodyMat);
+        cupGroup.add(body);
+        
+        // Cup Handle
+        const handleGeom = new THREE.TorusGeometry(0.2, 0.05, 16, 32, Math.PI);
+        const handleMat = new THREE.MeshPhongMaterial({ color: 0xfff8f6 });
+        const handle = new THREE.Mesh(handleGeom, handleMat);
+        handle.position.set(0.45, 0, 0);
+        handle.rotation.z = Math.PI / 2;
+        cupGroup.add(handle);
+
+        // Coffee inside
+        const coffeeGeom = new THREE.CircleGeometry(0.45, 32);
+        const coffeeMat = new THREE.MeshBasicMaterial({ color: 0x2c1e1a });
+        const coffee = new THREE.Mesh(coffeeGeom, coffeeMat);
+        coffee.rotation.x = -Math.PI / 2;
+        coffee.position.y = 0.41;
+        cupGroup.add(coffee);
+
+        // Random Position
+        cupGroup.position.set(
+            (Math.random() - 0.5) * 8,
+            (Math.random() - 0.5) * 6,
+            (Math.random() - 0.5) * 4
+        );
+        
+        cupGroup.rotation.set(
+            Math.random() * Math.PI,
+            Math.random() * Math.PI,
+            0
+        );
+
+        // Movement metadata
+        cupGroup.userData = {
+            floatSpeed: 0.005 + Math.random() * 0.01,
+            rotSpeed: 0.002 + Math.random() * 0.005,
+            offset: Math.random() * Math.PI * 2
+        };
+
+        cups.push(cupGroup);
+        scene.add(cupGroup);
+    }
+
+    animate();
+    
+    window.addEventListener('resize', onWindowResize);
+}
+
+function onWindowResize() {
+    const width = container.clientWidth || window.innerWidth;
+    const height = container.clientHeight || window.innerHeight;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    
+    const time = Date.now() * 0.001;
+    const scrollY = window.scrollY || window.pageYOffset;
+    
+    cups.forEach((cup, i) => {
+        // Ambient floating
+        cup.position.y += Math.sin(time + cup.userData.offset) * cup.userData.floatSpeed;
+        cup.rotation.x += cup.userData.rotSpeed;
+        cup.rotation.y += cup.userData.rotSpeed;
+        
+        // Scroll reaction
+        cup.position.y -= scrollY * 0.002 * (i + 1) * 0.2; // Differential scrolling for depth
+        cup.rotation.z += scrollY * 0.0005;
+    });
+
+    renderer.render(scene, camera);
+}
+
+init();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+<div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-8 max-w-4xl mx-auto reveal active">
+                Experience the Art of Coffee
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto reveal active" style="transition-delay: 200ms;">
+                Where heritage meets precision. Every bean tells a story of craftsmanship, sustainability, and sensory perfection.
+            </p>
+<div class="reveal active" style="transition-delay: 400ms;">
+<button class="bg-primary text-on-primary px-10 py-4 font-label-md text-label-md rounded-full hover-lift shadow-lg hover:shadow-xl transition-all">
+                    Explore the Collection
+                </button>
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 reveal">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4 block">Our Philosophy</span>
+<h2 class="font-headline-md text-headline-md text-primary mb-8">Crafted for the Discerning Palate</h2>
+<div class="space-y-6 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+<p>
+                        At Aura Brew, we believe coffee is more than a morning ritual—it is a sensory journey. Our "Modern Heritage" approach fuses the warmth of traditional artisanal roasting with the precision of luxury digital transparency.
+                    </p>
+<p>
+                        We source exclusively from sustainable high-altitude micro-lots, ensuring each roast preserves the unique terroir of its origin. Every cup is a testament to the hands that nurtured the harvest and the baristas who master the pour.
+                    </p>
+</div>
+<div class="mt-12 flex items-center gap-6">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">100%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ethical Sourcing</span>
+</div>
+<div class="w-[1px] h-12 bg-outline-variant/30"></div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">12+</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Single Origins</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 relative h-[600px] reveal" style="transition-delay: 200ms;">
+<div class="absolute inset-0 bg-secondary-container/5 rounded-xl -rotate-2 scale-105"></div>
+<img class="w-full h-full object-cover rounded-xl shadow-2xl relative z-10" data-alt="A high-end, macro close-up photograph of roasted coffee beans with a rich oily sheen. The lighting is dramatic and warm, emphasizing the textures and deep espresso colors. Soft golden highlights catch the edges of the beans against a minimalist, cream-colored surface, reflecting a luxury artisanal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC444fpIMxKPlvPdrz8xPPEy2ReVDj84rGIGHAuv5TMLJDWYWgNuVodu9Sqe14MHxce_TEw9hLBQNQZFrZWfG3DBu4vNOhiwxBbv_gO7L6gJFFEzORM_UCmYE3HdfJmuJIFG4-DgGpbDtUWQWbDvqd5iBb5aGc-lXbroZIrMXTzUqCiTLOu2WVW_A3bqc3fn3V-7C7flZcXtEuQuHpXPCzazQgjz7k8q0ydRLenRfH2XS4yh870ki_Zm7fBrJgrQMueAkEQsVXV9JA"/>
+</div>
+</div>
+</section>
+<!-- Product Showcase -->
+<section class="bg-surface-container-low py-32 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-20 reveal">
+<h2 class="font-display-lg text-headline-md md:text-display-lg text-primary mb-4">The Collection</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">Signature blends curated for moments of stillness and celebration.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group bg-surface-container-lowest p-unit rounded-xl hover-lift border border-outline-variant/10 reveal" style="transition-delay: 100ms;">
+<div class="aspect-[4/5] mb-8 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A premium bag of Aura Brew 'The Midnight Roast' coffee beans placed on a dark marble countertop. The packaging is minimalist black with gold embossed typography. Nearby, a single stream of light illuminates a few scattered dark-roasted beans and a silver espresso spoon. Sophisticated, dark, and moody atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjQPAr3pnZhSR7ItA1E_tuzHFL_YRXiyBSEnRfPTZJ6WtnOX-i8uvmzXT_Za6l2SKQA5qQBfvanWsLV1JlPS_SxoJ7UihU_15RHX0VEb5vbIuqlbPALeyPFf5HFxnP5lRJ4BWz8uwx3O-PgitPlZ45wlAZweOlHuWCK0GY5b6EPieehzfi8iZq2_Brl2RruRxdfSq1TyASzQIkEDHNno7cS1lcsoGSxORToHuWpz-MHrrbJSFpxSo7_rU0YNXvE_4g_fCWi2qyaM"/>
+</div>
+<div class="px-4 pb-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary">The Midnight Roast</h3>
+<span class="font-label-md text-label-md text-secondary">$28</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">A bold, intense profile with notes of dark chocolate and toasted almond.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Bold</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Nutty</span>
+</div>
+<button class="w-full border border-secondary text-secondary py-3 font-label-md text-label-md hover:bg-secondary hover:text-white transition-colors duration-300 rounded">Add to Collection</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-lowest p-unit rounded-xl hover-lift border border-outline-variant/10 reveal" style="transition-delay: 200ms;">
+<div class="aspect-[4/5] mb-8 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An elegant glass of 'The Velvet Latte' with perfect latte art in a heart shape on top. The foam is creamy and dense. The drink sits on a light wooden table next to a small sprig of dried lavender. Soft, ethereal morning light streams in, creating a calm and welcoming feeling with light cream and gold tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQTcEwzfZJ-MI_W2TNQWkrTeShD5AHNNS-Q-9xP2RmFFvJR7AbAYfwLnNbHYtt7dkS3LLX-DYgHEOoK9M9eXsliV1viTtjLfkKT35tD-__mUW4VD8hfpHxQcvc0wB5nYeu86rx8X6-glQAEqUr4-zCxZsS8b2ocF2ZEQiz_aPHsKKH88NWZixPR9oJq_X4zZ2JaK5yvPhzC5FMT4I3WhKcKYcOvRqTrBwsQBbRCcRBvSunO4snYrmwmB7yZhkwvaSWSkkskpYsK1k"/>
+</div>
+<div class="px-4 pb-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary">The Velvet Latte</h3>
+<span class="font-label-md text-label-md text-secondary">$32</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Smooth, silky texture with floral undertones and a hint of organic vanilla.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Smooth</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Floral</span>
+</div>
+<button class="w-full border border-secondary text-secondary py-3 font-label-md text-label-md hover:bg-secondary hover:text-white transition-colors duration-300 rounded">Add to Collection</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-lowest p-unit rounded-xl hover-lift border border-outline-variant/10 reveal" style="transition-delay: 300ms;">
+<div class="aspect-[4/5] mb-8 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A bag of 'The Golden Sunrise' coffee beans illuminated by bright, warm morning sunlight. The scene includes a fresh croissant and a white porcelain cup of coffee. The overall aesthetic is bright, airy, and optimistic, with soft shadows and a focus on high-quality morning rituals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG1ZToze3vPA5zGp7BAiB7Vx3YTj0ioD8z8I102DTWNtLWbhNKroQQAzaLwSQdTMapDb_7TsTE3RWtYIQSLCp8R6B5s_CjmhdT7OIjVXNQAuOzwiUcSRchB9MPsT0o8wuqXS1f-Dmh_iOQNNCvT8vjhaQsTILmhmuRPrklum5ssn4N_pA9lVMUUe5TM0p9g-9bYfV1rD2n_4PT9r340bSfd5RA-ovlEhsl2OwU4v9ENd66G4GtzAveO7H2e9T5y8rV21UTuummmEA"/>
+</div>
+<div class="px-4 pb-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary">The Golden Sunrise</h3>
+<span class="font-label-md text-label-md text-secondary">$30</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Light roasted beans with citrus brightness and a honey-like finish.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Citrus</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Bright</span>
+</div>
+<button class="w-full border border-secondary text-secondary py-3 font-label-md text-label-md hover:bg-secondary hover:text-white transition-colors duration-300 rounded">Add to Collection</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-tertiary-container w-full py-16 border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed mb-6">Aura Brew</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Crafting experiences, one bean at a time. Join our community of coffee enthusiasts.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-on-surface text-lg">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-on-surface text-lg">interests</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-on-surface text-lg">local_cafe</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary font-bold mb-6">Explore</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">The Experience</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Our Beans</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Brewing Guides</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary font-bold mb-6">Policies</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary font-bold mb-6">Stay Informed</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Subscribe for exclusive releases and brewing tips.</p>
+<div class="relative">
+<input class="w-full bg-transparent border-b border-outline-variant/40 py-2 font-body-md focus:border-secondary transition-colors outline-none" placeholder="Email Address" type="email"/>
+<button class="absolute right-0 bottom-2 text-secondary">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-20 pt-8 border-t border-outline-variant/10 text-center px-margin-desktop max-w-container-max mx-auto">
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Aura Brew Artisanal Coffee. Crafted for the discerning palate.</p>
+</div>
+</footer>
+<script>
+        // Scroll Animation Logic
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Header transparency logic
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('glass-panel', 'shadow-sm');
+                header.classList.remove('bg-transparent');
+            } else {
+                header.classList.remove('glass-panel', 'shadow-sm');
+                header.classList.add('bg-transparent');
+            }
+        });
+    </script>
+</body></html>
