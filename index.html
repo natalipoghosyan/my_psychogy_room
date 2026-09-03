@@ -1,1 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Voyages — Luxury Travel Curated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #faf8f5;
+    --cream: #f2ede4;
+    --charcoal: #1a1a1a;
+    --slate: #3a3a3a;
+    --muted: #6b6b6b;
+    --gold: #b8935a;
+    --gold-light: #d4b88a;
+    --gold-dark: #8a6d3f;
+    --line: rgba(26, 26, 26, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--ivory);
+    color: var(--charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-weight: 300;
+  }
+
+  .serif { font-family: 'Cormorant Garamond', serif; }
+
+  /* Announcement Bar */
+  .announcement {
+    background: var(--charcoal);
+    color: var(--ivory);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .announcement span { color: var(--gold-light); }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+  nav.scrolled {
+    background: rgba(250, 248, 245, 0.97);
+    backdrop-filter: blur(20px);
+    padding: 18px 60px;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.06);
+  }
+  nav.scrolled .logo, nav.scrolled .nav-links a { color: var(--charcoal); }
+  nav.scrolled .nav-cta { background: var(--charcoal); color: var(--ivory); }
+  
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--ivory);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .logo em { font-style: italic; color: var(--gold-light); font-weight: 400; }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--ivory);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--ivory);
+    color: var(--ivory);
+    padding: 10px 24px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+  }
+  .nav-cta:hover { background: var(--ivory); color: var(--charcoal); }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--ivory);
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1250e040b-d209-46ec-b4d9-3ee0246c88f3.png');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.1);
+    animation: heroZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.1); }
+    to { transform: scale(1.2); }
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.5) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--ivory);
+    padding: 0 20px;
+    max-width: 900px;
+  }
+  .hero-tag {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    color: var(--gold-light);
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.5s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.7s forwards;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-cta {
+    display: inline-flex;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ivory);
+    padding: 16px 40px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-primary:hover { background: var(--gold-dark); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ivory);
+    padding: 16px 40px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ivory);
+    transition: all 0.3s;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-outline:hover { background: var(--ivory); color: var(--charcoal); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--ivory);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: var(--ivory);
+    margin: 15px auto 0;
+    animation: scrollLine 2s infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Section Styles */
+  section { padding: 120px 60px; }
+  .section-header { text-align: center; margin-bottom: 80px; }
+  .section-tag {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4.5vw, 64px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* Destinations */
+  .destinations { background: var(--ivory); }
+  .dest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .dest-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 3/4;
+    transition: transform 0.6s;
+  }
+  .dest-card:hover { transform: translateY(-8px); }
+  .dest-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s;
+  }
+  .dest-card:hover img { transform: scale(1.08); }
+  .dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.85) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px 30px;
+    color: var(--ivory);
+  }
+  .dest-location {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+  .dest-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .dest-desc {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .dest-price {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dest-price span:last-child { color: var(--gold-light); }
+
+  /* Experiences */
+  .experiences { background: var(--cream); }
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .exp-image {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+  }
+  .exp-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s;
+  }
+  .exp-image:hover img { transform: scale(1.05); }
+  .exp-content { padding: 40px 0; }
+  .exp-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .exp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 30px;
+  }
+  .exp-title em { font-style: italic; color: var(--gold); }
+  .exp-desc {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .exp-features {
+    list-style: none;
+    margin: 30px 0;
+  }
+  .exp-features li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .exp-features li::before {
+    content: '◆';
+    color: var(--gold);
+    font-size: 10px;
+  }
+
+  /* Heritage */
+  .heritage {
+    background: var(--charcoal);
+    color: var(--ivory);
+    position: relative;
+    overflow: hidden;
+  }
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .heritage-content .section-tag { color: var(--gold-light); }
+  .heritage-content .section-title { color: var(--ivory); text-align: left; }
+  .heritage-content .section-sub { color: rgba(250,248,245,0.7); text-align: left; margin: 0; }
+  .heritage-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(250,248,245,0.15);
+  }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,248,245,0.6);
+  }
+  .heritage-image {
+    aspect-ratio: 4/5;
+    background-image: url('https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1a802f81d-93ef-471d-8b17-a2695b51918d.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .heritage-image::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: 20px;
+    bottom: 20px;
+    border: 1px solid var(--gold);
+    z-index: -1;
+  }
+
+  /* Testimonials */
+  .testimonials { background: var(--ivory); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .testi-card {
+    padding: 50px 40px;
+    background: var(--cream);
+    position: relative;
+    transition: all 0.4s;
+  }
+  .testi-card:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+  .testi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .testi-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: var(--charcoal);
+  }
+  .testi-author {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .testi-role {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+    letter-spacing: 1px;
+  }
+
+  /* Concierge */
+  .concierge {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--ivory) 100%);
+    text-align: center;
+  }
+  .concierge-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 60px;
+    border: 1px solid var(--gold);
+    position: relative;
+  }
+  .concierge-box::before, .concierge-box::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--gold);
+  }
+  .concierge-box::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .concierge-box::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+  .concierge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .concierge-title em { font-style: italic; color: var(--gold); }
+  .concierge-sub {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .concierge-form {
+    display: flex;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .concierge-form input {
+    flex: 1;
+    padding: 16px 24px;
+    background: var(--ivory);
+    border: 1px solid var(--line);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  .concierge-form input:focus { border-color: var(--gold); }
+  .concierge-form button {
+    background: var(--charcoal);
+    color: var(--ivory);
+    padding: 16px 32px;
+    border: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.3s;
+  }
+  .concierge-form button:hover { background: var(--gold); }
+
+  /* Footer */
+  footer {
+    background: var(--charcoal);
+    color: var(--ivory);
+    padding: 80px 60px 30px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto 60px;
+  }
+  .footer-brand .logo { display: inline-block; margin-bottom: 20px; }
+  .footer-brand p {
+    font-size: 14px;
+    color: rgba(250,248,245,0.6);
+    line-height: 1.8;
+    max-width: 300px;
+  }
+  .footer-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    margin-bottom: 25px;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; }
+  .footer-col a {
+    color: rgba(250,248,245,0.6);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(250,248,245,0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(250,248,245,0.5);
+    letter-spacing: 1px;
+  }
+  .socials { display: flex; gap: 20px; }
+  .socials a { color: rgba(250,248,245,0.6); text-decoration: none; }
+  .socials a:hover { color: var(--gold-light); }
+
+  /* Reveal Animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 968px) {
+    section { padding: 80px 30px; }
+    nav { padding: 20px 30px; }
+    nav.scrolled { padding: 15px 30px; }
+    .nav-links { display: none; }
+    .menu-toggle { display: block; }
+    .dest-grid { grid-template-columns: 1fr; }
+    .exp-grid, .heritage-grid { grid-template-columns: 1fr; gap: 40px; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .heritage-stats { grid-template-columns: 1fr; gap: 20px; }
+    .concierge-form { flex-direction: column; }
+    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+    .hero-cta { flex-direction: column; gap: 15px; }
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: var(--charcoal);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transition: right 0.4s ease;
+  }
+  .mobile-menu.open { right: 0; }
+  .mobile-menu a {
+    color: var(--ivory);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+  }
+  .mobile-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: var(--ivory);
+    font-size: 30px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="announcement">
+  <span>✦</span> Private Collection 2026 — Now accepting reservations for the autumn season <span>✦</span>
+</div>
+
+<nav id="navbar">
+  <a href="#" class="logo">Aurelian<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#heritage">Heritage</a></li>
+    <li><a href="#testimonials">Journal</a></li>
+    <li><a href="#concierge">Concierge</a></li>
+  </ul>
+  <button class="nav-cta">Begin Journey</button>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#destinations" onclick="toggleMenu()">Destinations</a>
+  <a href="#experiences" onclick="toggleMenu()">Experiences</a>
+  <a href="#heritage" onclick="toggleMenu()">Heritage</a>
+  <a href="#testimonials" onclick="toggleMenu()">Journal</a>
+  <a href="#concierge" onclick="toggleMenu()">Concierge</a>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Luxury Travel · Since 1987</div>
+    <h1 class="hero-title">Journeys crafted for the <em>discerning</em> few</h1>
+    <p class="hero-sub">Bespoke itineraries, private villas, and singular experiences across the world's most coveted destinations.</p>
+    <div class="hero-cta">
+      <a href="#destinations" class="btn-primary">Explore Collection</a>
+      <a href="#concierge" class="btn-outline">Private Consultation</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<section class="destinations" id="destinations">
+  <div class="section-header reveal">
+    <div class="section-tag">Curated Destinations</div>
+    <h2 class="section-title">The world's most <em>extraordinary</em> places</h2>
+    <p class="section-sub">Six signature destinations, each hand-selected for their unparalleled beauty, heritage, and exclusivity.</p>
+  </div>
+  <div class="dest-grid">
+    <div class="dest-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1864a0674-fb3a-4209-af54-c22883cca15b.png" alt="Santorini">
+      <div class="dest-overlay">
+        <div class="dest-location">Greece · Aegean</div>
+        <h3 class="dest-name">Santorini</h3>
+        <p class="dest-desc">Cliffside suites with caldera views and private wine cellars.</p>
+        <div class="dest-price"><span>7 Nights</span><span>From $12,400</span></div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/12cf3a072-2af8-47e3-b338-935c61979b84.png" alt="Swiss Alps">
+      <div class="dest-overlay">
+        <div class="dest-location">Switzerland · Alps</div>
+        <h3 class="dest-name">Zermatt</h3>
+        <p class="dest-desc">Alpine chalets with private ski instructors and heli-access.</p>
+        <div class="dest-price"><span>5 Nights</span><span>From $18,900</span></div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/12609c1cc-e1ef-41c2-979b-14ce7c825c49.png" alt="Safari">
+      <div class="dest-overlay">
+        <div class="dest-location">Kenya · Masai Mara</div>
+        <h3 class="dest-name">Serengeti</h3>
+        <p class="dest-desc">Luxury tented camps with private game drives and bush dinners.</p>
+        <div class="dest-price"><span>6 Nights</span><span>From $22,500</span></div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1a802f81d-93ef-471d-8b17-a2695b51918d.png" alt="Kyoto">
+      <div class="dest-overlay">
+        <div class="dest-location">Japan · Kansai</div>
+        <h3 class="dest-name">Kyoto</h3>
+        <p class="dest-desc">Traditional ryokans with private onsen and tea ceremonies.</p>
+        <div class="dest-price"><span>8 Nights</span><span>From $15,800</span></div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/141764396-7c41-481b-af20-ac1f77120151.png" alt="Amalfi">
+      <div class="dest-overlay">
+        <div class="dest-location">Italy · Campania</div>
+        <h3 class="dest-name">Amalfi Coast</h3>
+        <p class="dest-desc">Seaside villas with private chefs and yacht excursions.</p>
+        <div class="dest-price"><span>7 Nights</span><span>From $16,200</span></div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1250e040b-d209-46ec-b4d9-3ee0246c88f3.png" alt="Maldives">
+      <div class="dest-overlay">
+        <div class="dest-location">Maldives · Indian Ocean</div>
+        <h3 class="dest-name">Maldives</h3>
+        <p class="dest-desc">Overwater pavilions with private butlers and reef access.</p>
+        <div class="dest-price"><span>6 Nights</span><span>From $24,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experiences" id="experiences">
+  <div class="exp-grid">
+    <div class="exp-image reveal">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/17688baf4-3dec-482b-8aa7-3dc4ce2422a9.png" alt="Yacht">
+    </div>
+    <div class="exp-content reveal">
+      <div class="exp-number">01 — Private Voyages</div>
+      <h2 class="exp-title">Sail the <em>Mediterranean</em> in absolute privacy</h2>
+      <p class="exp-desc">Charter our fleet of luxury motor yachts, each crewed by a dedicated captain and Michelin-trained chef. From the Amalfi Coast to the Greek Islands, every voyage is tailored to your desires.</p>
+      <ul class="exp-features">
+        <li>Private crew of 8 specialists</li>
+        <li>Helicopter transfers between ports</li>
+        <li>Curated wine cellars on board</li>
+        <li>Exclusive access to hidden coves</li>
+      </ul>
+      <a href="#concierge" class="btn-primary" style="background: var(--charcoal); border-color: var(--charcoal);">Request Charter</a>
+    </div>
+  </div>
+  <div class="exp-grid" style="margin-top: 100px;">
+    <div class="exp-content reveal" style="order: 2;">
+      <div class="exp-number">02 — Culinary Journeys</div>
+      <h2 class="exp-title">Dine at tables <em>reserved</em> for the few</h2>
+      <p class="exp-desc">Access the world's most exclusive restaurants, private chef experiences in historic estates, and intimate tastings with master vintners. Every meal becomes a story worth telling.</p>
+      <ul class="exp-features">
+        <li>Reservations at Michelin-starred establishments</li>
+        <li>Private vineyard tours with owners</li>
+        <li>Cooking classes with renowned chefs</li>
+        <li>Truffle hunting and market experiences</li>
+      </ul>
+      <a href="#concierge" class="btn-primary" style="background: var(--charcoal); border-color: var(--charcoal);">Plan Your Journey</a>
+    </div>
+    <div class="exp-image reveal" style="order: 1;">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1d45ceeb0-a53f-4c2c-8876-21d5348b6131.png" alt="Dining">
+    </div>
+  </div>
+</section>
+
+<section class="heritage" id="heritage">
+  <div class="heritage-grid">
+    <div class="heritage-content reveal">
+      <div class="section-tag">Our Heritage</div>
+      <h2 class="section-title">Four decades of crafting <em>unforgettable</em> journeys</h2>
+      <p class="section-sub">Since 1987, Aurelian Voyages has been the trusted partner to discerning travelers who seek more than destinations—they seek transformation. Our network of private contacts, exclusive partnerships, and obsessive attention to detail sets us apart.</p>
+      <div class="heritage-stats">
+        <div>
+          <div class="stat-number">38</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+        <div>
+          <div class="stat-number">142</div>
+          <div class="stat-label">Private Partners</div>
+        </div>
+        <div>
+          <div class="stat-number">97%</div>
+          <div class="stat-label">Client Return Rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="heritage-image reveal"></div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="section-header reveal">
+    <div class="section-tag">Guest Reflections</div>
+    <h2 class="section-title">Words from our <em>travelers</em></h2>
+    <p class="section-sub">Stories from those who have journeyed with us across the world's most remarkable destinations.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Aurelian didn't just plan a trip—they orchestrated a masterpiece. Every detail was considered, every moment elevated beyond expectation.</p>
+      <div class="testi-author">Alexandra Whitmore</div>
+      <div class="testi-role">London · Private Client</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">The level of access they provide is simply unmatched. Private tours, after-hours museum visits, dinners with local artisans—truly extraordinary.</p>
+      <div class="testi-author">Jonathan Reeves</div>
+      <div class="testi-role">New York · CEO</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Our family has traveled with Aurelian for twelve years. They understand that luxury is not about opulence—it's about perfect moments.</p>
+      <div class="testi-author">Isabelle Moreau</div>
+      <div class="testi-role">Paris · Collector</div>
+    </div>
+  </div>
+</section>
+
+<section class="concierge" id="concierge">
+  <div class="concierge-box reveal">
+    <div class="section-tag">Private Concierge</div>
+    <h2 class="concierge-title">Begin your <em>next</em> journey</h2>
+    <p class="concierge-sub">Share your vision with our travel architects. Within 24 hours, a dedicated consultant will craft a bespoke proposal.</p>
+    <form class="concierge-form" onsubmit="handleSubmit(event)">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit">Request</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">Aurelian<em>.</em></a>
+      <p>Bespoke luxury travel since 1987. Crafting extraordinary journeys for the world's most discerning travelers.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="#">Europe</a></li>
+        <li><a href="#">Asia Pacific</a></li>
+        <li><a href="#">Africa</a></li>
+        <li><a href="#">Americas</a></li>
+        <li><a href="#">Oceania</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Experiences</h4>
+      <ul>
+        <li><a href="#">Private Yachts</a></li>
+        <li><a href="#">Culinary</a></li>
+        <li><a href="#">Wellness</a></li>
+        <li><a href="#">Adventure</a></li>
+        <li><a href="#">Cultural</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Aurelian Voyages. All rights reserved.</div>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Pinterest</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const original = btn.textContent;
+    btn.textContent = 'Request Sent ✓';
+    btn.style.background = 'var(--gold)';
+    e.target.querySelector('input').value = '';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+    }, 3000);
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
 
