@@ -3,21 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aurelian Voyages — Luxury Travel Curated</title>
+<title>EduPro Academy — Professional Teacher Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ivory: #faf8f5;
-    --cream: #f2ede4;
-    --charcoal: #1a1a1a;
-    --slate: #3a3a3a;
-    --muted: #6b6b6b;
-    --gold: #b8935a;
-    --gold-light: #d4b88a;
-    --gold-dark: #8a6d3f;
-    --line: rgba(26, 26, 26, 0.12);
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --secondary: #10b981;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --gray-900: #1e293b;
+    --gray-700: #334155;
+    --gray-600: #475569;
+    --gray-500: #64748b;
+    --gray-400: #94a3b8;
+    --gray-300: #cbd5e1;
+    --gray-200: #e2e8f0;
+    --gray-100: #f1f5f9;
+    --gray-50: #f8fafc;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,28 +37,12 @@
   html { scroll-behavior: smooth; }
   
   body {
-    font-family: 'Inter', sans-serif;
-    background: var(--ivory);
-    color: var(--charcoal);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--white);
+    color: var(--gray-700);
     line-height: 1.6;
     overflow-x: hidden;
-    font-weight: 300;
   }
-
-  .serif { font-family: 'Cormorant Garamond', serif; }
-
-  /* Announcement Bar */
-  .announcement {
-    background: var(--charcoal);
-    color: var(--ivory);
-    text-align: center;
-    padding: 10px 20px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .announcement span { color: var(--gold-light); }
 
   /* Navigation */
   nav {
@@ -55,959 +51,1142 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 24px 60px;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    transition: all 0.3s;
+  }
+  nav.scrolled {
+    box-shadow: var(--shadow-md);
+  }
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.4s ease;
-    background: transparent;
   }
-  nav.scrolled {
-    background: rgba(250, 248, 245, 0.97);
-    backdrop-filter: blur(20px);
-    padding: 18px 60px;
-    box-shadow: 0 2px 30px rgba(0,0,0,0.06);
-  }
-  nav.scrolled .logo, nav.scrolled .nav-links a { color: var(--charcoal); }
-  nav.scrolled .nav-cta { background: var(--charcoal); color: var(--ivory); }
-  
   .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: var(--ivory);
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
-    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark);
   }
-  .logo em { font-style: italic; color: var(--gold-light); font-weight: 400; }
-
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 20px;
+  }
   .nav-links {
     display: flex;
-    gap: 40px;
+    gap: 32px;
     list-style: none;
     align-items: center;
   }
   .nav-links a {
-    color: var(--ivory);
+    color: var(--gray-600);
     text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 500;
     transition: color 0.3s;
-    position: relative;
   }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--gold);
-    transition: width 0.3s;
+  .nav-links a:hover { color: var(--primary); }
+  .nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
   }
-  .nav-links a:hover::after { width: 100%; }
-
-  .nav-cta {
-    background: transparent;
-    border: 1px solid var(--ivory);
-    color: var(--ivory);
+  .btn {
     padding: 10px 24px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
     transition: all 0.3s;
+    border: none;
     font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
-  .nav-cta:hover { background: var(--ivory); color: var(--charcoal); }
-
+  .btn-primary {
+    background: var(--primary);
+    color: var(--white);
+  }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--gray-100);
+    color: var(--gray-700);
+  }
+  .btn-secondary:hover { background: var(--gray-200); }
+  .btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+  }
+  .btn-outline:hover { background: var(--primary); color: var(--white); }
+  .btn-lg {
+    padding: 14px 32px;
+    font-size: 16px;
+  }
   .menu-toggle {
     display: none;
     background: none;
     border: none;
-    color: var(--ivory);
-    cursor: pointer;
+    color: var(--dark);
     font-size: 24px;
+    cursor: pointer;
   }
 
   /* Hero */
   .hero {
+    padding: 140px 40px 80px;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
     position: relative;
-    height: 100vh;
-    min-height: 700px;
     overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+  }
+  .hero-content { z-index: 1; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 24px;
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-desc {
+    font-size: 18px;
+    color: var(--gray-600);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .stat-item {
+    text-align: left;
+  }
+  .stat-number {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 14px;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
+  .hero-image {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: var(--shadow-xl);
+  }
+  .hero-card {
+    position: absolute;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-card-1 {
+    top: 40px;
+    left: -40px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .hero-card-2 {
+    bottom: 40px;
+    right: -40px;
+    animation: float 3s ease-in-out infinite 1.5s;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 24px;
   }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1250e040b-d209-46ec-b4d9-3ee0246c88f3.png');
-    background-size: cover;
-    background-position: center;
-    transform: scale(1.1);
-    animation: heroZoom 20s ease-in-out infinite alternate;
+  .hero-card-1 .hero-card-icon {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--secondary);
   }
-  @keyframes heroZoom {
-    from { transform: scale(1.1); }
-    to { transform: scale(1.2); }
+  .hero-card-2 .hero-card-icon {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--accent);
   }
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.5) 100%);
+  .hero-card-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
   }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: var(--ivory);
-    padding: 0 20px;
-    max-width: 900px;
-  }
-  .hero-tag {
+  .hero-card-sub {
     font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    color: var(--gold-light);
-    opacity: 0;
-    animation: fadeUp 1s 0.3s forwards;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 7vw, 96px);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -1px;
-    margin-bottom: 30px;
-    opacity: 0;
-    animation: fadeUp 1.2s 0.5s forwards;
-  }
-  .hero-title em { font-style: italic; color: var(--gold-light); }
-  .hero-sub {
-    font-size: 16px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    margin-bottom: 50px;
-    opacity: 0;
-    animation: fadeUp 1.2s 0.7s forwards;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .hero-cta {
-    display: inline-flex;
-    gap: 20px;
-    opacity: 0;
-    animation: fadeUp 1.2s 0.9s forwards;
-  }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--ivory);
-    padding: 16px 40px;
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s;
-    border: 1px solid var(--gold);
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .btn-primary:hover { background: var(--gold-dark); }
-  .btn-outline {
-    background: transparent;
-    color: var(--ivory);
-    padding: 16px 40px;
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--ivory);
-    transition: all 0.3s;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .btn-outline:hover { background: var(--ivory); color: var(--charcoal); }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--ivory);
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    z-index: 2;
-    opacity: 0;
-    animation: fadeUp 1s 1.2s forwards;
-  }
-  .hero-scroll::after {
-    content: '';
-    display: block;
-    width: 1px;
-    height: 40px;
-    background: var(--ivory);
-    margin: 15px auto 0;
-    animation: scrollLine 2s infinite;
-  }
-  @keyframes scrollLine {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-    50% { opacity: 1; transform: scaleY(1); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    color: var(--gray-500);
+    font-weight: 400;
   }
 
   /* Section Styles */
-  section { padding: 120px 60px; }
-  .section-header { text-align: center; margin-bottom: 80px; }
+  section {
+    padding: 100px 40px;
+  }
+  .section-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 64px;
+  }
   .section-tag {
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
   }
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4.5vw, 64px);
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.5px;
-    margin-bottom: 20px;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 16px;
+    line-height: 1.2;
   }
-  .section-title em { font-style: italic; color: var(--gold); }
-  .section-sub {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 600px;
-    margin: 0 auto;
-    font-weight: 300;
+  .section-desc {
+    font-size: 18px;
+    color: var(--gray-600);
+    line-height: 1.7;
   }
 
-  /* Destinations */
-  .destinations { background: var(--ivory); }
-  .dest-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
+  /* Programs */
+  .programs {
+    background: var(--white);
   }
-  .dest-card {
-    position: relative;
-    overflow: hidden;
+  .program-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 10px 24px;
+    background: var(--gray-100);
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-600);
     cursor: pointer;
-    aspect-ratio: 3/4;
-    transition: transform 0.6s;
+    transition: all 0.3s;
+    font-family: inherit;
   }
-  .dest-card:hover { transform: translateY(-8px); }
-  .dest-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s;
+  .tab-btn.active {
+    background: var(--primary);
+    color: var(--white);
   }
-  .dest-card:hover img { transform: scale(1.08); }
-  .dest-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.85) 100%);
+  .tab-btn:hover:not(.active) {
+    background: var(--gray-200);
+  }
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+  }
+  .program-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .program-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+  }
+  .program-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 40px 30px;
-    color: var(--ivory);
-  }
-  .dest-location {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 10px;
-  }
-  .dest-name {
-    font-family: 'Cormorant Garamond', serif;
+    align-items: center;
+    justify-content: center;
     font-size: 32px;
-    font-weight: 400;
-    margin-bottom: 10px;
-  }
-  .dest-desc {
-    font-size: 13px;
-    opacity: 0.85;
     margin-bottom: 20px;
-    font-weight: 300;
   }
-  .dest-price {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-top: 1px solid rgba(255,255,255,0.3);
-    padding-top: 15px;
+  .program-card:nth-child(1) .program-icon { background: rgba(37, 99, 235, 0.1); color: var(--primary); }
+  .program-card:nth-child(2) .program-icon { background: rgba(16, 185, 129, 0.1); color: var(--secondary); }
+  .program-card:nth-child(3) .program-icon { background: rgba(245, 158, 11, 0.1); color: var(--accent); }
+  .program-card:nth-child(4) .program-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+  .program-card:nth-child(5) .program-icon { background: rgba(236, 72, 153, 0.1); color: #ec4899; }
+  .program-card:nth-child(6) .program-icon { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
+  .program-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .program-desc {
+    font-size: 15px;
+    color: var(--gray-600);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .program-meta {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 16px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
   }
-  .dest-price span:last-child { color: var(--gold-light); }
+  .program-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
 
-  /* Experiences */
-  .experiences { background: var(--cream); }
-  .exp-grid {
+  /* Features */
+  .features {
+    background: var(--gray-50);
+  }
+  .features-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    max-width: 1400px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+  }
+  .feature-card {
+    background: var(--white);
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .feature-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    display: flex;
     align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--white);
+    margin: 0 auto 20px;
   }
-  .exp-image {
-    position: relative;
-    aspect-ratio: 4/5;
+  .feature-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .feature-desc {
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* Instructors */
+  .instructors {
+    background: var(--white);
+  }
+  .instructor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+  }
+  .instructor-card {
+    text-align: center;
+    padding: 32px;
+    border-radius: 16px;
+    transition: all 0.3s;
+  }
+  .instructor-card:hover {
+    background: var(--gray-50);
+    transform: translateY(-4px);
+  }
+  .instructor-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
     overflow: hidden;
+    border: 4px solid var(--gray-200);
   }
-  .exp-image img {
+  .instructor-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 1s;
   }
-  .exp-image:hover img { transform: scale(1.05); }
-  .exp-content { padding: 40px 0; }
-  .exp-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
-  .exp-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 30px;
-  }
-  .exp-title em { font-style: italic; color: var(--gold); }
-  .exp-desc {
-    font-size: 15px;
-    color: var(--muted);
-    margin-bottom: 20px;
-    line-height: 1.8;
-  }
-  .exp-features {
-    list-style: none;
-    margin: 30px 0;
-  }
-  .exp-features li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  .exp-features li::before {
-    content: '◆';
-    color: var(--gold);
-    font-size: 10px;
-  }
-
-  /* Heritage */
-  .heritage {
-    background: var(--charcoal);
-    color: var(--ivory);
-    position: relative;
-    overflow: hidden;
-  }
-  .heritage-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    max-width: 1400px;
-    margin: 0 auto;
-    align-items: center;
-  }
-  .heritage-content .section-tag { color: var(--gold-light); }
-  .heritage-content .section-title { color: var(--ivory); text-align: left; }
-  .heritage-content .section-sub { color: rgba(250,248,245,0.7); text-align: left; margin: 0; }
-  .heritage-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid rgba(250,248,245,0.15);
-  }
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    font-weight: 300;
-    color: var(--gold-light);
+  .instructor-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
     margin-bottom: 8px;
   }
-  .stat-label {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(250,248,245,0.6);
+  .instructor-role {
+    font-size: 14px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 12px;
   }
-  .heritage-image {
-    aspect-ratio: 4/5;
-    background-image: url('https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1a802f81d-93ef-471d-8b17-a2695b51918d.png');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-  .heritage-image::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: 20px;
-    bottom: 20px;
-    border: 1px solid var(--gold);
-    z-index: -1;
+  .instructor-bio {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
   }
 
   /* Testimonials */
-  .testimonials { background: var(--ivory); }
-  .testi-grid {
+  .testimonials {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+  }
+  .testimonials .section-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+  }
+  .testimonials .section-title {
+    color: var(--white);
+  }
+  .testimonials .section-desc {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .testimonial-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
   }
-  .testi-card {
-    padding: 50px 40px;
-    background: var(--cream);
-    position: relative;
-    transition: all 0.4s;
+  .testimonial-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
-  .testi-card:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
-  .testi-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-  .testi-text {
-    font-family: 'Cormorant Garamond', serif;
+  .testimonial-stars {
+    color: var(--accent);
     font-size: 20px;
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    color: var(--charcoal);
+    margin-bottom: 16px;
   }
-  .testi-author {
+  .testimonial-text {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.95);
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .testimonial-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .testimonial-role {
     font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .testi-role {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 5px;
-    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.7);
   }
 
-  /* Concierge */
-  .concierge {
-    background: linear-gradient(135deg, var(--cream) 0%, var(--ivory) 100%);
-    text-align: center;
+  /* Pricing */
+  .pricing {
+    background: var(--gray-50);
   }
-  .concierge-box {
-    max-width: 800px;
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 80px 60px;
-    border: 1px solid var(--gold);
+  }
+  .pricing-card {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s;
     position: relative;
   }
-  .concierge-box::before, .concierge-box::after {
-    content: '';
+  .pricing-card.featured {
+    border-color: var(--primary);
+    transform: scale(1.05);
+  }
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+  .pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-4px);
+  }
+  .pricing-badge {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 1px solid var(--gold);
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: var(--white);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-  .concierge-box::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-  .concierge-box::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
-  .concierge-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    margin-bottom: 20px;
+  .pricing-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
   }
-  .concierge-title em { font-style: italic; color: var(--gold); }
-  .concierge-sub {
+  .pricing-desc {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 24px;
+  }
+  .pricing-price {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .pricing-price span {
+    font-size: 18px;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
+  .pricing-period {
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-bottom: 32px;
+  }
+  .pricing-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+  .pricing-features li {
+    padding: 10px 0;
     font-size: 15px;
-    color: var(--muted);
-    margin-bottom: 40px;
-    max-width: 500px;
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--secondary);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  /* FAQ */
+  .faq {
+    background: var(--white);
+  }
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .faq-item:hover {
+    border-color: var(--primary);
+  }
+  .faq-question {
+    padding: 20px 24px;
+    background: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    transition: all 0.3s;
+  }
+  .faq-question:hover {
+    background: var(--gray-50);
+  }
+  .faq-icon {
+    font-size: 24px;
+    color: var(--primary);
+    transition: transform 0.3s;
+  }
+  .faq-item.active .faq-icon {
+    transform: rotate(45deg);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+  }
+  .faq-answer-content {
+    padding: 0 24px 20px;
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 1.7;
+  }
+
+  /* CTA */
+  .cta {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
+    color: var(--white);
+    text-align: center;
+  }
+  .cta-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .cta-desc {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 32px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
   }
-  .concierge-form {
+  .cta-form {
     display: flex;
-    gap: 15px;
-    max-width: 600px;
+    gap: 12px;
+    max-width: 500px;
     margin: 0 auto;
   }
-  .concierge-form input {
+  .cta-form input {
     flex: 1;
-    padding: 16px 24px;
-    background: var(--ivory);
-    border: 1px solid var(--line);
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 15px;
     font-family: inherit;
-    font-size: 14px;
     outline: none;
-    transition: border 0.3s;
+    transition: all 0.3s;
   }
-  .concierge-form input:focus { border-color: var(--gold); }
-  .concierge-form button {
-    background: var(--charcoal);
-    color: var(--ivory);
-    padding: 16px 32px;
-    border: none;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.3s;
+  .cta-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
   }
-  .concierge-form button:hover { background: var(--gold); }
+  .cta-form input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--primary);
+  }
 
   /* Footer */
   footer {
-    background: var(--charcoal);
-    color: var(--ivory);
-    padding: 80px 60px 30px;
+    background: var(--dark);
+    color: var(--white);
+    padding: 60px 40px 30px;
+  }
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
   }
   .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 60px;
-    max-width: 1400px;
-    margin: 0 auto 60px;
+    gap: 48px;
+    margin-bottom: 48px;
   }
-  .footer-brand .logo { display: inline-block; margin-bottom: 20px; }
   .footer-brand p {
-    font-size: 14px;
-    color: rgba(250,248,245,0.6);
-    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 16px;
     max-width: 300px;
   }
   .footer-col h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    margin-bottom: 25px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
   }
-  .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 12px; }
+  .footer-col ul {
+    list-style: none;
+  }
+  .footer-col li {
+    margin-bottom: 12px;
+  }
   .footer-col a {
-    color: rgba(250,248,245,0.6);
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     transition: color 0.3s;
   }
-  .footer-col a:hover { color: var(--gold-light); }
+  .footer-col a:hover {
+    color: var(--primary-light);
+  }
   .footer-bottom {
-    max-width: 1400px;
-    margin: 0 auto;
     padding-top: 30px;
-    border-top: 1px solid rgba(250,248,245,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
-    color: rgba(250,248,245,0.5);
-    letter-spacing: 1px;
+    align-items: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
   }
-  .socials { display: flex; gap: 20px; }
-  .socials a { color: rgba(250,248,245,0.6); text-decoration: none; }
-  .socials a:hover { color: var(--gold-light); }
-
-  /* Reveal Animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  .social-links {
+    display: flex;
+    gap: 16px;
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* Responsive */
-  @media (max-width: 968px) {
-    section { padding: 80px 30px; }
-    nav { padding: 20px 30px; }
-    nav.scrolled { padding: 15px 30px; }
-    .nav-links { display: none; }
-    .menu-toggle { display: block; }
-    .dest-grid { grid-template-columns: 1fr; }
-    .exp-grid, .heritage-grid { grid-template-columns: 1fr; gap: 40px; }
-    .testi-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-    .heritage-stats { grid-template-columns: 1fr; gap: 20px; }
-    .concierge-form { flex-direction: column; }
-    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
-    .hero-cta { flex-direction: column; gap: 15px; }
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-links a:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
   }
 
-  /* Mobile menu */
+  /* Mobile Menu */
   .mobile-menu {
     position: fixed;
     top: 0;
     right: -100%;
     width: 100%;
     height: 100vh;
-    background: var(--charcoal);
+    background: var(--white);
     z-index: 999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 24px;
     transition: right 0.4s ease;
   }
-  .mobile-menu.open { right: 0; }
+  .mobile-menu.open {
+    right: 0;
+  }
   .mobile-menu a {
-    color: var(--ivory);
+    color: var(--dark);
     text-decoration: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 300;
+    font-size: 24px;
+    font-weight: 600;
   }
   .mobile-close {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 20px;
+    right: 20px;
     background: none;
     border: none;
-    color: var(--ivory);
+    color: var(--dark);
     font-size: 30px;
     cursor: pointer;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .hero-image {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 768px) {
+    section {
+      padding: 60px 20px;
+    }
+    .nav-container {
+      padding: 16px 20px;
+    }
+    .nav-links {
+      display: none;
+    }
+    .menu-toggle {
+      display: block;
+    }
+    .hero {
+      padding: 120px 20px 60px;
+    }
+    .hero-actions {
+      flex-direction: column;
+    }
+    .hero-stats {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .hero-card {
+      display: none;
+    }
+    .pricing-card.featured {
+      transform: scale(1);
+    }
+    .pricing-card.featured:hover {
+      transform: translateY(-4px);
+    }
+    .cta-form {
+      flex-direction: column;
+    }
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+  }
+
+  /* Reveal Animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
 </head>
 <body>
 
-<div class="announcement">
-  <span>✦</span> Private Collection 2026 — Now accepting reservations for the autumn season <span>✦</span>
-</div>
-
 <nav id="navbar">
-  <a href="#" class="logo">Aurelian<em>.</em></a>
-  <ul class="nav-links">
-    <li><a href="#destinations">Destinations</a></li>
-    <li><a href="#experiences">Experiences</a></li>
-    <li><a href="#heritage">Heritage</a></li>
-    <li><a href="#testimonials">Journal</a></li>
-    <li><a href="#concierge">Concierge</a></li>
-  </ul>
-  <button class="nav-cta">Begin Journey</button>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <div class="logo-icon">📚</div>
+      EduPro
+    </a>
+    <ul class="nav-links">
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#instructors">Instructors</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn btn-secondary">Sign In</a>
+      <a href="#cta" class="btn btn-primary">Get Started</a>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="toggleMenu()">✕</button>
-  <a href="#destinations" onclick="toggleMenu()">Destinations</a>
-  <a href="#experiences" onclick="toggleMenu()">Experiences</a>
-  <a href="#heritage" onclick="toggleMenu()">Heritage</a>
-  <a href="#testimonials" onclick="toggleMenu()">Journal</a>
-  <a href="#concierge" onclick="toggleMenu()">Concierge</a>
+  <a href="#programs" onclick="toggleMenu()">Programs</a>
+  <a href="#features" onclick="toggleMenu()">Features</a>
+  <a href="#instructors" onclick="toggleMenu()">Instructors</a>
+  <a href="#testimonials" onclick="toggleMenu()">Testimonials</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#cta" class="btn btn-primary btn-lg" onclick="toggleMenu()">Get Started</a>
 </div>
 
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Luxury Travel · Since 1987</div>
-    <h1 class="hero-title">Journeys crafted for the <em>discerning</em> few</h1>
-    <p class="hero-sub">Bespoke itineraries, private villas, and singular experiences across the world's most coveted destinations.</p>
-    <div class="hero-cta">
-      <a href="#destinations" class="btn-primary">Explore Collection</a>
-      <a href="#concierge" class="btn-outline">Private Consultation</a>
-    </div>
-  </div>
-  <div class="hero-scroll">Scroll</div>
-</section>
-
-<section class="destinations" id="destinations">
-  <div class="section-header reveal">
-    <div class="section-tag">Curated Destinations</div>
-    <h2 class="section-title">The world's most <em>extraordinary</em> places</h2>
-    <p class="section-sub">Six signature destinations, each hand-selected for their unparalleled beauty, heritage, and exclusivity.</p>
-  </div>
-  <div class="dest-grid">
-    <div class="dest-card reveal">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1864a0674-fb3a-4209-af54-c22883cca15b.png" alt="Santorini">
-      <div class="dest-overlay">
-        <div class="dest-location">Greece · Aegean</div>
-        <h3 class="dest-name">Santorini</h3>
-        <p class="dest-desc">Cliffside suites with caldera views and private wine cellars.</p>
-        <div class="dest-price"><span>7 Nights</span><span>From $12,400</span></div>
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-badge">🎓 New Programs Available</div>
+      <h1 class="hero-title">
+        Empower Your Teaching with <span>Professional Development</span>
+      </h1>
+      <p class="hero-desc">
+        Transform your classroom with evidence-based strategies, innovative techniques, and expert guidance. Join thousands of educators advancing their careers.
+      </p>
+      <div class="hero-actions">
+        <a href="#programs" class="btn btn-primary btn-lg">Explore Programs</a>
+        <a href="#" class="btn btn-outline btn-lg">Watch Demo</a>
       </div>
-    </div>
-    <div class="dest-card reveal">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/12cf3a072-2af8-47e3-b338-935c61979b84.png" alt="Swiss Alps">
-      <div class="dest-overlay">
-        <div class="dest-location">Switzerland · Alps</div>
-        <h3 class="dest-name">Zermatt</h3>
-        <p class="dest-desc">Alpine chalets with private ski instructors and heli-access.</p>
-        <div class="dest-price"><span>5 Nights</span><span>From $18,900</span></div>
-      </div>
-    </div>
-    <div class="dest-card reveal">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/12609c1cc-e1ef-41c2-979b-14ce7c825c49.png" alt="Safari">
-      <div class="dest-overlay">
-        <div class="dest-location">Kenya · Masai Mara</div>
-        <h3 class="dest-name">Serengeti</h3>
-        <p class="dest-desc">Luxury tented camps with private game drives and bush dinners.</p>
-        <div class="dest-price"><span>6 Nights</span><span>From $22,500</span></div>
-      </div>
-    </div>
-    <div class="dest-card reveal">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1a802f81d-93ef-471d-8b17-a2695b51918d.png" alt="Kyoto">
-      <div class="dest-overlay">
-        <div class="dest-location">Japan · Kansai</div>
-        <h3 class="dest-name">Kyoto</h3>
-        <p class="dest-desc">Traditional ryokans with private onsen and tea ceremonies.</p>
-        <div class="dest-price"><span>8 Nights</span><span>From $15,800</span></div>
-      </div>
-    </div>
-    <div class="dest-card reveal">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/141764396-7c41-481b-af20-ac1f77120151.png" alt="Amalfi">
-      <div class="dest-overlay">
-        <div class="dest-location">Italy · Campania</div>
-        <h3 class="dest-name">Amalfi Coast</h3>
-        <p class="dest-desc">Seaside villas with private chefs and yacht excursions.</p>
-        <div class="dest-price"><span>7 Nights</span><span>From $16,200</span></div>
-      </div>
-    </div>
-    <div class="dest-card reveal">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1250e040b-d209-46ec-b4d9-3ee0246c88f3.png" alt="Maldives">
-      <div class="dest-overlay">
-        <div class="dest-location">Maldives · Indian Ocean</div>
-        <h3 class="dest-name">Maldives</h3>
-        <p class="dest-desc">Overwater pavilions with private butlers and reef access.</p>
-        <div class="dest-price"><span>6 Nights</span><span>From $24,000</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="experiences" id="experiences">
-  <div class="exp-grid">
-    <div class="exp-image reveal">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/17688baf4-3dec-482b-8aa7-3dc4ce2422a9.png" alt="Yacht">
-    </div>
-    <div class="exp-content reveal">
-      <div class="exp-number">01 — Private Voyages</div>
-      <h2 class="exp-title">Sail the <em>Mediterranean</em> in absolute privacy</h2>
-      <p class="exp-desc">Charter our fleet of luxury motor yachts, each crewed by a dedicated captain and Michelin-trained chef. From the Amalfi Coast to the Greek Islands, every voyage is tailored to your desires.</p>
-      <ul class="exp-features">
-        <li>Private crew of 8 specialists</li>
-        <li>Helicopter transfers between ports</li>
-        <li>Curated wine cellars on board</li>
-        <li>Exclusive access to hidden coves</li>
-      </ul>
-      <a href="#concierge" class="btn-primary" style="background: var(--charcoal); border-color: var(--charcoal);">Request Charter</a>
-    </div>
-  </div>
-  <div class="exp-grid" style="margin-top: 100px;">
-    <div class="exp-content reveal" style="order: 2;">
-      <div class="exp-number">02 — Culinary Journeys</div>
-      <h2 class="exp-title">Dine at tables <em>reserved</em> for the few</h2>
-      <p class="exp-desc">Access the world's most exclusive restaurants, private chef experiences in historic estates, and intimate tastings with master vintners. Every meal becomes a story worth telling.</p>
-      <ul class="exp-features">
-        <li>Reservations at Michelin-starred establishments</li>
-        <li>Private vineyard tours with owners</li>
-        <li>Cooking classes with renowned chefs</li>
-        <li>Truffle hunting and market experiences</li>
-      </ul>
-      <a href="#concierge" class="btn-primary" style="background: var(--charcoal); border-color: var(--charcoal);">Plan Your Journey</a>
-    </div>
-    <div class="exp-image reveal" style="order: 1;">
-      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1d45ceeb0-a53f-4c2c-8876-21d5348b6131.png" alt="Dining">
-    </div>
-  </div>
-</section>
-
-<section class="heritage" id="heritage">
-  <div class="heritage-grid">
-    <div class="heritage-content reveal">
-      <div class="section-tag">Our Heritage</div>
-      <h2 class="section-title">Four decades of crafting <em>unforgettable</em> journeys</h2>
-      <p class="section-sub">Since 1987, Aurelian Voyages has been the trusted partner to discerning travelers who seek more than destinations—they seek transformation. Our network of private contacts, exclusive partnerships, and obsessive attention to detail sets us apart.</p>
-      <div class="heritage-stats">
-        <div>
-          <div class="stat-number">38</div>
-          <div class="stat-label">Years of Excellence</div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">15K+</div>
+          <div class="stat-label">Teachers Trained</div>
         </div>
-        <div>
-          <div class="stat-number">142</div>
-          <div class="stat-label">Private Partners</div>
+        <div class="stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Satisfaction Rate</div>
         </div>
-        <div>
-          <div class="stat-number">97%</div>
-          <div class="stat-label">Client Return Rate</div>
+        <div class="stat-item">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Courses Available</div>
         </div>
       </div>
     </div>
-    <div class="heritage-image reveal"></div>
-  </div>
-</section>
-
-<section class="testimonials" id="testimonials">
-  <div class="section-header reveal">
-    <div class="section-tag">Guest Reflections</div>
-    <h2 class="section-title">Words from our <em>travelers</em></h2>
-    <p class="section-sub">Stories from those who have journeyed with us across the world's most remarkable destinations.</p>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card reveal">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Aurelian didn't just plan a trip—they orchestrated a masterpiece. Every detail was considered, every moment elevated beyond expectation.</p>
-      <div class="testi-author">Alexandra Whitmore</div>
-      <div class="testi-role">London · Private Client</div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">The level of access they provide is simply unmatched. Private tours, after-hours museum visits, dinners with local artisans—truly extraordinary.</p>
-      <div class="testi-author">Jonathan Reeves</div>
-      <div class="testi-role">New York · CEO</div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Our family has traveled with Aurelian for twelve years. They understand that luxury is not about opulence—it's about perfect moments.</p>
-      <div class="testi-author">Isabelle Moreau</div>
-      <div class="testi-role">Paris · Collector</div>
+    <div class="hero-image">
+      <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/18d8e5c8c-3f4a-4b8e-9c7d-2e1f3a4b5c6d.png" alt="Teacher training">
+      <div class="hero-card hero-card-1">
+        <div class="hero-card-icon">✓</div>
+        <div>
+          <div class="hero-card-text">Certified Programs</div>
+          <div class="hero-card-sub">Accredited courses</div>
+        </div>
+      </div>
+      <div class="hero-card hero-card-2">
+        <div class="hero-card-icon">⭐</div>
+        <div>
+          <div class="hero-card-text">4.9/5 Rating</div>
+          <div class="hero-card-sub">From 2,500+ reviews</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="concierge" id="concierge">
-  <div class="concierge-box reveal">
-    <div class="section-tag">Private Concierge</div>
-    <h2 class="concierge-title">Begin your <em>next</em> journey</h2>
-    <p class="concierge-sub">Share your vision with our travel architects. Within 24 hours, a dedicated consultant will craft a bespoke proposal.</p>
-    <form class="concierge-form" onsubmit="handleSubmit(event)">
-      <input type="email" placeholder="Your email address" required>
-      <button type="submit">Request</button>
-    </form>
+<section class="programs" id="programs">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-tag">Our Programs</div>
+      <h2 class="section-title">Comprehensive Training for Every Educator</h2>
+      <p class="section-desc">From classroom management to advanced pedagogy, we offer specialized programs designed to elevate your teaching practice.</p>
+    </div>
+    <div class="program-tabs">
+      <button class="tab-btn active" onclick="filterPrograms('all', this)">All Programs</button>
+      <button class="tab-btn" onclick="filterPrograms('beginner', this)">Beginner</button>
+      <button class="tab-btn" onclick="filterPrograms('intermediate', this)">Intermediate</button>
+      <button class="tab-btn" onclick="filterPrograms('advanced', this)">Advanced</button>
+    </div>
+    <div class="program-grid" id="programGrid">
+      <div class="program-card reveal" data-level="beginner">
+        <div class="program-icon">📖</div>
+        <h3 class="program-title">Classroom Management Mastery</h3>
+        <p class="program-desc">Learn proven strategies to create an engaging, respectful, and productive learning environment for all students.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">⏱ 6 weeks</div>
+          <div class="program-meta-item">📊 Beginner</div>
+          <div class="program-meta-item">🎓 Certificate</div>
+        </div>
+      </div>
+      <div class="program-card reveal" data-level="intermediate">
+        <div class="program-icon">🎯</div>
+        <h3 class="program-title">Differentiated Instruction</h3>
+        <p class="program-desc">Master techniques to tailor your teaching to diverse learning styles, abilities, and needs in your classroom.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">⏱ 8 weeks</div>
+          <div class="program-meta-item">📊 Intermediate</div>
+          <div class="program-meta-item">🎓 Certificate</div>
+        </div>
+      </div>
+      <div class="program-card reveal" data-level="advanced">
+        <div class="program-icon">💡</div>
+        <h3 class="program-title">Innovative Teaching Methods</h3>
+        <p class="program-desc">Explore cutting-edge pedagogical approaches including project-based learning, flipped classrooms, and more.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">⏱ 10 weeks</div>
+          <div class="program-meta-item">📊 Advanced</div>
+          <div class="program-meta-item">🎓 Certificate</div>
+        </div>
+      </div>
+      <div class="program-card reveal" data-level="intermediate">
+        <div class="program-icon">🧠</div>
+        <h3 class="program-title">Social-Emotional Learning</h3>
+        <p class="program-desc">Integrate SEL into your curriculum to support students' emotional development and academic success.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">⏱ 6 weeks</div>
+          <div class="program-meta-item">📊 Intermediate</div>
+          <div class="program-meta-item">🎓 Certificate</div>
+        </div>
+      </div>
+      <div class="program-card reveal" data-level="beginner">
+        <div class="program-icon">💻</div>
+        <h3 class="program-title">EdTech Integration</h3>
+        <p class="program-desc">Leverage technology effectively to enhance student engagement, collaboration, and learning outcomes.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">⏱ 4 weeks</div>
+          <div class="program-meta-item">📊 Beginner</div>
+          <div class="program-meta-item">🎓 Certificate</div>
+        </div>
+      </div>
+      <div class="program-card reveal" data-level="advanced">
+        <div class="program-icon">📊</div>
+        <h3 class="program-title">Data-Driven Instruction</h3>
+        <p class="program-desc">Use assessment data to inform your teaching, track student progress, and improve learning outcomes.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">⏱ 8 weeks</div>
+          <div class="program-meta-item">📊 Advanced</div>
+          <div class="program-meta-item">🎓 Certificate</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a href="#" class="logo">Aurelian<em>.</em></a>
-      <p>Bespoke luxury travel since 1987. Crafting extraordinary journeys for the world's most discerning travelers.</p>
+<section class="features" id="features">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-tag">Why Choose Us</div>
+      <h2 class="section-title">Everything You Need to Succeed</h2>
+      <p class="section-desc">Our comprehensive approach combines expert instruction, practical application, and ongoing support to ensure your success.</p>
     </div>
-    <div class="footer-col">
-      <h4>Destinations</h4>
-      <ul>
-        <li><a href="#">Europe</a></li>
-        <li><a href="#">Asia Pacific</a></li>
-        <li><a href="#">Africa</a></li>
-        <li><a href="#">Americas</a></li>
-        <li><a href="#">Oceania</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Experiences</h4>
-      <ul>
-        <li><a href="#">Private Yachts</a></li>
-        <li><a href="#">Culinary</a></li>
-        <li><a href="#">Wellness</a></li>
-        <li><a href="#">Adventure</a></li>
-        <li><a href="#">Cultural</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Journal</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div>© 2026 Aurelian Voyages. All rights reserved.</div>
-    <div class="socials">
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Pinterest</a>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🎓</div>
+        <h3 class="feature-title">Expert Instructors</h3>
+        <p class="feature-desc">Learn from experienced educators and researchers with decades of classroom and academic expertise.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📱</div>
+        <h3 class="feature-title">Flexible Learning</h3>
+        <p class="feature-desc">Access courses anytime, anywhere. Study at your own pace with our mobile-friendly platform.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🤝</div>
+        <h3 class="feature-title">Peer Community</h3>
+        <p class="feature-desc">Connect with fellow educators, share experiences, and collaborate on best practices.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📜</div>
+        <h3 class="feature-title">Accredited Certificates</h3>
+        <p class="feature-desc">Earn recognized credentials that advance your career and demonstrate your expertise.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Practical Application</h3>
+        <p class="feature-desc">Apply what you learn immediately with real-world projects and classroom-ready strategies.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">💬</div>
+        <h3 class="feature-title">Ongoing Support</h3>
+        <p class="feature-desc">Get personalized feedback, mentoring, and resources to support your continuous growth.</p>
+      </div>
     </div>
   </div>
-</footer>
+</section>
 
-<script>
-  // Nav scroll effect
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
-
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Mobile menu
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
-
-  // Form
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    const original = btn.textContent;
-    btn.textContent = 'Request Sent ✓';
-    btn.style.background = 'var(--gold)';
-    e.target.querySelector('input').value = '';
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-    }, 3000);
-  }
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
-
+<section class="instructors" id="instructors">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-tag">Meet Our Team</div>
+      <h2 class="section-title">Learn from the Best in Education</h2>
+      <p class="section-desc">Our instructors are award-winning educators, researchers, and thought leaders passionate about teacher development.</p>
+    </div>
+    <div class="instructor-grid">
+      <div class="instructor-card reveal">
+        <div class="instructor-avatar">
+          <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1a1b2c3d4-e5f6-7890-abcd-ef1234567890.png" alt="Dr. Sarah Chen">
+        </div>
+        <h3 class="instructor-name">Dr. Sarah Chen</h3>
+        <div class="instructor-role">Curriculum Design Expert</div>
+        <p class="instructor-bio">Former university professor with 20+ years experience in K-12 curriculum development and assessment design.</p>
+      </div>
+      <div class="instructor-card reveal">
+        <div class="instructor-avatar">
+          <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1b2c3d4e5-f6a7-8901-bcde-f12345678901.png" alt="Marcus Johnson">
+        </div>
+        <h3 class="instructor-name">Marcus Johnson</h3>
+        <div class="instructor-role">Classroom Management Specialist</div>
+        <p class="instructor-bio">Award-winning teacher and author specializing in positive behavior interventions and restorative practices.</p>
+      </div>
+      <div class="instructor-card reveal">
+        <div class="instructor-avatar">
+          <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1c3d4e5f6-a7b8-9012-cdef-123456789012.png" alt="Dr. Elena Rodriguez">
+        </div>
+        <h3 class="instructor-name">Dr. Elena Rodriguez</h3>
+        <div class="instructor-role">EdTech Innovation Leader</div>
+        <p class="instructor-bio">Pioneer in educational technology integration with extensive research in digital learning environments.</p>
+      </div>
+      <div class="instructor-card reveal">
+        <div class="instructor-avatar">
+          <img src="https://image.qwenlm.ai/public_source/5fe824bc-426e-4a26-89d6-4ccad67abf8d/1d4e5f6a7-b8c9-0123-defa-234567890123.png" alt
