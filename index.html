@@ -420,7 +420,7 @@
       border-radius: 16px;
       padding: 15px 19px;
       box-shadow: var(--shadow);
-      max-width: 245px;
+      max-width: 270px;
       animation: float 5s ease-in-out infinite;
     }
 
@@ -430,11 +430,16 @@
       font-size: 13px;
     }
 
-    .photo-note span {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 3px;
+    .photo-badge {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 4px 10px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      border: 1px solid rgba(66, 93, 75, .15);
     }
 
     .decor-circle {
@@ -694,6 +699,8 @@
       font-size: 12px;
       font-weight: 700;
       color: var(--green);
+      position: relative;
+      z-index: 2;
     }
 
     /* Process */
@@ -976,6 +983,8 @@
       font-size: 12px;
       font-weight: 800;
       color: var(--green);
+      position: relative;
+      z-index: 2;
     }
 
     .blog-disclaimer {
@@ -1497,7 +1506,7 @@
       }
 
       .photo-note {
-        max-width: 220px;
+        max-width: 240px;
         padding: 12px 14px;
       }
 
@@ -1640,7 +1649,7 @@
           Մասնագիտական հոգեբանական աջակցություն Երևանում
         </div>
         <h1>Գտեք ներդաշնակություն և <span>վստահություն</span> ձեր կյանքում</h1>
-        <p class="hero-description">Անհատական և սخطագույն մոտեցում կանանց և դեռահաս աղջիկների համար։ Ապահով և վստահելի միջավայր՝ հուզական խնդիրները հաղթահարելու և անձնական աճի համար։</p>
+        <p class="hero-description">Անհատական և սրտացավ մոտեցում կանանց և դեռահաս աղջիկների համար։ Ապահով և վստահելի միջավայր՝ հուզական խնդիրները հաղթահարելու և անձնական աճի համար։</p>
         
         <div class="hero-actions">
           <a class="btn btn-primary" href="#contact">Ամրագրել հանդիպում <span class="arrow">→</span></a>
@@ -1663,7 +1672,7 @@
         </div>
         <div class="photo-note">
           <strong>Նատալի Պողոսյան</strong>
-          <span>Գործ praktիկ հոգեբան</span>
+          <span class="photo-badge">Հոգեբանների միության անդամ</span>
         </div>
         <div class="decor-circle"></div>
       </div>
@@ -1711,7 +1720,7 @@
       <div class="about-copy">
         <span class="section-label">Իմ մասին</span>
         <h2 class="section-title">Ողջույն, ես Նատալի Պողոսյանն եմ</h2>
-        <p>Ես մասնագիտությամբ հոգեբան եմ։ Իմ առաքելությունն է օգնել կանանց և դեռահաս աղջիկներին հաղթահարել կյանքի դժվարին պահերը, գտնել սեփական «ես»-ը, կարգավորել հարաբերությունները և ձեռք բերել հուզական կայունություն։</p>
+        <p>Ես մասնագիտությամբ հոգեբան եմ և Հոգեբանների միության անդամ։ Իմ առաքելությունն է օգնել կանանց և դեռահաս աղջիկներին հաղթահարել կյանքի դժվարին պահերը, գտնել սեփական «ես»-ը, կարգավորել հարաբերությունները և ձեռք բերել հուզական կայունություն։</p>
         
         <div class="about-points">
           <div class="about-point">
@@ -1739,7 +1748,7 @@
       <div class="section-heading">
         <span class="section-label">Ծառայություններ</span>
         <h2 class="section-title">Ինչ հարցերով կարող եք դիմել ինձ</h2>
-        <p class="section-description">Յուրաքանչյուր ուղղություն մշակված է ձեր անհատական կարիքներին և հոգեբանական առանձնահատկություններին համապատասխան։</p>
+        <p class="section-description">Յուրաքանչյուր ուղղություն մշակված է ձեր անհատական կարիքներին և հոգեբանական առանձնահատկություններին համապատասխան.</p>
       </div>
 
       <div class="services-grid">
@@ -1763,7 +1772,7 @@
           <div class="service-number">03</div>
           <div class="service-icon">💻</div>
           <h3>Առցանց խորհրդատվություն</h3>
-          <p>Հարմարավետ հանդիպումներ տեսազանգի միջոցով (Zoom, WhatsApp, Google Meet)՝ աշխարհի ցանկացած անկյունից:</p>
+          <p>Հարմարավետ հանդիպումներ տեսազանգի միջոցով (Zoom, WhatsApp, Google Meet)՝ աշխարհի ցանկացած անկյունից։</p>
           <a class="service-link" href="#contact">Գրանցվել <span class="arrow">→</span></a>
         </div>
       </div>
@@ -1829,7 +1838,7 @@
           <div class="price">15,000 <span>դրամ</span></div>
           <div class="price-duration">Տևողությունը՝ 60 րոպե</div>
           <div class="price-divider"></div>
-          <p>Ներառում է խորհրդատվական մեկ լիարժեք սեսիա, անհատական մեթոդների ընտրություն և անհրաժեշտության դեպքում՝ տնային գործնական առաջադրանքներ:</p>
+          <p>Ներառում է խորհրդատվական մեկ լիարժեք սեսիա, անհատական մեթոդների ընտրություն և անհրաժեշտության դեպքում՝ տնային գործնական առաջադրանքներ։</p>
           <a class="btn btn-primary" href="#contact">Ամրագրել ժամ</a>
           <div class="price-note">* Հանդիպումները կատարվում են նախնական գրանցմամբ</div>
         </div>
@@ -1908,7 +1917,7 @@
       <div>
         <span class="section-label">Հարցեր և պատասխաններ</span>
         <h2 class="section-title">Հաճախ տրվող հարցեր</h2>
-        <p class="section-description">Այստեղհավաքված են այն հիմնական հարցերը, որոնք առավել հաճախ են տալիս հաճախորդները նախքան խորհրդատվության գրանցվելը։</p>
+        <p class="section-description">Այստեղ հավաքված են այն հիմնական հարցերը, որոնք առավել հաճախ են տալիս հաճախորդները նախքան խորհրդատվության գրանցվելը։</p>
       </div>
 
       <div class="faq-list">
@@ -2006,7 +2015,7 @@
             </div>
 
             <div class="form-field full">
-              <label for="message">Հաղորդագրություն (կամկընտրելի)</label>
+              <label for="message">Հաղորդագրություն (կամընտրելի)</label>
               <textarea id="message" placeholder="Գրեք ձեզ հուզող հարցի կամ նախընտրելի ժամի մասին..."></textarea>
             </div>
           </div>
@@ -2060,7 +2069,7 @@
           © 2026 Նատալի Պողոսյան։ Բոլոր իրավունքները պաշտպանված են։
         </div>
         <div>
-          Հոգեբանական վብ-կայք
+          Հոգեբանական վեբ-կայք
         </div>
       </div>
     </div>
