@@ -1,1 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew & Bean — Artisan Coffee House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/playfair-display@latest/latin-400-normal.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-400-normal.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-600-normal.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --coffee:#3d2817;
+    --espresso:#1f1410;
+    --cream:#f5ede3;
+    --latte:#d4a574;
+    --caramel:#b8834a;
+    --mocha:#6b4423;
+    --milk:#faf6f0;
+    --accent:#c97b3c;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--milk);
+    color:var(--espresso);
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:400}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    padding:18px 6%;
+    display:flex;justify-content:space-between;align-items:center;
+    transition:all .4s ease;
+    background:transparent;
+  }
+  nav.scrolled{
+    background:rgba(250,246,240,.95);
+    backdrop-filter:blur(12px);
+    box-shadow:0 2px 20px rgba(61,40,23,.08);
+    padding:12px 6%;
+  }
+  .logo{
+    font-family:'Playfair Display',serif;
+    font-size:1.6rem;
+    color:var(--coffee);
+    display:flex;align-items:center;gap:10px;
+    cursor:pointer;
+  }
+  .logo-icon{
+    width:38px;height:38px;
+    background:var(--coffee);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--cream);
+    font-size:1.1rem;
+  }
+  .nav-links{display:flex;gap:36px;align-items:center;list-style:none}
+  .nav-links a{
+    text-decoration:none;color:var(--coffee);
+    font-size:.92rem;font-weight:600;
+    position:relative;transition:color .3s;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;bottom:-4px;left:0;
+    width:0;height:2px;background:var(--accent);
+    transition:width .3s;
+  }
+  .nav-links a:hover{color:var(--accent)}
+  .nav-links a:hover::after{width:100%}
+  .cart-btn{
+    background:var(--coffee);color:var(--cream);
+    border:none;padding:10px 22px;border-radius:30px;
+    font-weight:600;cursor:pointer;
+    display:flex;align-items:center;gap:8px;
+    transition:all .3s;font-size:.9rem;
+  }
+  .cart-btn:hover{background:var(--accent);transform:translateY(-2px)}
+  .cart-count{
+    background:var(--accent);color:#fff;
+    width:22px;height:22px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.75rem;font-weight:600;
+  }
+  .cart-btn:hover .cart-count{background:#fff;color:var(--accent)}
+  .menu-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--coffee)}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex;align-items:center;
+    padding:120px 6% 80px;
+    background:linear-gradient(135deg,var(--cream) 0%,#ede0d0 50%,#e8d5bf 100%);
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;
+    top:-50%;right:-20%;
+    width:700px;height:700px;
+    background:radial-gradient(circle,rgba(201,123,60,.15) 0%,transparent 70%);
+    border-radius:50%;
+    animation:float 8s ease-in-out infinite;
+  }
+  .hero::after{
+    content:'';position:absolute;
+    bottom:-30%;left:-10%;
+    width:500px;height:500px;
+    background:radial-gradient(circle,rgba(61,40,23,.08) 0%,transparent 70%);
+    border-radius:50%;
+    animation:float 10s ease-in-out infinite reverse;
+  }
+  @keyframes float{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(30px,-30px)}
+  }
+  .hero-content{
+    max-width:620px;
+    position:relative;z-index:2;
+    animation:slideUp 1s ease;
+  }
+  @keyframes slideUp{
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .hero-tag{
+    display:inline-block;
+    background:rgba(61,40,23,.1);
+    color:var(--coffee);
+    padding:6px 18px;border-radius:20px;
+    font-size:.8rem;font-weight:600;
+    letter-spacing:1.5px;text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem,6vw,4.8rem);
+    line-height:1.1;
+    color:var(--espresso);
+    margin-bottom:24px;
+  }
+  .hero h1 span{
+    color:var(--accent);
+    font-style:italic;
+    position:relative;
+  }
+  .hero h1 span::after{
+    content:'';position:absolute;bottom:4px;left:0;right:0;
+    height:8px;background:rgba(201,123,60,.2);
+    z-index:-1;
+  }
+  .hero p{
+    font-size:1.1rem;
+    color:var(--mocha);
+    margin-bottom:36px;
+    max-width:480px;
+  }
+  .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{
+    background:var(--coffee);color:var(--cream);
+    padding:14px 32px;border:none;border-radius:30px;
+    font-weight:600;cursor:pointer;font-size:.95rem;
+    transition:all .3s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary:hover{background:var(--accent);transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,123,60,.3)}
+  .btn-secondary{
+    background:transparent;color:var(--coffee);
+    padding:14px 32px;border:2px solid var(--coffee);border-radius:30px;
+    font-weight:600;cursor:pointer;font-size:.95rem;
+    transition:all .3s;
+  }
+  .btn-secondary:hover{background:var(--coffee);color:var(--cream)}
+
+  .hero-visual{
+    position:absolute;
+    right:6%;top:50%;transform:translateY(-50%);
+    width:45%;max-width:520px;
+    z-index:1;
+    animation:slideUp 1.2s ease;
+  }
+  .coffee-cup-art{
+    width:100%;aspect-ratio:1;
+    position:relative;
+  }
+  .cup-main{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:70%;height:65%;
+    background:linear-gradient(145deg,#fff 0%,#f0e6d8 100%);
+    border-radius:8% 8% 45% 45% / 5% 5% 50% 50%;
+    box-shadow:
+      inset 0 -20px 40px rgba(61,40,23,.1),
+      0 30px 60px rgba(61,40,23,.2);
+    overflow:hidden;
+  }
+  .cup-main::before{
+    content:'';position:absolute;
+    top:8%;left:8%;right:8%;
+    height:40%;
+    background:radial-gradient(ellipse at center,#6b4423 0%,#3d2817 60%,#1f1410 100%);
+    border-radius:50%;
+    box-shadow:inset 0 4px 12px rgba(0,0,0,.3);
+  }
+  .cup-main::after{
+    content:'';position:absolute;
+    top:15%;left:25%;
+    width:30%;height:20%;
+    background:rgba(255,255,255,.15);
+    border-radius:50%;
+    filter:blur(4px);
+  }
+  .cup-handle{
+    position:absolute;
+    top:50%;right:8%;
+    transform:translateY(-50%);
+    width:18%;height:35%;
+    border:14px solid #fff;
+    border-left:none;
+    border-radius:0 50% 50% 0;
+    box-shadow:4px 4px 12px rgba(61,40,23,.15);
+  }
+  .steam{
+    position:absolute;
+    top:10%;left:50%;
+    transform:translateX(-50%);
+    display:flex;gap:14px;
+  }
+  .steam span{
+    width:4px;height:60px;
+    background:linear-gradient(to top,rgba(61,40,23,.15),transparent);
+    border-radius:4px;
+    animation:steam 3s ease-in-out infinite;
+  }
+  .steam span:nth-child(2){animation-delay:.5s;height:80px}
+  .steam span:nth-child(3){animation-delay:1s;height:50px}
+  @keyframes steam{
+    0%{opacity:0;transform:translateY(0) scaleX(1)}
+    50%{opacity:1;transform:translateY(-30px) scaleX(1.5)}
+    100%{opacity:0;transform:translateY(-60px) scaleX(.5)}
+  }
+  .floating-beans{position:absolute;inset:0}
+  .bean{
+    position:absolute;
+    width:24px;height:32px;
+    background:var(--coffee);
+    border-radius:50%;
+    animation:floatBean 6s ease-in-out infinite;
+  }
+  .bean::before{
+    content:'';position:absolute;
+    top:30%;left:50%;
+    width:2px;height:40%;
+    background:rgba(0,0,0,.3);
+    transform:translateX(-50%);
+    border-radius:2px;
+  }
+  .bean:nth-child(1){top:15%;left:10%;animation-delay:0s}
+  .bean:nth-child(2){top:70%;left:5%;animation-delay:1s;transform:rotate(45deg)}
+  .bean:nth-child(3){top:25%;right:5%;animation-delay:2s;transform:rotate(-30deg)}
+  .bean:nth-child(4){bottom:15%;right:15%;animation-delay:3s;transform:rotate(60deg)}
+  @keyframes floatBean{
+    0%,100%{transform:translateY(0) rotate(var(--r,0deg))}
+    50%{transform:translateY(-15px) rotate(var(--r,0deg))}
+  }
+
+  /* FEATURES */
+  .features{
+    padding:80px 6%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:30px;
+    background:var(--cream);
+  }
+  .feature{
+    text-align:center;
+    padding:30px 20px;
+    transition:transform .3s;
+  }
+  .feature:hover{transform:translateY(-8px)}
+  .feature-icon{
+    width:64px;height:64px;
+    background:var(--coffee);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+    font-size:1.6rem;
+    transition:all .3s;
+  }
+  .feature:hover .feature-icon{background:var(--accent);transform:rotate(10deg) scale(1.1)}
+  .feature h4{font-size:1.15rem;margin-bottom:8px;color:var(--coffee)}
+  .feature p{font-size:.88rem;color:var(--mocha)}
+
+  /* MENU */
+  .menu-section{
+    padding:100px 6%;
+    background:var(--milk);
+  }
+  .section-header{
+    text-align:center;
+    margin-bottom:60px;
+  }
+  .section-tag{
+    display:inline-block;
+    color:var(--accent);
+    font-size:.8rem;font-weight:600;
+    letter-spacing:2px;text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  .section-header h2{
+    font-size:clamp(2rem,4vw,3.2rem);
+    color:var(--espresso);
+    margin-bottom:14px;
+  }
+  .section-header p{
+    color:var(--mocha);
+    max-width:520px;margin:0 auto;
+  }
+
+  .menu-filters{
+    display:flex;justify-content:center;
+    gap:10px;flex-wrap:wrap;
+    margin-bottom:50px;
+  }
+  .filter-btn{
+    background:transparent;
+    border:2px solid transparent;
+    padding:10px 24px;border-radius:30px;
+    font-weight:600;font-size:.88rem;
+    color:var(--mocha);cursor:pointer;
+    transition:all .3s;
+  }
+  .filter-btn:hover{color:var(--coffee)}
+  .filter-btn.active{
+    background:var(--coffee);
+    color:var(--cream);
+    border-color:var(--coffee);
+  }
+
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:30px;
+    max-width:1300px;margin:0 auto;
+  }
+  .menu-card{
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 4px 20px rgba(61,40,23,.06);
+    transition:all .4s cubic-bezier(.2,.8,.2,1);
+    cursor:pointer;
+    position:relative;
+  }
+  .menu-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(61,40,23,.15);
+  }
+  .menu-card.hidden{display:none}
+  .card-image{
+    height:220px;
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,var(--cream),#e8d5bf);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card-image svg{
+    width:70%;height:70%;
+    transition:transform .5s;
+  }
+  .menu-card:hover .card-image svg{transform:scale(1.1) rotate(3deg)}
+  .card-badge{
+    position:absolute;top:16px;right:16px;
+    background:var(--accent);color:#fff;
+    padding:5px 12px;border-radius:15px;
+    font-size:.72rem;font-weight:600;
+    letter-spacing:.5px;
+  }
+  .card-body{padding:22px}
+  .card-body h3{
+    font-size:1.25rem;
+    color:var(--coffee);
+    margin-bottom:6px;
+  }
+  .card-body .desc{
+    font-size:.85rem;
+    color:var(--mocha);
+    margin-bottom:16px;
+    min-height:40px;
+  }
+  .card-footer{
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .price{
+    font-size:1.3rem;font-weight:600;
+    color:var(--coffee);
+    font-family:'Playfair Display',serif;
+  }
+  .add-btn{
+    background:var(--coffee);color:var(--cream);
+    border:none;width:40px;height:40px;border-radius:50%;
+    font-size:1.3rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .add-btn:hover{background:var(--accent);transform:rotate(90deg) scale(1.1)}
+  .add-btn.added{background:#4caf50;transform:rotate(0)}
+
+  /* ABOUT */
+  .about{
+    padding:100px 6%;
+    background:var(--coffee);
+    color:var(--cream);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .about-visual{
+    aspect-ratio:1;
+    background:linear-gradient(135deg,var(--mocha),var(--espresso));
+    border-radius:30px;
+    position:relative;
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .about-visual::before{
+    content:'';position:absolute;inset:20px;
+    border:2px solid rgba(245,237,227,.2);
+    border-radius:20px;
+  }
+  .about-visual svg{width:60%;height:60%;opacity:.9}
+  .about-content .section-tag{color:var(--latte)}
+  .about-content h2{
+    font-size:clamp(2rem,3.5vw,2.8rem);
+    margin-bottom:20px;
+    color:var(--cream);
+  }
+  .about-content p{
+    color:rgba(245,237,227,.8);
+    margin-bottom:16px;
+    font-size:.98rem;
+  }
+  .stats{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:20px;margin-top:36px;
+    padding-top:30px;
+    border-top:1px solid rgba(245,237,227,.15);
+  }
+  .stat-num{
+    font-family:'Playfair Display',serif;
+    font-size:2.2rem;
+    color:var(--latte);
+    margin-bottom:4px;
+  }
+  .stat-label{font-size:.82rem;opacity:.7}
+
+  /* TESTIMONIALS */
+  .testimonials{
+    padding:100px 6%;
+    background:var(--cream);
+  }
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    max-width:1200px;margin:0 auto;
+  }
+  .testi-card{
+    background:#fff;
+    padding:34px;
+    border-radius:20px;
+    box-shadow:0 4px 20px rgba(61,40,23,.05);
+    transition:transform .3s;
+  }
+  .testi-card:hover{transform:translateY(-6px)}
+  .stars{color:var(--accent);margin-bottom:14px;font-size:1rem;letter-spacing:2px}
+  .testi-card p{
+    font-style:italic;
+    color:var(--mocha);
+    margin-bottom:20px;
+    font-size:.95rem;
+  }
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:linear-gradient(135deg,var(--latte),var(--accent));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:600;
+  }
+  .testi-author strong{display:block;font-size:.9rem;color:var(--coffee)}
+  .testi-author span{font-size:.78rem;color:var(--mocha)}
+
+  /* CONTACT */
+  .contact{
+    padding:100px 6%;
+    background:var(--milk);
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    max-width:1100px;margin:0 auto;
+  }
+  .contact-info h3{font-size:1.8rem;margin-bottom:20px;color:var(--coffee)}
+  .contact-info p{color:var(--mocha);margin-bottom:24px}
+  .info-item{
+    display:flex;gap:16px;align-items:flex-start;
+    margin-bottom:20px;
+  }
+  .info-icon{
+    width:44px;height:44px;
+    background:var(--cream);
+    border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;flex-shrink:0;
+  }
+  .info-item strong{display:block;color:var(--coffee);font-size:.95rem;margin-bottom:2px}
+  .info-item span{color:var(--mocha);font-size:.88rem}
+  .contact-form{
+    background:#fff;
+    padding:36px;
+    border-radius:24px;
+    box-shadow:0 4px 20px rgba(61,40,23,.06);
+  }
+  .form-group{margin-bottom:18px}
+  .form-group label{
+    display:block;
+    font-size:.85rem;font-weight:600;
+    color:var(--coffee);
+    margin-bottom:6px;
+  }
+  .form-group input,.form-group textarea,.form-group select{
+    width:100%;
+    padding:12px 16px;
+    border:2px solid var(--cream);
+    border-radius:12px;
+    font-family:inherit;font-size:.9rem;
+    transition:border-color .3s;
+    background:var(--milk);
+  }
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+    outline:none;border-color:var(--accent);
+  }
+  .form-group textarea{resize:vertical;min-height:100px}
+
+  /* FOOTER */
+  footer{
+    background:var(--espresso);
+    color:var(--cream);
+    padding:60px 6% 30px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+    max-width:1300px;margin:0 auto 40px;
+  }
+  .footer-brand .logo{color:var(--cream);margin-bottom:16px}
+  .footer-brand .logo-icon{background:var(--accent)}
+  .footer-brand p{opacity:.7;font-size:.88rem;max-width:300px}
+  .footer-col h4{
+    font-family:'Inter',sans-serif;
+    font-size:.9rem;font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:18px;
+    color:var(--latte);
+  }
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:10px}
+  .footer-col a{
+    color:rgba(245,237,227,.7);
+    text-decoration:none;font-size:.88rem;
+    transition:color .3s;
+  }
+  .footer-col a:hover{color:var(--accent)}
+  .social{display:flex;gap:12px;margin-top:16px}
+  .social a{
+    width:38px;height:38px;
+    background:rgba(245,237,227,.1);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .social a:hover{background:var(--accent);transform:translateY(-3px)}
+  .footer-bottom{
+    border-top:1px solid rgba(245,237,227,.1);
+    padding-top:24px;
+    text-align:center;
+    font-size:.82rem;opacity:.6;
+  }
+
+  /* CART DRAWER */
+  .cart-overlay{
+    position:fixed;inset:0;
+    background:rgba(31,20,16,.5);
+    backdrop-filter:blur(4px);
+    z-index:2000;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s;
+  }
+  .cart-overlay.open{opacity:1;pointer-events:auto}
+  .cart-drawer{
+    position:fixed;top:0;right:0;bottom:0;
+    width:400px;max-width:90vw;
+    background:var(--milk);
+    z-index:2001;
+    transform:translateX(100%);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    display:flex;flex-direction:column;
+  }
+  .cart-drawer.open{transform:translateX(0)}
+  .cart-header{
+    padding:24px;
+    display:flex;justify-content:space-between;align-items:center;
+    border-bottom:1px solid var(--cream);
+  }
+  .cart-header h3{font-size:1.4rem;color:var(--coffee)}
+  .close-cart{
+    background:none;border:none;
+    font-size:1.6rem;cursor:pointer;
+    color:var(--coffee);
+    width:36px;height:36px;border-radius:50%;
+    transition:background .3s;
+  }
+  .close-cart:hover{background:var(--cream)}
+  .cart-items{flex:1;overflow-y:auto;padding:20px 24px}
+  .cart-item{
+    display:flex;gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--cream);
+    animation:slideIn .3s ease;
+  }
+  @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+  .cart-item-img{
+    width:60px;height:60px;
+    background:var(--cream);border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .cart-item-img svg{width:70%;height:70%}
+  .cart-item-info{flex:1}
+  .cart-item-info h5{font-size:.92rem;color:var(--coffee);margin-bottom:4px;font-family:'Inter',sans-serif;font-weight:600}
+  .cart-item-info .cart-price{color:var(--accent);font-weight:600;font-size:.9rem}
+  .qty-controls{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .qty-btn{
+    width:26px;height:26px;border-radius:50%;
+    border:1px solid var(--cream);background:#fff;
+    cursor:pointer;font-size:.9rem;color:var(--coffee);
+    display:flex;align-items:center;justify-content:center;
+    transition:all .2s;
+  }
+  .qty-btn:hover{background:var(--coffee);color:var(--cream);border-color:var(--coffee)}
+  .qty-num{font-weight:600;font-size:.88rem;min-width:20px;text-align:center}
+  .remove-item{
+    background:none;border:none;
+    color:var(--mocha);cursor:pointer;
+    font-size:.78rem;margin-left:auto;
+    align-self:flex-start;
+    opacity:.6;transition:opacity .2s;
+  }
+  .remove-item:hover{opacity:1;color:#d32f2f}
+  .empty-cart{
+    text-align:center;padding:60px 20px;
+    color:var(--mocha);
+  }
+  .empty-cart-icon{font-size:3rem;margin-bottom:14px;opacity:.4}
+  .cart-footer{
+    padding:24px;
+    border-top:1px solid var(--cream);
+    background:#fff;
+  }
+  .cart-total{
+    display:flex;justify-content:space-between;
+    margin-bottom:16px;
+    font-size:1.1rem;font-weight:600;
+    color:var(--coffee);
+  }
+  .checkout-btn{
+    width:100%;
+    background:var(--coffee);color:var(--cream);
+    border:none;padding:14px;border-radius:30px;
+    font-weight:600;font-size:.95rem;cursor:pointer;
+    transition:all .3s;
+  }
+  .checkout-btn:hover{background:var(--accent)}
+
+  /* TOAST */
+  .toast{
+    position:fixed;bottom:30px;left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:var(--coffee);color:var(--cream);
+    padding:14px 28px;border-radius:30px;
+    font-size:.9rem;font-weight:600;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    z-index:3000;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    display:flex;align-items:center;gap:10px;
+  }
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero-visual{display:none}
+    .about{grid-template-columns:1fr}
+    .about-visual{max-width:400px;margin:0 auto}
+    .contact-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:700px){
+    .nav-links{
+      position:fixed;top:0;right:0;bottom:0;
+      width:280px;
+      background:var(--milk);
+      flex-direction:column;
+      padding:80px 30px;gap:24px;
+      transform:translateX(100%);
+      transition:transform .4s;
+      box-shadow:-10px 0 30px rgba(0,0,0,.1);
+    }
+    .nav-links.open{transform:translateX(0)}
+    .menu-toggle{display:block}
+    .footer-grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(3,1fr);gap:10px}
+    .stat-num{font-size:1.6rem}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo" onclick="scrollTo({top:0,behavior:'smooth'})">
+    <div class="logo-icon">☕</div>
+    <span>Brew & Bean</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </li>
+  </ul>
+  <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-tag">✦ Est. 2015 · Artisan Coffee</span>
+    <h1>Where every cup tells a <span>story</span></h1>
+    <p>Handcrafted beverages, fresh pastries, and a warm atmosphere — your perfect escape from the everyday.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
+        Explore Menu →
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Reserve a Table
+      </button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="coffee-cup-art">
+      <div class="floating-beans">
+        <div class="bean"></div>
+        <div class="bean"></div>
+        <div class="bean"></div>
+        <div class="bean"></div>
+      </div>
+      <div class="steam"><span></span><span></span><span></span></div>
+      <div class="cup-main"></div>
+      <div class="cup-handle"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feature">
+    <div class="feature-icon">🌱</div>
+    <h4>Ethically Sourced</h4>
+    <p>Single-origin beans from sustainable farms worldwide</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">👨‍🍳</div>
+    <h4>Master Roasters</h4>
+    <p>Expertly roasted in-house for peak flavor profiles</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">🥐</div>
+    <h4>Fresh Daily</h4>
+    <p>Baked goods crafted every morning from scratch</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">💚</div>
+    <h4>Cozy Vibes</h4>
+    <p>A warm space designed for connection and creativity</p>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="section-header">
+    <span class="section-tag">Our Menu</span>
+    <h2>Crafted with Passion</h2>
+    <p>From classic espresso to signature creations — discover your new favorite.</p>
+  </div>
+
+  <div class="menu-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="coffee">Coffee</button>
+    <button class="filter-btn" data-filter="tea">Tea</button>
+    <button class="filter-btn" data-filter="pastry">Pastries</button>
+    <button class="filter-btn" data-filter="breakfast">Breakfast</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#d4a574" stroke-width="2"/>
+      <circle cx="100" cy="100" r="50" fill="none" stroke="#d4a574" stroke-width="1.5" opacity=".6"/>
+      <path d="M70 90 Q70 130 100 135 Q130 130 130 90 L125 90 Q125 125 100 128 Q75 125 75 90 Z" fill="#d4a574"/>
+      <ellipse cx="100" cy="90" rx="30" ry="6" fill="#3d2817"/>
+      <path d="M130 100 Q145 100 145 115 Q145 125 130 125" fill="none" stroke="#d4a574" stroke-width="4" stroke-linecap="round"/>
+      <path d="M85 70 Q85 55 90 55" fill="none" stroke="#d4a574" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+      <path d="M100 65 Q100 50 105 50" fill="none" stroke="#d4a574" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+      <path d="M115 70 Q115 55 120 55" fill="none" stroke="#d4a574" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="about-content">
+    <span class="section-tag">Our Story</span>
+    <h2>A decade of perfecting the perfect cup</h2>
+    <p>Founded in 2015 by two coffee-obsessed friends, Brew & Bean started as a tiny corner shop with one mission: to serve coffee that makes people pause, smile, and savor.</p>
+    <p>Today, we source beans from over 12 countries, roast them in-house weekly, and serve them with the same care we had on day one. Every cup is a conversation between bean, brewer, and you.</p>
+    <div class="stats">
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Bean Origins</div>
+      </div>
+      <div>
+        <div class="stat-num">50k</div>
+        <div class="stat-label">Cups Served</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Customer Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header">
+    <span class="section-tag">Kind Words</span>
+    <h2>What Our Guests Say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"The cappuccino here is genuinely the best I've had outside of Italy. The atmosphere is pure magic — I come here to write every weekend."</p>
+      <div class="testi-author">
+        <div class="avatar">SM</div>
+        <div>
+          <strong>Sarah Mitchell</strong>
+          <span>Regular since 2019</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Their avocado toast is legendary. Fresh, perfectly seasoned, and the sourdough is always impeccable. A neighborhood gem."</p>
+      <div class="testi-author">
+        <div class="avatar">JC</div>
+        <div>
+          <strong>James Chen</strong>
+          <span>Food blogger</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"I've tried every café in the city. Brew & Bean wins on consistency, quality, and warmth. The staff remembers your name and your order."</p>
+      <div class="testi-author">
+        <div class="avatar">EP</div>
+        <div>
+          <strong>Elena Park</strong>
+          <span>Local resident</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header">
+    <span class="section-tag">Get in Touch</span>
+    <h2>Visit Us or Say Hello</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Come say hi 👋</h3>
+      <p>We'd love to host you. Drop by for a cup, or reach out to reserve a table for your next gathering.</p>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <strong>Location</strong>
+          <span>142 Maple Street, Downtown District</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <strong>Hours</strong>
+          <span>Mon–Fri: 7am – 8pm<br>Sat–Sun: 8am – 9pm</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <strong>Contact</strong>
+          <span>(555) 123-4567 · hello@brewandbean.co</span>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" required placeholder="Jane Doe">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" required placeholder="jane@example.com">
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select required>
+          <option value="">Select a topic...</option>
+          <option>Table Reservation</option>
+          <option>Catering Inquiry</option>
+          <option>General Question</option>
+          <option>Feedback</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea required placeholder="Tell us what's on your mind..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-icon">☕</div>
+        <span>Brew & Bean</span>
+      </div>
+      <p>Artisan coffee, fresh pastries, and warm conversations — since 2015.</p>
+      <div class="social">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="TikTok">🎵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#menu">Coffee</a></li>
+        <li><a href="#menu">Tea</a></li>
+        <li><a href="#menu">Pastries</a></li>
+        <li><a href="#menu">Breakfast</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Gift Cards</a></li>
+        <li><a href="#">Loyalty Program</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Brew & Bean Coffee House. Brewed with ♥ in Downtown.
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Your Order</h3>
+    <button class="close-cart" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Checkout →</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast">✓ Added to cart</div>
+
+<script>
+// SVG icons for menu items
+const icons = {
+  cappuccino: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M25 40 Q25 75 50 80 Q75 75 75 40 L70 40 Q70 70 50 73 Q30 70 30 40 Z" fill="#fff" stroke="#3d2817" stroke-width="1.5"/><ellipse cx="50" cy="40" rx="25" ry="5" fill="#6b4423"/><path d="M75 50 Q85 50 85 60 Q85 68 75 68" fill="none" stroke="#3d2817" stroke-width="3" stroke-linecap="round"/><path d="M40 25 Q40 18 43 18" fill="none" stroke="#b8834a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/><path d="M50 22 Q50 15 53 15" fill="none" stroke="#b8834a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/><path d="M60 25 Q60 18 63 18" fill="none" stroke="#b8834a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/></svg>`,
+  croissant: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20 55 Q30 30 50 35 Q70 30 80 55 Q75 70 50 68 Q25 70 20 55 Z" fill="#d4a574" stroke="#6b4423" stroke-width="1.5"/><path d="M30 50 Q40 42 50 45 Q60 42 70 50" fill="none" stroke="#6b4423" stroke-width="1.2" opacity=".6"/><path d="M35 58 Q45 52 50 54 Q55 52 65 58" fill="none" stroke="#6b4423" stroke-width="1.2" opacity=".6"/></svg>`,
+  cheesecake: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M25 45 L75 45 L70 75 L30 75 Z" fill="#faf6f0" stroke="#3d2817" stroke-width="1.5"/><path d="M25 45 Q50 35 75 45" fill="#f5ede3" stroke="#3d2817" stroke-width="1.5"/><ellipse cx="40" cy="42" rx="4" ry="3" fill="#d32f2f"/><ellipse cx="55" cy="40" rx="4" ry="3" fill="#d32f2f"/><ellipse cx="48" cy="45" rx="3" ry="2.5" fill="#c2185b"/><circle cx="62" cy="44" r="2" fill="#4caf50"/></svg>`,
+  avocado: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="45" width="60" height="25" rx="4" fill="#d4a574" stroke="#6b4423" stroke-width="1.5"/><ellipse cx="50" cy="48" rx="28" ry="6" fill="#7cb342"/><circle cx="50" cy="45" r="8" fill="#fff"/><circle cx="50" cy="45" r="5" fill="#ff9800"/><circle cx="35" cy="48" r="2" fill="#d32f2f"/><circle cx="65" cy="48" r="2" fill="#d32f2f"/></svg>`,
+  mocha: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30 30 L35 80 Q50 85 65 80 L70 30 Z" fill="rgba(255,255,255,.4)" stroke="#3d2817" stroke-width="1.5"/><path d="M32 50 L35 80 Q50 85 65 80 L68 50 Z" fill="#3d2817"/><path d="M31 40 L32 50 L68 50 L69 40 Z" fill="#6b4423"/><ellipse cx="50" cy="35" rx="18" ry="3" fill="#fff"/><path d="M42 30 Q45 20 48 22" fill="#fff"/><circle cx="50" cy="25" r="6" fill="#faf6f0"/></svg>`,
+  matcha: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M25 40 Q25 75 50 80 Q75 75 75 40 L70 40 Q70 70 50 73 Q30 70 30 40 Z" fill="#fff" stroke="#3d2817" stroke-width="1.5"/><ellipse cx="50" cy="40" rx="25" ry="5" fill="#7cb342"/><path d="M75 50 Q85 50 85 60 Q85 68 75 68" fill="none" stroke="#3d2817" stroke-width="3" stroke-linecap="round"/><path d="M45 38 Q50 35 55 38 Q52 42 48 42 Z" fill="#fff" opacity=".7"/></svg>`,
+  espresso: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30 50 Q30 75 50 78 Q70 75 70 50 L65 50 Q65 70 50 72 Q35 70 35 50 Z" fill="#fff" stroke="#3d2817" stroke-width="1.5"/><ellipse cx="50" cy="50" rx="20" ry="4" fill="#1f1410"/><path d="M70 58 Q78 58 78 65 Q78 70 70 70" fill="none" stroke="#3d2817" stroke-width="2.5" stroke-linecap="round"/><path d="M42 35 Q42 28 45 28" fill="none" stroke="#b8834a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/><path d="M50 32 Q50 25 53 25" fill="none" stroke="#b8834a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/><path d="M58 35 Q58 28 61 28" fill="none" stroke="#b8834a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/></svg>`,
+  pancakes: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="70" rx="30" ry="5" fill="#d4a574" stroke="#6b4423" stroke-width="1.5"/><ellipse cx="50" cy="62" rx="28" ry="5" fill="#e8c39e" stroke="#6b4423" stroke-width="1.5"/><ellipse cx="50" cy="54" rx="26" ry="5" fill="#d4a574" stroke="#6b4423" stroke-width="1.5"/><path d="M35 50 Q50 40 65 50 L65 54 Q50 44 35 54 Z" fill="#b8834a"/><circle cx="42" cy="48" r="3" fill="#3d2817"/><circle cx="55" cy="46" r="3" fill="#3d2817"/><circle cx="60" cy="52" r="2.5" fill="#3d2817"/><rect x="47" y="38" width="6" height="8" rx="1" fill="#ffeb3b"/></svg>`,
+  latte: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M25 35 L30 80 Q50 85 70 80 L75 35 Z" fill="#fff" stroke="#3d2817" stroke-width="1.5"/><ellipse cx="50" cy="35" rx="25" ry="5" fill="#d4a574"/><path d="M40 33 Q50 28 60 33 Q55 38 50 36 Q45 38 40 33 Z" fill="#fff" opacity=".8"/><path d="M75 50 Q85 50 85 60 Q85 68 75 68" fill="none" stroke="#3d2817" stroke-width="3" stroke-linecap="round"/></svg>`,
+  greentea: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M25 40 Q25 75 50 80 Q75 75 75 40 L70 40 Q70 70 50 73 Q30 70 30 40 Z" fill="#fff" stroke="#3d2817" stroke-width="1.5"/><ellipse cx="50" cy="40" rx="25" ry="5" fill="#8bc34a"/><path d="M75 50 Q85 50 85 60 Q85 68 75 68" fill="none" stroke="#3d2817" stroke-width="3" stroke-linecap="round"/><path d="M40 25 Q40 18 43 18" fill="none" stroke="#8bc34a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/><path d="M50 22 Q50 15 53 15" fill="none" stroke="#8bc34a" stroke-width="1.5" opacity=".6" stroke-linecap="round"/></svg>`
+};
+
+const menuItems = [
+  {id:1, name:'Classic Cappuccino', desc:'Velvety steamed milk over rich espresso, finished with heart art.', price:4.50, cat:'coffee', icon:'cappuccino', badge:'Bestseller'},
+  {id:2, name:'Butter Croissant', desc:'Flaky, golden, and baked fresh every morning. Pure French tradition.', price:3.25, cat:'pastry', icon:'croissant'},
+  {id:3, name:'Berry Cheesecake', desc:'Creamy New York style with a swirl of fresh seasonal berries.', price:6.50, cat:'pastry', icon:'cheesecake', badge:'New'},
+  {id:4, name:'Avocado Toast', desc:'Sourdough, smashed avocado, poached egg, microgreens & chili flakes.', price:9.75, cat:'breakfast', icon:'avocado'},
+  {id:5, name:'Mocha Deluxe', desc:'Dark chocolate meets bold espresso, topped with whipped cream.', price:5.25, cat:'coffee', icon:'mocha'},
+  {id:6, name:'Matcha Latte', desc:'Ceremonial-grade matcha whisked with oat milk. Earthy & smooth.', price:5.50, cat:'tea', icon:'matcha', badge:'Popular'},
+  {id:7, name:'Double Espresso', desc:'Intense, bold, and beautifully extracted. For the purist.', price:3.00, cat:'coffee', icon:'espresso'},
+  {id:8, name:'Maple Pancakes', desc:'Fluffy stack with real maple syrup, blueberries & whipped butter.', price:10.50, cat:'breakfast', icon:'pancakes'},
+  {id:9, name:'Caramel Latte', desc:'Smooth espresso with buttery caramel and silky steamed milk.', price:5.00, cat:'coffee', icon:'latte'},
+  {id:10, name:'Jasmine Green Tea', desc:'Delicate floral notes from premium loose-leaf jasmine pearls.', price:3.75, cat:'tea', icon:'greentea'},
+  {id:11, name:'Almond Danish', desc:'Buttery puff pastry filled with almond cream and toasted flakes.', price:4.25, cat:'pastry', icon:'croissant'},
+  {id:12, name:'Breakfast Burrito', desc:'Scrambled eggs, black beans, cheese, salsa in a warm tortilla.', price:8.50, cat:'breakfast', icon:'avocado', badge:'Hearty'},
+];
+
+let cart = [];
+
+function renderMenu(filter='all'){
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = '';
+  const items = filter==='all' ? menuItems : menuItems.filter(i=>i.cat===filter);
+  items.forEach((item,i)=>{
+    const card = document.createElement('div');
+    card.className = 'menu-card';
+    card.style.animation = `slideUp .5s ease ${i*.05}s both`;
+    card.innerHTML = `
+      <div class="card-image">
+        ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
+        ${icons[item.icon]}
+      </div>
+      <div class="card-body">
+        <h3>${item.name}</h3>
+        <p class="desc">${item.desc}</p>
+        <div class="card-footer">
+          <span class="price">$${item.price.toFixed(2)}</span>
+          <button class="add-btn" onclick="addToCart(${item.id}, this)" aria-label="Add to cart">+</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMenu(btn.dataset.filter);
+  });
+});
+
+function addToCart(id, btn){
+  const item = menuItems.find(i=>i.id===id);
+  const existing = cart.find(c=>c.id===id);
+  if(existing) existing.qty++;
+  else cart.push({...item, qty:1});
+  updateCart();
+  showToast(`✓ ${item.name} added`);
+  if(btn){
+    btn.classList.add('added');
+    btn.textContent = '✓';
+    setTimeout(()=>{btn.classList.remove('added');btn.textContent='+'},1200);
+  }
+}
+
+function updateCart(){
+  const count = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent = count;
+  const itemsEl = document.getElementById('cartItems');
+  if(cart.length===0){
+    itemsEl.innerHTML = `<div class="empty-cart"><div class="empty-cart-icon">☕</div><p>Your cart is empty.<br>Add something delicious!</p></div>`;
+  } else {
+    itemsEl.innerHTML = cart.map(item=>`
+      <div class="cart-item">
+        <div class="cart-item-img">${icons[item.icon]}</div>
+        <div class="cart-item-info">
+          <h5>${item.name}</h5>
+          <div class="cart-price">$${(item.price*item.qty).toFixed(2)}</div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+            <button class="remove-item" onclick="removeItem(${item.id})">Remove</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+}
+
+function changeQty(id, delta){
+  const item = cart.find(c=>c.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0) cart = cart.filter(c=>c.id!==id);
+  updateCart();
+}
+
+function removeItem(id){
+  cart = cart.filter(c=>c.id!==id);
+  updateCart();
+}
+
+function toggleCart(){
+  document.getElementById('cartDrawer').classList.toggle('open');
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+
+function checkout(){
+  if(cart.length===0){showToast('Your cart is empty');return}
+  showToast('🎉 Order placed! Thank you.');
+  cart = [];
+  updateCart();
+  setTimeout(toggleCart, 800);
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function handleSubmit(e){
+  e.preventDefault();
+  showToast('✓ Message sent! We\'ll reply soon.');
+  e.target.reset();
+}
+
+// NAV scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY>50);
+});
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+});
+
+// Init
+renderMenu();
+updateCart();
+</script>
+</body>
+</html>
 
