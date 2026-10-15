@@ -34,6 +34,10 @@
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
 
+  /* ===== Page Visibility ===== */
+  .page{display:none}
+  .page.active{display:block}
+
   /* ===== Top Bar ===== */
   .topbar{
     background:#000;
@@ -64,13 +68,14 @@
     font-size:28px;font-weight:700;
     letter-spacing:.35em;
     color:var(--cream);
+    cursor:pointer;
   }
   .logo span{color:var(--gold)}
   .nav-links{display:flex;gap:42px;list-style:none}
   .nav-links a{
     font-size:12px;letter-spacing:.25em;text-transform:uppercase;
     color:var(--cream);position:relative;padding:4px 0;
-    transition:color .3s;
+    transition:color .3s;cursor:pointer;
   }
   .nav-links a::after{
     content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
@@ -105,9 +110,7 @@
     background-size:80px 80px;
     mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
   }
-  .hero-decor{
-    position:absolute;inset:0;pointer-events:none;
-  }
+  .hero-decor{position:absolute;inset:0;pointer-events:none}
   .hero-decor svg{position:absolute;opacity:.35}
   .hero-decor .sun{top:15%;right:12%;width:280px;height:280px;animation:spin 60s linear infinite}
   .hero-decor .wave{bottom:0;left:0;width:100%;opacity:.25}
@@ -205,18 +208,14 @@
     transition:transform .6s;
   }
   .tour-card:hover{transform:translateY(-8px)}
-  .tour-visual{
-    position:absolute;inset:0;transition:transform .8s;
-  }
+  .tour-visual{position:absolute;inset:0;transition:transform .8s}
   .tour-card:hover .tour-visual{transform:scale(1.08)}
   .tour-overlay{
     position:absolute;inset:0;
     background:linear-gradient(180deg,transparent 40%,rgba(11,13,16,.95) 100%);
     z-index:2;
   }
-  .tour-content{
-    position:absolute;bottom:0;left:0;right:0;padding:32px;z-index:3;
-  }
+  .tour-content{position:absolute;bottom:0;left:0;right:0;padding:32px;z-index:3}
   .tour-tag{
     display:inline-block;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
     color:var(--gold);padding:6px 14px;border:1px solid var(--gold);margin-bottom:16px;
@@ -236,7 +235,6 @@
   }
   .tour-card:hover .tour-arrow{background:var(--gold);border-color:var(--gold);color:var(--ink)}
 
-  /* Tour visual styles (CSS art) */
   .v-maldives{background:linear-gradient(180deg,#6ec5d9 0%,#3a98b5 45%,#1e5d75 100%)}
   .v-maldives::before{content:'';position:absolute;bottom:30%;left:0;right:0;height:40%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.15));}
   .v-maldives::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(180deg,#1a4a5c,#0a2836);}
@@ -252,17 +250,12 @@
   .v-paris::before{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(180deg,#3a2a3a,#1a1520);}
 
   /* ===== Destinations ===== */
-  .destinations{
-    background:linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%);
-  }
+  .destinations{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%)}
   .dest-grid{
     display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,280px);
     gap:20px;max-width:1400px;margin:0 auto;
   }
-  .dest-item{
-    position:relative;overflow:hidden;cursor:pointer;
-    border:1px solid rgba(201,169,97,.15);
-  }
+  .dest-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid rgba(201,169,97,.15)}
   .dest-item:nth-child(1){grid-row:span 2}
   .dest-item .dest-visual{position:absolute;inset:0;transition:transform .8s}
   .dest-item:hover .dest-visual{transform:scale(1.05)}
@@ -270,13 +263,8 @@
     content:'';position:absolute;inset:0;
     background:linear-gradient(180deg,transparent 40%,rgba(11,13,16,.9) 100%);
   }
-  .dest-info{
-    position:absolute;bottom:24px;left:24px;right:24px;z-index:2;
-  }
-  .dest-info .country{
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
-    margin-bottom:6px;
-  }
+  .dest-info{position:absolute;bottom:24px;left:24px;right:24px;z-index:2}
+  .dest-info .country{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
   .dest-info h3{font-size:26px;color:var(--cream)}
   .dest-info .count{font-size:12px;color:var(--muted);margin-top:4px}
 
@@ -285,10 +273,7 @@
 
   /* ===== Experience ===== */
   .experience{background:var(--ink)}
-  .exp-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
-    max-width:1400px;margin:0 auto;
-  }
+  .exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;max-width:1400px;margin:0 auto}
   .exp-card{
     padding:40px 30px;border:1px solid rgba(201,169,97,.2);
     text-align:center;transition:all .4s;background:rgba(255,255,255,.01);
@@ -335,9 +320,7 @@
     border-top:1px solid rgba(201,169,97,.15);
     border-bottom:1px solid rgba(201,169,97,.15);
   }
-  .cta-section h2{
-    font-size:clamp(36px,5vw,64px);margin-bottom:24px;
-  }
+  .cta-section h2{font-size:clamp(36px,5vw,64px);margin-bottom:24px}
   .cta-section h2 em{font-style:italic;color:var(--gold)}
   .cta-section p{color:var(--muted);max-width:560px;margin:0 auto 40px;font-size:16px}
   .newsletter{
@@ -388,6 +371,166 @@
     font-size:12px;color:var(--muted);letter-spacing:.1em;
   }
 
+  /* ===== ABOUT PAGE STYLES ===== */
+  .about-hero{
+    position:relative;min-height:80vh;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(201,169,97,.2), transparent 60%),
+      linear-gradient(135deg,#0a1520 0%,#0b0d10 60%,#1a1410 100%);
+  }
+  .about-hero::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(201,169,97,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(201,169,97,.04) 1px,transparent 1px);
+    background-size:80px 80px;
+    mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+  }
+  .about-hero-content{
+    position:relative;z-index:2;text-align:center;max-width:900px;padding:0 30px;
+  }
+  .about-hero h1{
+    font-size:clamp(50px,8vw,120px);line-height:1.02;margin-bottom:30px;
+    background:linear-gradient(180deg,var(--cream) 0%,var(--gold-light) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .about-hero h1 em{font-style:italic;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+  .about-hero p{font-size:18px;color:var(--muted);max-width:640px;margin:0 auto}
+
+  /* Story Section */
+  .story{background:var(--ink)}
+  .story-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;
+    max-width:1300px;margin:0 auto;align-items:center;
+  }
+  .story-visual{
+    aspect-ratio:4/5;position:relative;overflow:hidden;
+    border:1px solid rgba(201,169,97,.2);
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(201,169,97,.3), transparent 60%),
+      linear-gradient(135deg,#1a2a3a 0%,#0a1520 100%);
+  }
+  .story-visual::before{
+    content:'';position:absolute;inset:20px;
+    border:1px solid rgba(201,169,97,.3);
+  }
+  .story-visual::after{
+    content:'A';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-family:'Cormorant Garamond',serif;font-size:280px;
+    color:rgba(201,169,97,.2);font-weight:700;line-height:1;
+  }
+  .story-text h2{
+    font-size:clamp(36px,4vw,56px);line-height:1.1;margin-bottom:30px;
+  }
+  .story-text h2 em{font-style:italic;color:var(--gold)}
+  .story-text p{color:var(--muted);font-size:16px;margin-bottom:20px}
+  .story-text .signature{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:28px;color:var(--gold);margin-top:30px;
+  }
+
+  /* Philosophy */
+  .philosophy{
+    background:linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%);
+  }
+  .phil-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+    max-width:1300px;margin:0 auto;
+  }
+  .phil-card{
+    padding:50px 35px;border:1px solid rgba(201,169,97,.2);
+    text-align:center;transition:all .4s;
+    background:rgba(255,255,255,.01);
+  }
+  .phil-card:hover{border-color:var(--gold);transform:translateY(-6px)}
+  .phil-card .num{
+    font-family:'Cormorant Garamond',serif;font-size:60px;
+    color:var(--gold);font-weight:600;line-height:1;margin-bottom:20px;
+    font-style:italic;
+  }
+  .phil-card h4{font-size:24px;margin-bottom:14px;color:var(--cream)}
+  .phil-card p{color:var(--muted);font-size:14px}
+
+  /* Timeline */
+  .timeline{background:var(--ink)}
+  .timeline-wrap{max-width:900px;margin:0 auto;position:relative}
+  .timeline-wrap::before{
+    content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
+    background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  }
+  .tl-item{
+    display:grid;grid-template-columns:1fr 80px 1fr;gap:0;
+    margin-bottom:60px;align-items:center;
+  }
+  .tl-item:nth-child(even) .tl-content{grid-column:3;text-align:left;padding-left:30px}
+  .tl-item:nth-child(even) .tl-spacer{grid-column:1;text-align:right}
+  .tl-item:nth-child(odd) .tl-content{grid-column:1;text-align:right;padding-right:30px}
+  .tl-item:nth-child(odd) .tl-spacer{grid-column:3}
+  .tl-dot{
+    grid-column:2;justify-self:center;
+    width:16px;height:16px;border-radius:50%;
+    background:var(--ink);border:2px solid var(--gold);
+    position:relative;z-index:2;
+  }
+  .tl-year{
+    font-family:'Cormorant Garamond',serif;font-size:42px;
+    color:var(--gold);font-weight:600;line-height:1;margin-bottom:8px;
+  }
+  .tl-content h4{font-size:20px;margin-bottom:8px;color:var(--cream)}
+  .tl-content p{color:var(--muted);font-size:14px}
+
+  /* Team */
+  .team{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%)}
+  .team-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+    max-width:1300px;margin:0 auto;
+  }
+  .team-card{
+    text-align:center;transition:transform .4s;
+  }
+  .team-card:hover{transform:translateY(-8px)}
+  .team-photo{
+    aspect-ratio:3/4;margin-bottom:20px;position:relative;overflow:hidden;
+    border:1px solid rgba(201,169,97,.2);
+  }
+  .team-photo .avatar{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-size:120px;
+    color:rgba(201,169,97,.3);font-weight:600;
+  }
+  .tp-1{background:linear-gradient(135deg,#2a3a4a 0%,#0a1520 100%)}
+  .tp-2{background:linear-gradient(135deg,#3a2a2a 0%,#1a0a0a 100%)}
+  .tp-3{background:linear-gradient(135deg,#2a3a2a 0%,#0a1a0a 100%)}
+  .tp-4{background:linear-gradient(135deg,#3a3a2a 0%,#1a1a0a 100%)}
+  .team-card h4{font-size:22px;margin-bottom:6px;color:var(--cream)}
+  .team-card .role{
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:12px;
+  }
+  .team-card p{color:var(--muted);font-size:13px;padding:0 10px}
+
+  /* Values */
+  .values{background:var(--ink)}
+  .values-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:30px;
+    max-width:1200px;margin:0 auto;
+  }
+  .value-item{
+    padding:50px;border:1px solid rgba(201,169,97,.2);
+    display:flex;gap:30px;align-items:flex-start;
+    transition:all .4s;background:rgba(255,255,255,.01);
+  }
+  .value-item:hover{border-color:var(--gold);background:rgba(201,169,97,.03)}
+  .value-item .v-icon{
+    flex-shrink:0;width:60px;height:60px;
+    border:1px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+  }
+  .value-item h4{font-size:24px;margin-bottom:10px;color:var(--cream)}
+  .value-item p{color:var(--muted);font-size:14px}
+
   /* Reveal animation */
   .reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(.2,.8,.2,1)}
   .reveal.in{opacity:1;transform:none}
@@ -407,391 +550,607 @@
     .award-item{border-right:none}
     .foot-grid{grid-template-columns:1fr 1fr;gap:40px}
     .foot-bottom{flex-direction:column;gap:12px;text-align:center}
+    .story-grid{grid-template-columns:1fr;gap:40px}
+    .phil-grid{grid-template-columns:1fr}
+    .team-grid{grid-template-columns:repeat(2,1fr)}
+    .values-grid{grid-template-columns:1fr}
+    .value-item{flex-direction:column;text-align:center;align-items:center}
+    .timeline-wrap::before{left:20px}
+    .tl-item{grid-template-columns:40px 1fr;gap:0}
+    .tl-item .tl-content,.tl-item:nth-child(even) .tl-content,.tl-item:nth-child(odd) .tl-content{
+      grid-column:2;text-align:left;padding:0 0 0 20px;
+    }
+    .tl-item .tl-dot{grid-column:1}
+    .tl-item .tl-spacer{display:none}
   }
 </style>
 </head>
 <body>
 
-<!-- Top Bar -->
-<div class="topbar">
-  <div class="award-pill">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg>
-    Winner — World Luxury Travel Awards 2026
+<!-- =================== MAIN PAGE =================== -->
+<div class="page" id="page-home">
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="award-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg>
+      Winner — World Luxury Travel Awards 2026
+    </div>
+    <div>Concierge: +44 20 7946 0958</div>
   </div>
-  <div>Concierge: +44 20 7946 0958</div>
+
+  <!-- Navigation -->
+  <nav class="main">
+    <div class="logo" onclick="goHome()">AUREL<span>I</span>A</div>
+    <ul class="nav-links">
+      <li><a href="#tours">Journeys</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a onclick="openAbout()">About Us</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta">Plan Journey</button>
+    <div class="burger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-decor">
+      <svg class="sun" viewBox="0 0 200 200" fill="none" stroke="#c9a961" stroke-width=".5">
+        <circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="60"/>
+        <circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="95"/>
+        <g stroke-width=".8">
+          <line x1="100" y1="5" x2="100" y2="25"/><line x1="100" y1="175" x2="100" y2="195"/>
+          <line x1="5" y1="100" x2="25" y2="100"/><line x1="175" y1="100" x2="195" y2="100"/>
+          <line x1="30" y1="30" x2="45" y2="45"/><line x1="155" y1="155" x2="170" y2="170"/>
+          <line x1="170" y1="30" x2="155" y2="45"/><line x1="45" y1="155" x2="30" y2="170"/>
+        </g>
+      </svg>
+      <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="#c9a961" opacity=".15"/>
+        <path d="M0,80 C240,40 480,100 720,80 C960,40 1200,100 1440,80 L1440,120 L0,120 Z" fill="#c9a961" opacity=".1"/>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Bespoke Luxury Travel Since 1987</div>
+      <h1>Voyages Beyond <em>Ordinary</em></h1>
+      <p>Curated journeys to the world's most extraordinary destinations. Private villas, yacht charters, and experiences reserved for the discerning few.</p>
+      <div class="hero-btns">
+        <button class="btn-primary">Explore Journeys</button>
+        <button class="btn-ghost" onclick="openAbout()">Our Story</button>
+      </div>
+    </div>
+    <div class="scroll-ind"><span>Scroll</span><div class="line"></div></div>
+  </section>
+
+  <!-- Awards Banner -->
+  <div class="awards-banner" id="awards">
+    <div class="awards-grid">
+      <div class="award-item">
+        <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
+          <circle cx="30" cy="24" r="14"/><path d="M22 36l-4 18 12-6 12 6-4-18"/><circle cx="30" cy="24" r="8"/>
+        </svg>
+        <div class="num">38</div><div class="lbl">Years of Excellence</div>
+      </div>
+      <div class="award-item">
+        <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
+          <path d="M30 8l6 14 15 2-11 10 3 15-13-7-13 7 3-15-11-10 15-2z"/>
+        </svg>
+        <div class="num">127</div><div class="lbl">Countries Served</div>
+      </div>
+      <div class="award-item">
+        <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
+          <path d="M15 45V20l15-10 15 10v25"/><path d="M15 45h30"/><path d="M22 45V30h16v15"/>
+        </svg>
+        <div class="num">2,400+</div><div class="lbl">Private Villas</div>
+      </div>
+      <div class="award-item">
+        <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
+          <circle cx="30" cy="30" r="22"/><path d="M30 14v16l10 6"/><circle cx="30" cy="30" r="2"/>
+        </svg>
+        <div class="num">24/7</div><div class="lbl">Concierge Service</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tours -->
+  <section class="tours" id="tours">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Signature Journeys</div>
+      <h2>Curated <em>Expeditions</em></h2>
+      <p>Each voyage is a masterwork — designed by our travel architects, delivered with flawless precision.</p>
+    </div>
+    <div class="tours-grid">
+      <div class="tour-card reveal">
+        <div class="tour-visual v-maldives"></div><div class="tour-overlay"></div>
+        <div class="tour-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+        <div class="tour-content">
+          <span class="tour-tag">Overwater Villa</span><h3>Maldives Atoll</h3>
+          <div class="tour-meta"><span>7 Nights · All Inclusive</span><span class="price">From $12,400</span></div>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <div class="tour-visual v-santorini"></div><div class="tour-overlay"></div>
+        <div class="tour-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+        <div class="tour-content">
+          <span class="tour-tag">Aegean Escape</span><h3>Santorini & Mykonos</h3>
+          <div class="tour-meta"><span>9 Nights · Private Yacht</span><span class="price">From $18,900</span></div>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <div class="tour-visual v-bali"></div><div class="tour-overlay"></div>
+        <div class="tour-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+        <div class="tour-content">
+          <span class="tour-tag">Spiritual Retreat</span><h3>Bali Sacred Journey</h3>
+          <div class="tour-meta"><span>10 Nights · Wellness</span><span class="price">From $9,800</span></div>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <div class="tour-visual v-alps"></div><div class="tour-overlay"></div>
+        <div class="tour-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+        <div class="tour-content">
+          <span class="tour-tag">Alpine Retreat</span><h3>Swiss Chalet Season</h3>
+          <div class="tour-meta"><span>6 Nights · Private Chef</span><span class="price">From $15,200</span></div>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <div class="tour-visual v-safari"></div><div class="tour-overlay"></div>
+        <div class="tour-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+        <div class="tour-content">
+          <span class="tour-tag">Safari & Glamping</span><h3>Serengeti Expedition</h3>
+          <div class="tour-meta"><span>8 Nights · Private Guide</span><span class="price">From $22,500</span></div>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <div class="tour-visual v-paris"></div><div class="tour-overlay"></div>
+        <div class="tour-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+        <div class="tour-content">
+          <span class="tour-tag">Cultural Immersion</span><h3>Parisian Romance</h3>
+          <div class="tour-meta"><span>5 Nights · Suite at Ritz</span><span class="price">From $11,600</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinations -->
+  <section class="destinations" id="destinations">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The Collection</div>
+      <h2>World <em>Destinations</em></h2>
+      <p>From hidden archipelagos to storied capitals — discover places reserved for those who seek the exceptional.</p>
+    </div>
+    <div class="dest-grid">
+      <div class="dest-item reveal">
+        <div class="dest-visual v-yacht"></div>
+        <div class="dest-info"><div class="country">Mediterranean</div><h3>French Riviera</h3><div class="count">24 Private Experiences</div></div>
+      </div>
+      <div class="dest-item reveal">
+        <div class="dest-visual v-maldives"></div>
+        <div class="dest-info"><div class="country">Indian Ocean</div><h3>Maldives</h3><div class="count">18 Overwater Villas</div></div>
+      </div>
+      <div class="dest-item reveal">
+        <div class="dest-visual v-santorini"></div>
+        <div class="dest-info"><div class="country">Greece</div><h3>Cyclades</h3><div class="count">12 Island Escapes</div></div>
+      </div>
+      <div class="dest-item reveal">
+        <div class="dest-visual v-safari"></div>
+        <div class="dest-info"><div class="country">Tanzania</div><h3>Serengeti</h3><div class="count">9 Safari Camps</div></div>
+      </div>
+      <div class="dest-item reveal">
+        <div class="dest-visual v-bali"></div>
+        <div class="dest-info"><div class="country">Indonesia</div><h3>Bali & Komodo</h3><div class="count">15 Retreats</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="experience" id="experience">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The Aurelia Difference</div>
+      <h2>An Experience <em>Unrivalled</em></h2>
+      <p>Four pillars that define every journey we craft.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+        <h4>Bespoke Design</h4>
+        <p>Every itinerary is crafted from scratch, tailored to your passions, pace, and privacy.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg></div>
+        <h4>Global Access</h4>
+        <p>Private islands, sold-out events, and doors closed to others — opened for you.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+        <h4>Discretion</h4>
+        <p>Absolute privacy. Non-disclosure is standard. Your journey remains yours alone.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 7h-3V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM9 5h6v2H9z"/></svg></div>
+        <h4>White-Glove Service</h4>
+        <p>A dedicated concierge, available around the clock, from first thought to final farewell.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="test-wrap reveal">
+      <div class="section-eyebrow">Guest Voices</div>
+      <div class="test-quote" id="testQuote">
+        "Aurelia did not simply plan our honeymoon — they authored a chapter of our lives we will retell for decades. Every detail, from the private sunset dhow to the chef who remembered my grandmother's recipe, was nothing short of magic."
+      </div>
+      <div class="test-author">
+        <div class="name" id="testName">Lady Victoria Ashford</div>
+        <div class="role" id="testRole">London · Maldives, 2025</div>
+      </div>
+      <div class="test-dots">
+        <span class="active" data-i="0"></span><span data-i="1"></span><span data-i="2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="reveal">
+      <div class="section-eyebrow">Begin Your Story</div>
+      <h2>Your Next <em>Chapter</em> Awaits</h2>
+      <p>Receive our seasonal journal — a private dispatch of new journeys, rare openings, and quiet corners of the world.</p>
+      <form class="newsletter" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed ✓';this.querySelector('input').value=''">
+        <input type="email" placeholder="Your private email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-col foot-brand">
+        <div class="logo">AUREL<span>I</span>A</div>
+        <p>Members of Virtuoso, IGLTA, and The Leading Hotels of the World. Licensed luxury tour operator since 1987.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 20l4-12M12 8c3 0 5 1.5 5 4s-2 4-4 4-3-1-3-3"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Journeys</h5>
+        <ul>
+          <li><a href="#">Honeymoons</a></li><li><a href="#">Family Voyages</a></li>
+          <li><a href="#">Yacht Charters</a></li><li><a href="#">Safari Expeditions</a></li>
+          <li><a href="#">Cultural Immersion</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a onclick="openAbout()" style="cursor:pointer">Our Story</a></li>
+          <li><a href="#">Concierge Team</a></li><li><a href="#">Press & Awards</a></li>
+          <li><a href="#">Careers</a></li><li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">17 Mount Street, London</a></li><li><a href="#">+44 20 7946 0958</a></li>
+          <li><a href="#">concierge@aurelia.com</a></li><li><a href="#">By Appointment Only</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Aurelia Travel Ltd. All rights reserved.</div>
+      <div>Privacy · Terms · Cookies · ABTA Y6742 · ATOL 12834</div>
+    </div>
+  </footer>
 </div>
 
-<!-- Navigation -->
-<nav class="main">
-  <div class="logo">AUREL<span>I</span>A</div>
-  <ul class="nav-links">
-    <li><a href="#tours">Journeys</a></li>
-    <li><a href="#destinations">Destinations</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#awards">Awards</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="nav-cta">Plan Journey</button>
-  <div class="burger"><span></span><span></span><span></span></div>
-</nav>
+<!-- =================== ABOUT PAGE =================== -->
+<div class="page" id="page-about">
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-decor">
-    <svg class="sun" viewBox="0 0 200 200" fill="none" stroke="#c9a961" stroke-width=".5">
-      <circle cx="100" cy="100" r="40"/>
-      <circle cx="100" cy="100" r="60"/>
-      <circle cx="100" cy="100" r="80"/>
-      <circle cx="100" cy="100" r="95"/>
-      <g stroke-width=".8">
-        <line x1="100" y1="5" x2="100" y2="25"/>
-        <line x1="100" y1="175" x2="100" y2="195"/>
-        <line x1="5" y1="100" x2="25" y2="100"/>
-        <line x1="175" y1="100" x2="195" y2="100"/>
-        <line x1="30" y1="30" x2="45" y2="45"/>
-        <line x1="155" y1="155" x2="170" y2="170"/>
-        <line x1="170" y1="30" x2="155" y2="45"/>
-        <line x1="45" y1="155" x2="30" y2="170"/>
-      </g>
-    </svg>
-    <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none">
-      <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="#c9a961" opacity=".15"/>
-      <path d="M0,80 C240,40 480,100 720,80 C960,40 1200,100 1440,80 L1440,120 L0,120 Z" fill="#c9a961" opacity=".1"/>
-    </svg>
-  </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Bespoke Luxury Travel Since 1987</div>
-    <h1>Voyages Beyond <em>Ordinary</em></h1>
-    <p>Curated journeys to the world's most extraordinary destinations. Private villas, yacht charters, and experiences reserved for the discerning few.</p>
-    <div class="hero-btns">
-      <button class="btn-primary">Explore Journeys</button>
-      <button class="btn-ghost">Meet Our Concierges</button>
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="award-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg>
+      Winner — World Luxury Travel Awards 2026
     </div>
+    <div>Concierge: +44 20 7946 0958</div>
   </div>
-  <div class="scroll-ind">
-    <span>Scroll</span>
-    <div class="line"></div>
-  </div>
-</section>
 
-<!-- Awards Banner -->
-<div class="awards-banner" id="awards">
-  <div class="awards-grid">
-    <div class="award-item">
-      <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
-        <circle cx="30" cy="24" r="14"/><path d="M22 36l-4 18 12-6 12 6-4-18"/><circle cx="30" cy="24" r="8"/>
+  <!-- Navigation -->
+  <nav class="main">
+    <div class="logo" onclick="goHome()">AUREL<span>I</span>A</div>
+    <ul class="nav-links">
+      <li><a onclick="goHome()">Home</a></li>
+      <li><a onclick="goHome();setTimeout(()=>document.getElementById('tours')?.scrollIntoView({behavior:'smooth'}),100)">Journeys</a></li>
+      <li><a class="active-link" style="color:var(--gold)">About Us</a></li>
+      <li><a onclick="goHome();setTimeout(()=>document.getElementById('experience')?.scrollIntoView({behavior:'smooth'}),100)">Experience</a></li>
+      <li><a onclick="goHome();setTimeout(()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}),100)">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="goHome()">Plan Journey</button>
+    <div class="burger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="hero-decor">
+      <svg class="sun" viewBox="0 0 200 200" fill="none" stroke="#c9a961" stroke-width=".5">
+        <circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="60"/>
+        <circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="95"/>
       </svg>
-      <div class="num">38</div>
-      <div class="lbl">Years of Excellence</div>
     </div>
-    <div class="award-item">
-      <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
-        <path d="M30 8l6 14 15 2-11 10 3 15-13-7-13 7 3-15-11-10 15-2z"/>
-      </svg>
-      <div class="num">127</div>
-      <div class="lbl">Countries Served</div>
+    <div class="about-hero-content">
+      <div class="hero-eyebrow">Our Story · Est. 1987</div>
+      <h1>The Art of <em>Travel,</em> Perfected</h1>
+      <p>For nearly four decades, Aurelia has redefined what it means to journey — not as tourists, but as guests of the world's most extraordinary places and people.</p>
     </div>
-    <div class="award-item">
-      <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
-        <path d="M15 45V20l15-10 15 10v25"/><path d="M15 45h30"/><path d="M22 45V30h16v15"/>
-      </svg>
-      <div class="num">2,400+</div>
-      <div class="lbl">Private Villas</div>
+  </section>
+
+  <!-- Story -->
+  <section class="story">
+    <div class="story-grid">
+      <div class="story-visual reveal"></div>
+      <div class="story-text reveal">
+        <div class="section-eyebrow">Our Beginning</div>
+        <h2>A Legacy Born of <em>Wanderlust</em></h2>
+        <p>In the spring of 1987, in a small Mayfair townhouse, Eleanor Aurelia Whitmore opened the doors to what would become one of the world's most revered travel houses. A former diplomat's daughter with a passport worn soft from use, she believed travel should be more than movement — it should be metamorphosis.</p>
+        <p>What began as a private consultancy for friends and family soon attracted a clientele who sought something the guidebooks could not offer: access, intuition, and an almost ancestral knowledge of the world's hidden corners.</p>
+        <p>Today, under the stewardship of her granddaughter, Isolde, Aurelia remains a family affair — still operating from the same Mayfair address, still answering every call personally, still believing that the finest journeys are those that change you.</p>
+        <div class="signature">— The Aurelia Family</div>
+      </div>
     </div>
-    <div class="award-item">
-      <svg viewBox="0 0 60 60" fill="none" stroke="#c9a961" stroke-width="1">
-        <circle cx="30" cy="30" r="22"/><path d="M30 14v16l10 6"/><circle cx="30" cy="30" r="2"/>
-      </svg>
-      <div class="num">24/7</div>
-      <div class="lbl">Concierge Service</div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Our Philosophy</div>
+      <h2>Three <em>Tenets</em></h2>
+      <p>The principles upon which every Aurelia journey is built.</p>
     </div>
-  </div>
+    <div class="phil-grid">
+      <div class="phil-card reveal">
+        <div class="num">I</div>
+        <h4>Depth Over Distance</h4>
+        <p>We do not collect countries. We cultivate understanding. A single week in Kyoto, properly guided, is worth a lifetime of passing through.</p>
+      </div>
+      <div class="phil-card reveal">
+        <div class="num">II</div>
+        <h4>People Over Places</h4>
+        <p>The soul of any destination is its people. We connect our guests with artisans, historians, chefs, and storytellers — not attractions.</p>
+      </div>
+      <div class="phil-card reveal">
+        <div class="num">III</div>
+        <h4>Legacy Over Luxury</h4>
+        <p>True luxury is not what you consume — it is what you leave behind. We partner only with those who protect the places they share.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="timeline">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Our Journey</div>
+      <h2>Milestones of <em>Distinction</em></h2>
+    </div>
+    <div class="timeline-wrap">
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">1987</div>
+          <h4>The Founding</h4>
+          <p>Eleanor Aurelia Whitmore establishes the company at 17 Mount Street, London, with a staff of three.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-spacer"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">1995</div>
+          <h4>First Royal Warrant</h4>
+          <p>Aurelia is appointed travel consultant to a European royal household — a relationship that continues today.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2004</div>
+          <h4>The Yacht Division</h4>
+          <p>Launch of Aurelia Marine, offering private yacht charters across the Mediterranean and Caribbean.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-spacer"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">2015</div>
+          <h4>Second Generation</h4>
+          <p>Isolde Whitmore assumes leadership, expanding into Asia and introducing the sustainability charter.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2026</div>
+          <h4>World Luxury Awards</h4>
+          <p>Named World's Leading Luxury Tour Operator at the prestigious World Luxury Travel Awards.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="team">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The Curators</div>
+      <h2>Our <em>Concierge</em> Team</h2>
+      <p>Each member of our team has lived, studied, or worked in the regions they design — because you cannot curate what you have not felt.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-photo tp-1"><div class="avatar">I</div></div>
+        <h4>Isolde Whitmore</h4>
+        <div class="role">Founder & Director</div>
+        <p>Granddaughter of Eleanor. Former Sotheby's specialist. Speaks five languages.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo tp-2"><div class="avatar">M</div></div>
+        <h4>Marco Bellini</h4>
+        <div class="role">Head of Europe</div>
+        <p>Born in Florence. Former Ritz Paris concierge. Specialist in private access.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo tp-3"><div class="avatar">A</div></div>
+        <h4>Amara Okafor</h4>
+        <div class="role">Africa & Indian Ocean</div>
+        <p>Tanzanian-born conservationist. Designs every safari personally.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo tp-4"><div class="avatar">K</div></div>
+        <h4>Kenji Tanaka</h4>
+        <div class="role">Asia & Pacific</div>
+        <p>Tokyo native. Former Aman Resorts director. Specialist in cultural immersion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="values">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Our Commitments</div>
+      <h2>What We <em>Stand For</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-item reveal">
+        <div class="v-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div><h4>Sustainability First</h4><p>Every journey must leave a place better than we found it. We donate 2% of revenue to conservation.</p></div>
+      </div>
+      <div class="value-item reveal">
+        <div class="v-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div><h4>Community Partnership</h4><p>We work only with locally-owned properties and employ local guides — never imported ones.</p></div>
+      </div>
+      <div class="value-item reveal">
+        <div class="v-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><h4>Time Honoured</h4><p>We take no more than 200 clients per year. Quality cannot be scaled — only cultivated.</p></div>
+      </div>
+      <div class="value-item reveal">
+        <div class="v-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+        <div><h4>Award-Winning</h4><p>Recognised by Condé Nast, Travel + Leisure, and the World Luxury Awards — consecutively since 2012.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="reveal">
+      <div class="section-eyebrow">Begin With Us</div>
+      <h2>Let Us Craft Your <em>Story</em></h2>
+      <p>A conversation costs nothing. A journey with Aurelia may change everything.</p>
+      <div class="hero-btns" style="margin-top:30px">
+        <button class="btn-primary" onclick="goHome()">Explore Journeys</button>
+        <button class="btn-ghost">Book Consultation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-col foot-brand">
+        <div class="logo">AUREL<span>I</span>A</div>
+        <p>Members of Virtuoso, IGLTA, and The Leading Hotels of the World. Licensed luxury tour operator since 1987.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 20l4-12M12 8c3 0 5 1.5 5 4s-2 4-4 4-3-1-3-3"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Journeys</h5>
+        <ul>
+          <li><a href="#">Honeymoons</a></li><li><a href="#">Family Voyages</a></li>
+          <li><a href="#">Yacht Charters</a></li><li><a href="#">Safari Expeditions</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a onclick="goHome()" style="cursor:pointer">Home</a></li>
+          <li><a style="color:var(--gold)">Our Story</a></li>
+          <li><a href="#">Press & Awards</a></li><li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">17 Mount Street, London</a></li><li><a href="#">+44 20 7946 0958</a></li>
+          <li><a href="#">concierge@aurelia.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Aurelia Travel Ltd. All rights reserved.</div>
+      <div>Privacy · Terms · Cookies · ABTA Y6742 · ATOL 12834</div>
+    </div>
+  </footer>
 </div>
-
-<!-- Tours -->
-<section class="tours" id="tours">
-  <div class="section-head reveal">
-    <div class="section-eyebrow">Signature Journeys</div>
-    <h2>Curated <em>Expeditions</em></h2>
-    <p>Each voyage is a masterwork — designed by our travel architects, delivered with flawless precision.</p>
-  </div>
-  <div class="tours-grid">
-    <div class="tour-card reveal">
-      <div class="tour-visual v-maldives"></div>
-      <div class="tour-overlay"></div>
-      <div class="tour-arrow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-      </div>
-      <div class="tour-content">
-        <span class="tour-tag">Overwater Villa</span>
-        <h3>Maldives Atoll</h3>
-        <div class="tour-meta">
-          <span>7 Nights · All Inclusive</span>
-          <span class="price">From $12,400</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tour-card reveal">
-      <div class="tour-visual v-santorini"></div>
-      <div class="tour-overlay"></div>
-      <div class="tour-arrow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-      </div>
-      <div class="tour-content">
-        <span class="tour-tag">Aegean Escape</span>
-        <h3>Santorini & Mykonos</h3>
-        <div class="tour-meta">
-          <span>9 Nights · Private Yacht</span>
-          <span class="price">From $18,900</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tour-card reveal">
-      <div class="tour-visual v-bali"></div>
-      <div class="tour-overlay"></div>
-      <div class="tour-arrow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-      </div>
-      <div class="tour-content">
-        <span class="tour-tag">Spiritual Retreat</span>
-        <h3>Bali Sacred Journey</h3>
-        <div class="tour-meta">
-          <span>10 Nights · Wellness</span>
-          <span class="price">From $9,800</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tour-card reveal">
-      <div class="tour-visual v-alps"></div>
-      <div class="tour-overlay"></div>
-      <div class="tour-arrow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-      </div>
-      <div class="tour-content">
-        <span class="tour-tag">Alpine Retreat</span>
-        <h3>Swiss Chalet Season</h3>
-        <div class="tour-meta">
-          <span>6 Nights · Private Chef</span>
-          <span class="price">From $15,200</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tour-card reveal">
-      <div class="tour-visual v-safari"></div>
-      <div class="tour-overlay"></div>
-      <div class="tour-arrow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-      </div>
-      <div class="tour-content">
-        <span class="tour-tag">Safari & Glamping</span>
-        <h3>Serengeti Expedition</h3>
-        <div class="tour-meta">
-          <span>8 Nights · Private Guide</span>
-          <span class="price">From $22,500</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tour-card reveal">
-      <div class="tour-visual v-paris"></div>
-      <div class="tour-overlay"></div>
-      <div class="tour-arrow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-      </div>
-      <div class="tour-content">
-        <span class="tour-tag">Cultural Immersion</span>
-        <h3>Parisian Romance</h3>
-        <div class="tour-meta">
-          <span>5 Nights · Suite at Ritz</span>
-          <span class="price">From $11,600</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Destinations -->
-<section class="destinations" id="destinations">
-  <div class="section-head reveal">
-    <div class="section-eyebrow">The Collection</div>
-    <h2>World <em>Destinations</em></h2>
-    <p>From hidden archipelagos to storied capitals — discover places reserved for those who seek the exceptional.</p>
-  </div>
-  <div class="dest-grid">
-    <div class="dest-item reveal">
-      <div class="dest-visual v-yacht"></div>
-      <div class="dest-info">
-        <div class="country">Mediterranean</div>
-        <h3>French Riviera</h3>
-        <div class="count">24 Private Experiences</div>
-      </div>
-    </div>
-    <div class="dest-item reveal">
-      <div class="dest-visual v-maldives"></div>
-      <div class="dest-info">
-        <div class="country">Indian Ocean</div>
-        <h3>Maldives</h3>
-        <div class="count">18 Overwater Villas</div>
-      </div>
-    </div>
-    <div class="dest-item reveal">
-      <div class="dest-visual v-santorini"></div>
-      <div class="dest-info">
-        <div class="country">Greece</div>
-        <h3>Cyclades</h3>
-        <div class="count">12 Island Escapes</div>
-      </div>
-    </div>
-    <div class="dest-item reveal">
-      <div class="dest-visual v-safari"></div>
-      <div class="dest-info">
-        <div class="country">Tanzania</div>
-        <h3>Serengeti</h3>
-        <div class="count">9 Safari Camps</div>
-      </div>
-    </div>
-    <div class="dest-item reveal">
-      <div class="dest-visual v-bali"></div>
-      <div class="dest-info">
-        <div class="country">Indonesia</div>
-        <h3>Bali & Komodo</h3>
-        <div class="count">15 Retreats</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Experience -->
-<section class="experience" id="experience">
-  <div class="section-head reveal">
-    <div class="section-eyebrow">The Aurelia Difference</div>
-    <h2>An Experience <em>Unrivalled</em></h2>
-    <p>Four pillars that define every journey we craft.</p>
-  </div>
-  <div class="exp-grid">
-    <div class="exp-card reveal">
-      <div class="icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
-      </div>
-      <h4>Bespoke Design</h4>
-      <p>Every itinerary is crafted from scratch, tailored to your passions, pace, and privacy.</p>
-    </div>
-    <div class="exp-card reveal">
-      <div class="icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
-      </div>
-      <h4>Global Access</h4>
-      <p>Private islands, sold-out events, and doors closed to others — opened for you.</p>
-    </div>
-    <div class="exp-card reveal">
-      <div class="icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-      </div>
-      <h4>Discretion</h4>
-      <p>Absolute privacy. Non-disclosure is standard. Your journey remains yours alone.</p>
-    </div>
-    <div class="exp-card reveal">
-      <div class="icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 7h-3V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM9 5h6v2H9z"/></svg>
-      </div>
-      <h4>White-Glove Service</h4>
-      <p>A dedicated concierge, available around the clock, from first thought to final farewell.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Testimonials -->
-<section class="testimonials">
-  <div class="test-wrap reveal">
-    <div class="section-eyebrow">Guest Voices</div>
-    <div class="test-quote" id="testQuote">
-      "Aurelia did not simply plan our honeymoon — they authored a chapter of our lives we will retell for decades. Every detail, from the private sunset dhow to the chef who remembered my grandmother's recipe, was nothing short of magic."
-    </div>
-    <div class="test-author">
-      <div class="name" id="testName">Lady Victoria Ashford</div>
-      <div class="role" id="testRole">London · Maldives, 2025</div>
-    </div>
-    <div class="test-dots">
-      <span class="active" data-i="0"></span>
-      <span data-i="1"></span>
-      <span data-i="2"></span>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="reveal">
-    <div class="section-eyebrow">Begin Your Story</div>
-    <h2>Your Next <em>Chapter</em> Awaits</h2>
-    <p>Receive our seasonal journal — a private dispatch of new journeys, rare openings, and quiet corners of the world.</p>
-    <form class="newsletter" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed ✓';this.querySelector('input').value=''">
-      <input type="email" placeholder="Your private email" required>
-      <button type="submit">Subscribe</button>
-    </form>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="foot-grid">
-    <div class="foot-col foot-brand">
-      <div class="logo">AUREL<span>I</span>A</div>
-      <p>Members of Virtuoso, IGLTA, and The Leading Hotels of the World. Licensed luxury tour operator since 1987.</p>
-      <div class="socials">
-        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        <a href="#" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 20l4-12M12 8c3 0 5 1.5 5 4s-2 4-4 4-3-1-3-3"/></svg></a>
-      </div>
-    </div>
-    <div class="foot-col">
-      <h5>Journeys</h5>
-      <ul>
-        <li><a href="#">Honeymoons</a></li>
-        <li><a href="#">Family Voyages</a></li>
-        <li><a href="#">Yacht Charters</a></li>
-        <li><a href="#">Safari Expeditions</a></li>
-        <li><a href="#">Cultural Immersion</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h5>Company</h5>
-      <ul>
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Concierge Team</a></li>
-        <li><a href="#">Press & Awards</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Sustainability</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h5>Contact</h5>
-      <ul>
-        <li><a href="#">17 Mount Street, London</a></li>
-        <li><a href="#">+44 20 7946 0958</a></li>
-        <li><a href="#">concierge@aurelia.com</a></li>
-        <li><a href="#">By Appointment Only</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <div>© 2026 Aurelia Travel Ltd. All rights reserved.</div>
-    <div>Privacy · Terms · Cookies · ABTA Y6742 · ATOL 12834</div>
-  </div>
-</footer>
 
 <script>
-  // Reveal on scroll
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // ===== Page routing =====
+  const homePage = document.getElementById('page-home');
+  const aboutPage = document.getElementById('page-about');
 
-  // Testimonials
+  function showPage(which){
+    homePage.classList.toggle('active', which==='home');
+    aboutPage.classList.toggle('active', which==='about');
+    window.scrollTo({top:0, behavior:'instant'});
+    // Re-run reveal observer for newly visible elements
+    setTimeout(initReveal, 50);
+  }
+
+  function openAbout(){
+    // Open About page in a NEW TAB with hash
+    const url = window.location.pathname + '#about';
+    window.open(url, '_blank');
+  }
+
+  function goHome(){
+    // If on about page opened in new tab, navigate to home
+    if(window.location.hash === '#about'){
+      window.location.href = window.location.pathname;
+    } else {
+      showPage('home');
+      window.location.hash = '';
+    }
+  }
+
+  // On load: detect hash
+  function initFromHash(){
+    if(window.location.hash === '#about'){
+      showPage('about');
+    } else {
+      showPage('home');
+    }
+  }
+
+  // ===== Reveal on scroll =====
+  let io;
+  function initReveal(){
+    if(io) io.disconnect();
+    io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.12});
+    document.querySelectorAll('.page.active .reveal').forEach(el=>io.observe(el));
+  }
+
+  // ===== Testimonials =====
   const tests = [
     {q:'"Aurelia did not simply plan our honeymoon — they authored a chapter of our lives we will retell for decades. Every detail, from the private sunset dhow to the chef who remembered my grandmother\'s recipe, was nothing short of magic."',n:'Lady Victoria Ashford',r:'London · Maldives, 2025'},
     {q:'"I have travelled with the finest agencies in Europe for thirty years. Aurelia is in a category of its own. The Serengeti camp they arranged had a level of intimacy and wildness I did not know was still possible in this century."',n:'Mr. Alessandro Moretti',r:'Milan · Tanzania, 2024'},
@@ -811,17 +1170,23 @@
     },300);
     dots.forEach(d=>d.classList.toggle('active', +d.dataset.i===i));
   }
-  q.style.transition='opacity .4s';
-  dots.forEach(d=>d.addEventListener('click',()=>setTest(+d.dataset.i)));
-  setInterval(()=>setTest((cur+1)%tests.length), 7000);
+  if(q){
+    q.style.transition='opacity .4s';
+    dots.forEach(d=>d.addEventListener('click',()=>setTest(+d.dataset.i)));
+    setInterval(()=>setTest((cur+1)%tests.length), 7000);
+  }
 
-  // Smooth nav
+  // ===== Smooth nav =====
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',e=>{
       const t = document.querySelector(a.getAttribute('href'));
       if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
     });
   });
+
+  // ===== Init =====
+  initFromHash();
+  window.addEventListener('hashchange', initFromHash);
 </script>
 </body>
 </html>
