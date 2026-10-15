@@ -3,956 +3,602 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ironclad Construction — Building Tomorrow, Today</title>
-<link href="https://cdn.jsdelivr.net/fontsource/fonts/oswald@latest/latin-400-normal.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/fontsource/fonts/oswald@latest/latin-600-normal.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/fontsource/fonts/oswald@latest/latin-700-normal.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-400-normal.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-500-normal.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-600-normal.css" rel="stylesheet">
+<title>PitPat GPS — The Smartest GPS Tracker for Your Dog</title>
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-600-normal.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-700-normal.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-800-normal.css" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
-    --steel:#0f1e2e;
-    --steel-dark:#081421;
-    --concrete:#2c3e50;
-    --cement:#8b95a1;
-    --sand:#e8e6e1;
-    --cream:#f7f5f0;
+    --primary:#0066ff;
+    --primary-dark:#0052cc;
+    --primary-light:#e6f0ff;
+    --accent:#ff6b35;
+    --accent-dark:#e85a28;
+    --dark:#0a1628;
+    --dark-2:#1a2942;
+    --gray:#64748b;
+    --gray-light:#94a3b8;
+    --bg:#fafbfd;
     --white:#ffffff;
-    --safety:#ffb800;
-    --safety-dark:#e6a500;
-    --rust:#c2410c;
-    --ink:#1a1a1a;
+    --border:#e2e8f0;
+    --success:#10b981;
   }
   html{scroll-behavior:smooth}
   body{
-    font-family:'Inter',sans-serif;
-    background:var(--cream);
-    color:var(--ink);
+    font-family:'Poppins',sans-serif;
+    background:var(--bg);
+    color:var(--dark);
     overflow-x:hidden;
     line-height:1.6;
   }
-  h1,h2,h3,h4{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.1;text-transform:uppercase;letter-spacing:.5px}
-
-  /* TOP BAR */
-  .topbar{
-    background:var(--steel-dark);
-    color:rgba(255,255,255,.7);
-    padding:10px 6%;
-    font-size:.8rem;
-    display:flex;justify-content:space-between;align-items:center;
-    border-bottom:1px solid rgba(255,184,0,.2);
-  }
-  .topbar-info{display:flex;gap:24px;flex-wrap:wrap}
-  .topbar-info span{display:flex;align-items:center;gap:6px}
-  .topbar-social{display:flex;gap:12px}
-  .topbar-social a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .3s}
-  .topbar-social a:hover{color:var(--safety)}
+  h1,h2,h3,h4{font-weight:700;line-height:1.15}
 
   /* NAV */
   nav{
-    position:sticky;top:0;z-index:1000;
-    background:var(--white);
+    position:fixed;top:0;left:0;right:0;z-index:1000;
     padding:18px 6%;
     display:flex;justify-content:space-between;align-items:center;
-    box-shadow:0 2px 20px rgba(0,0,0,.06);
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid transparent;
     transition:all .3s;
   }
-  nav.scrolled{padding:12px 6%;box-shadow:0 4px 30px rgba(0,0,0,.1)}
+  nav.scrolled{
+    border-bottom-color:var(--border);
+    box-shadow:0 4px 20px rgba(0,0,0,.04);
+    padding:14px 6%;
+  }
   .logo{
-    display:flex;align-items:center;gap:12px;
-    font-family:'Oswald',sans-serif;
-    font-size:1.6rem;font-weight:700;
-    color:var(--steel);
-    text-transform:uppercase;
-    letter-spacing:1px;
+    display:flex;align-items:center;gap:10px;
+    font-weight:800;font-size:1.4rem;
+    color:var(--dark);
   }
   .logo-mark{
-    width:48px;height:48px;
-    background:var(--safety);
+    width:38px;height:38px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    border-radius:12px;
     display:flex;align-items:center;justify-content:center;
-    position:relative;
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
+    color:#fff;font-size:1.1rem;
+    box-shadow:0 4px 14px rgba(0,102,255,.3);
   }
-  .logo-mark::before{
-    content:'';position:absolute;
-    width:24px;height:24px;
-    background:var(--steel);
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
-  }
-  .logo span{color:var(--safety)}
   .nav-links{display:flex;gap:32px;align-items:center;list-style:none}
   .nav-links a{
-    text-decoration:none;
-    color:var(--steel);
-    font-size:.88rem;font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    position:relative;
+    text-decoration:none;color:var(--dark-2);
+    font-size:.92rem;font-weight:500;
     transition:color .3s;
   }
-  .nav-links a::after{
-    content:'';position:absolute;
-    bottom:-6px;left:0;
-    width:0;height:3px;
-    background:var(--safety);
-    transition:width .3s;
-  }
-  .nav-links a:hover{color:var(--safety-dark)}
-  .nav-links a:hover::after{width:100%}
-  .cta-btn{
-    background:var(--safety);color:var(--steel);
-    border:none;padding:12px 26px;
-    font-family:'Oswald',sans-serif;
-    font-weight:600;font-size:.9rem;
-    text-transform:uppercase;letter-spacing:1.5px;
-    cursor:pointer;
-    clip-path:polygon(0 0,100% 0,100% 75%,95% 100%,0 100%);
+  .nav-links a:hover{color:var(--primary)}
+  .nav-cta{
+    background:var(--dark);color:#fff;
+    border:none;padding:11px 24px;border-radius:30px;
+    font-weight:600;font-size:.88rem;cursor:pointer;
     transition:all .3s;
   }
-  .cta-btn:hover{background:var(--steel);color:var(--safety)}
-  .menu-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--steel)}
+  .nav-cta:hover{background:var(--primary);transform:translateY(-2px)}
+  .menu-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--dark)}
 
   /* HERO */
   .hero{
-    min-height:92vh;
+    min-height:100vh;
+    padding:120px 6% 60px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
     position:relative;
-    display:flex;align-items:center;
-    padding:80px 6%;
     overflow:hidden;
-    background:var(--steel);
-  }
-  .hero-bg{
-    position:absolute;inset:0;
     background:
-      linear-gradient(135deg,rgba(15,30,46,.92) 0%,rgba(15,30,46,.7) 50%,rgba(15,30,46,.4) 100%),
-      linear-gradient(45deg,#2c3e50 25%,transparent 25%,transparent 75%,#2c3e50 75%),
-      linear-gradient(45deg,#2c3e50 25%,#1a2b3c 25%,#1a2b3c 75%,#2c3e50 75%);
-    background-size:cover,60px 60px,60px 60px;
-    background-position:0 0,0 0,30px 30px;
+      radial-gradient(circle at 80% 20%,rgba(0,102,255,.08) 0%,transparent 50%),
+      radial-gradient(circle at 20% 80%,rgba(255,107,53,.06) 0%,transparent 50%),
+      linear-gradient(180deg,#fff 0%,var(--bg) 100%);
   }
-  /* Construction crane SVG */
-  .crane{
-    position:absolute;
-    right:5%;top:10%;
-    width:400px;height:500px;
-    opacity:.15;
-    z-index:1;
-  }
-  /* Grid overlay */
   .hero::before{
-    content:'';position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(255,184,0,.05) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,184,0,.05) 1px,transparent 1px);
-    background-size:50px 50px;
-    z-index:2;
+    content:'';position:absolute;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    width:800px;height:800px;
+    background:radial-gradient(circle,rgba(0,102,255,.04) 0%,transparent 70%);
+    border-radius:50%;
     pointer-events:none;
   }
-  .hero-content{
-    max-width:780px;
-    position:relative;z-index:3;
-    color:#fff;
-    animation:slideIn 1s ease;
-  }
-  @keyframes slideIn{
-    from{opacity:0;transform:translateX(-40px)}
-    to{opacity:1;transform:translateX(0)}
-  }
-  .hero-tag{
-    display:inline-flex;align-items:center;gap:10px;
-    background:rgba(255,184,0,.15);
-    border:1px solid var(--safety);
-    padding:8px 20px;
+  .hero-content{position:relative;z-index:2;animation:fadeUp 1s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--primary-light);
+    color:var(--primary);
+    padding:8px 16px;border-radius:30px;
+    font-size:.82rem;font-weight:600;
     margin-bottom:24px;
-    font-size:.78rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:2px;
-    color:var(--safety);
   }
-  .hero-tag::before{
-    content:'';width:8px;height:8px;background:var(--safety);
-    animation:blink 1.5s ease-in-out infinite;
+  .hero-badge .dot{
+    width:8px;height:8px;background:var(--success);
+    border-radius:50%;
+    animation:pulse 2s ease-in-out infinite;
   }
-  @keyframes blink{
-    0%,100%{opacity:1}
-    50%{opacity:.3}
-  }
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.7}}
   .hero h1{
-    font-size:clamp(2.8rem,6.5vw,5.5rem);
-    margin-bottom:24px;
-    line-height:.95;
+    font-size:clamp(2.4rem,5vw,4rem);
+    font-weight:800;
+    margin-bottom:20px;
+    letter-spacing:-1px;
   }
-  .hero h1 span{
-    color:var(--safety);
-    display:block;
+  .hero h1 .gradient{
+    background:linear-gradient(120deg,var(--primary),var(--accent));
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
   }
-  .hero h1 em{
-    font-style:italic;
-    color:var(--cement);
-    font-weight:400;
+  .hero-desc{
+    font-size:1.1rem;color:var(--gray);
+    margin-bottom:32px;max-width:520px;
   }
-  .hero p{
-    font-size:1.1rem;
-    color:rgba(255,255,255,.8);
-    margin-bottom:40px;
-    max-width:560px;
-  }
-  .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
   .btn-primary{
-    background:var(--safety);color:var(--steel);
-    border:none;padding:16px 34px;
-    font-family:'Oswald',sans-serif;
-    font-weight:600;font-size:.95rem;
-    text-transform:uppercase;letter-spacing:2px;
-    cursor:pointer;
-    clip-path:polygon(0 0,100% 0,100% 75%,95% 100%,0 100%);
+    background:var(--primary);color:#fff;
+    border:none;padding:15px 32px;border-radius:30px;
+    font-weight:600;font-size:.95rem;cursor:pointer;
     transition:all .3s;
-    display:inline-flex;align-items:center;gap:10px;
+    box-shadow:0 8px 24px rgba(0,102,255,.3);
+    display:inline-flex;align-items:center;gap:8px;
   }
-  .btn-primary:hover{background:#fff;transform:translateY(-3px)}
+  .btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,102,255,.4)}
   .btn-secondary{
-    background:transparent;color:#fff;
-    border:2px solid rgba(255,255,255,.3);
-    padding:14px 32px;
-    font-family:'Oswald',sans-serif;
-    font-weight:600;font-size:.95rem;
-    text-transform:uppercase;letter-spacing:2px;
-    cursor:pointer;transition:all .3s;
+    background:#fff;color:var(--dark);
+    border:2px solid var(--border);
+    padding:13px 28px;border-radius:30px;
+    font-weight:600;font-size:.95rem;cursor:pointer;
+    transition:all .3s;
+    display:inline-flex;align-items:center;gap:8px;
   }
-  .btn-secondary:hover{border-color:var(--safety);color:var(--safety)}
+  .btn-secondary:hover{border-color:var(--dark);transform:translateY(-2px)}
 
-  /* Hero side info */
-  .hero-info{
-    position:absolute;
-    bottom:40px;right:6%;
-    display:flex;gap:40px;
-    z-index:3;
-    color:#fff;
+  .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+  .hero-stat{display:flex;flex-direction:column}
+  .hero-stat-num{
+    font-size:1.8rem;font-weight:800;
+    color:var(--dark);
   }
-  .hero-info-item{text-align:right}
-  .hero-info-num{
-    font-family:'Oswald',sans-serif;
-    font-size:2.8rem;font-weight:700;
-    color:var(--safety);
-    line-height:1;
-  }
-  .hero-info-label{
-    font-size:.78rem;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    opacity:.7;
-    margin-top:4px;
-  }
+  .hero-stat-label{font-size:.82rem;color:var(--gray);font-weight:500}
 
-  /* STATS STRIP */
-  .stats-strip{
-    background:var(--safety);
-    padding:40px 6%;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:30px;
+  /* 3D VIEWER */
+  .hero-visual{
     position:relative;
+    aspect-ratio:1;
+    max-height:650px;
+    animation:fadeUp 1.2s ease;
   }
-  .stats-strip::before{
-    content:'';position:absolute;
-    top:0;left:0;right:0;height:4px;
-    background:repeating-linear-gradient(90deg,var(--steel) 0,var(--steel) 20px,transparent 20px,transparent 40px);
+  #viewer3d{
+    width:100%;height:100%;
+    border-radius:30px;
+    cursor:grab;
+    background:radial-gradient(circle at center,#f0f5ff 0%,#e0ebff 100%);
+    position:relative;
+    overflow:hidden;
   }
-  .stat-item{
-    display:flex;align-items:center;gap:18px;
+  #viewer3d:active{cursor:grabbing}
+  .viewer-hint{
+    position:absolute;
+    bottom:20px;left:50%;transform:translateX(-50%);
+    background:rgba(10,22,40,.8);
+    color:#fff;padding:8px 16px;border-radius:20px;
+    font-size:.78rem;font-weight:500;
+    display:flex;align-items:center;gap:6px;
+    pointer-events:none;
+    animation:hintFade 4s ease-in-out infinite;
+    z-index:5;
   }
-  .stat-icon{
-    width:56px;height:56px;
-    background:var(--steel);
+  @keyframes hintFade{
+    0%,100%{opacity:.6}
+    50%{opacity:1}
+  }
+  .viewer-badge{
+    position:absolute;
+    top:20px;right:20px;
+    background:#fff;
+    padding:10px 16px;border-radius:20px;
+    font-size:.78rem;font-weight:600;
+    color:var(--dark);
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    display:flex;align-items:center;gap:8px;
+    z-index:5;
+  }
+  .viewer-badge::before{
+    content:'';width:8px;height:8px;
+    background:var(--success);border-radius:50%;
+    animation:pulse 2s ease-in-out infinite;
+  }
+  .loader{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    background:radial-gradient(circle at center,#f0f5ff 0%,#e0ebff 100%);
+    z-index:10;
+    transition:opacity .5s;
+  }
+  .loader.hidden{opacity:0;pointer-events:none}
+  .loader-spinner{
+    width:50px;height:50px;
+    border:4px solid var(--border);
+    border-top-color:var(--primary);
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin-bottom:16px;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loader-text{font-size:.88rem;color:var(--gray);font-weight:500}
+
+  /* TRUST BAR */
+  .trust-bar{
+    padding:40px 6%;
+    background:#fff;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .trust-inner{
+    max-width:1200px;margin:0 auto;
+    display:flex;justify-content:space-around;align-items:center;
+    flex-wrap:wrap;gap:30px;
+  }
+  .trust-item{
+    display:flex;align-items:center;gap:12px;
+    color:var(--gray);font-size:.9rem;font-weight:500;
+  }
+  .trust-icon{
+    width:44px;height:44px;
+    background:var(--primary-light);
+    border-radius:12px;
     display:flex;align-items:center;justify-content:center;
-    font-size:1.5rem;color:var(--safety);
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
-    flex-shrink:0;
-  }
-  .stat-num{
-    font-family:'Oswald',sans-serif;
-    font-size:2.2rem;font-weight:700;
-    color:var(--steel);
-    line-height:1;
-  }
-  .stat-label{
-    font-size:.82rem;font-weight:500;
-    color:var(--steel);
-    text-transform:uppercase;letter-spacing:1px;
-    margin-top:4px;
+    font-size:1.3rem;
   }
 
   /* SECTIONS */
   section{padding:100px 6%}
-  .section-head{
-    margin-bottom:60px;
-    display:flex;justify-content:space-between;align-items:flex-end;
-    flex-wrap:wrap;gap:20px;
-  }
-  .section-title{
-    max-width:600px;
-  }
+  .section-head{text-align:center;max-width:700px;margin:0 auto 60px}
   .section-tag{
-    display:inline-flex;align-items:center;gap:10px;
-    color:var(--safety-dark);
-    font-size:.78rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:3px;
+    display:inline-block;
+    color:var(--primary);
+    font-size:.82rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .section-head h2{
+    font-size:clamp(2rem,4vw,3rem);
     margin-bottom:16px;
+    letter-spacing:-.5px;
   }
-  .section-tag::before{
-    content:'';width:40px;height:2px;background:var(--safety);
+  .section-head h2 .gradient{
+    background:linear-gradient(120deg,var(--primary),var(--accent));
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
   }
-  .section-title h2{
-    font-size:clamp(2rem,4.5vw,3.5rem);
-    color:var(--steel);
-  }
-  .section-title h2 span{color:var(--safety-dark)}
-  .section-desc{
-    max-width:400px;
-    color:var(--concrete);
-    font-size:.95rem;
-  }
+  .section-head p{color:var(--gray);font-size:1.05rem}
 
-  /* SERVICES */
-  .services{background:var(--cream)}
-  .services-grid{
+  /* FEATURES */
+  .features{background:#fff}
+  .features-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:2px;
-    background:var(--sand);
-    max-width:1400px;margin:0 auto;
+    gap:24px;
+    max-width:1300px;margin:0 auto;
   }
-  .service-card{
-    background:var(--white);
-    padding:40px 32px;
-    position:relative;
+  .feature-card{
+    background:var(--bg);
+    padding:36px 30px;
+    border-radius:24px;
+    border:1px solid var(--border);
     transition:all .4s;
-    cursor:pointer;
+    position:relative;
     overflow:hidden;
   }
-  .service-card::before{
+  .feature-card::before{
     content:'';position:absolute;
-    top:0;left:0;width:0;height:4px;
-    background:var(--safety);
-    transition:width .4s;
+    top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+    transform:scaleX(0);transform-origin:left;
+    transition:transform .4s;
   }
-  .service-card:hover{background:var(--steel);color:#fff}
-  .service-card:hover::before{width:100%}
-  .service-card:hover .service-num{color:var(--safety)}
-  .service-card:hover .service-title{color:#fff}
-  .service-card:hover .service-desc{color:rgba(255,255,255,.7)}
-  .service-card:hover .service-icon{background:var(--safety);color:var(--steel)}
-  .service-num{
-    font-family:'Oswald',sans-serif;
-    font-size:.85rem;font-weight:600;
-    color:var(--cement);
-    letter-spacing:2px;
+  .feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 50px rgba(0,102,255,.1);
+    border-color:transparent;
+    background:#fff;
+  }
+  .feature-card:hover::before{transform:scaleX(1)}
+  .feature-icon{
+    width:60px;height:60px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    border-radius:16px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.6rem;color:#fff;
     margin-bottom:20px;
-    transition:color .3s;
+    box-shadow:0 8px 20px rgba(0,102,255,.25);
   }
-  .service-icon{
-    width:64px;height:64px;
-    background:var(--cream);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.8rem;
-    margin-bottom:24px;
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
-    transition:all .4s;
-  }
-  .service-title{
-    font-size:1.4rem;
-    color:var(--steel);
-    margin-bottom:14px;
-    transition:color .3s;
-  }
-  .service-desc{
-    color:var(--concrete);
-    font-size:.9rem;
-    margin-bottom:24px;
-    transition:color .3s;
-  }
-  .service-link{
-    display:inline-flex;align-items:center;gap:8px;
-    color:var(--safety-dark);
-    font-size:.82rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:1.5px;
-    text-decoration:none;
-    transition:gap .3s;
-  }
-  .service-card:hover .service-link{color:var(--safety);gap:14px}
+  .feature-card:nth-child(2) .feature-icon{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 8px 20px rgba(255,107,53,.25)}
+  .feature-card:nth-child(4) .feature-icon{background:linear-gradient(135deg,var(--success),#059669);box-shadow:0 8px 20px rgba(16,185,129,.25)}
+  .feature-card h3{font-size:1.25rem;margin-bottom:10px}
+  .feature-card p{color:var(--gray);font-size:.92rem}
 
-  /* ABOUT */
-  .about{
-    background:var(--white);
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:80px;
-    align-items:center;
-  }
-  .about-visual{
-    position:relative;
-    aspect-ratio:4/5;
-  }
-  .about-img-main{
-    position:absolute;
-    top:0;left:0;right:40px;bottom:40px;
-    background:
-      linear-gradient(135deg,rgba(15,30,46,.3),rgba(15,30,46,.6)),
-      repeating-linear-gradient(45deg,#3d4f63 0,#3d4f63 2px,#2c3e50 2px,#2c3e50 20px);
-    clip-path:polygon(0 0,100% 0,100% 85%,85% 100%,0 100%);
-    display:flex;align-items:center;justify-content:center;
-    overflow:hidden;
-  }
-  .about-img-main::before{
-    content:'';position:absolute;inset:0;
-    background:
-      radial-gradient(circle at 30% 40%,rgba(255,184,0,.3) 0%,transparent 50%),
-      radial-gradient(circle at 70% 70%,rgba(194,65,12,.2) 0%,transparent 50%);
-  }
-  /* Building silhouette */
-  .building-silhouette{
-    position:absolute;
-    bottom:0;left:0;right:0;
-    height:70%;
-    background:linear-gradient(to top,var(--steel-dark),transparent);
-    clip-path:polygon(0 100%,0 40%,15% 40%,15% 20%,30% 20%,30% 50%,45% 50%,45% 10%,60% 10%,60% 35%,75% 35%,75% 25%,90% 25%,90% 55%,100% 55%,100% 100%);
-  }
-  .about-badge{
-    position:absolute;
-    bottom:0;right:0;
-    width:200px;height:200px;
-    background:var(--safety);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    color:var(--steel);
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
-    box-shadow:0 20px 40px rgba(0,0,0,.2);
-  }
-  .about-badge-num{
-    font-family:'Oswald',sans-serif;
-    font-size:4rem;font-weight:700;
-    line-height:1;
-  }
-  .about-badge-label{
-    font-size:.85rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:1.5px;
-    margin-top:6px;
-  }
-  .about-content .section-tag{color:var(--safety-dark)}
-  .about-content h2{
-    font-size:clamp(2rem,4vw,3rem);
-    color:var(--steel);
-    margin-bottom:24px;
-  }
-  .about-content h2 span{color:var(--safety-dark)}
-  .about-content p{
-    color:var(--concrete);
-    margin-bottom:18px;
-    font-size:.98rem;
-  }
-  .about-features{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    margin:30px 0;
-  }
-  .about-feature{
-    display:flex;gap:14px;align-items:flex-start;
-  }
-  .about-feature-icon{
-    width:40px;height:40px;
-    background:var(--safety);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--steel);font-size:1.1rem;
-    flex-shrink:0;
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
-  }
-  .about-feature strong{
-    display:block;
-    font-family:'Oswald',sans-serif;
-    font-size:1rem;
-    color:var(--steel);
-    text-transform:uppercase;letter-spacing:.5px;
-    margin-bottom:2px;
-  }
-  .about-feature span{font-size:.85rem;color:var(--concrete)}
-
-  /* PROJECTS */
-  .projects{background:var(--steel);color:#fff}
-  .projects .section-title h2{color:#fff}
-  .projects .section-desc{color:rgba(255,255,255,.7)}
-  .project-filters{
-    display:flex;gap:8px;flex-wrap:wrap;
-    margin-bottom:40px;
-  }
-  .project-filter{
-    background:transparent;
-    border:1px solid rgba(255,255,255,.2);
-    color:rgba(255,255,255,.7);
-    padding:10px 22px;
-    font-family:'Oswald',sans-serif;
-    font-size:.85rem;font-weight:500;
-    text-transform:uppercase;letter-spacing:1.5px;
-    cursor:pointer;transition:all .3s;
-  }
-  .project-filter:hover{border-color:var(--safety);color:var(--safety)}
-  .project-filter.active{
-    background:var(--safety);color:var(--steel);border-color:var(--safety);
-  }
-  .projects-grid{
+  /* HOW IT WORKS */
+  .how-it-works{background:var(--bg)}
+  .steps{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
-    max-width:1400px;margin:0 auto;
-  }
-  .project-card{
-    position:relative;
-    aspect-ratio:4/5;
-    overflow:hidden;
-    cursor:pointer;
-    transition:transform .4s;
-  }
-  .project-card:hover{transform:translateY(-8px)}
-  .project-card.wide{grid-column:span 2;aspect-ratio:8/5}
-  .project-bg{
-    position:absolute;inset:0;
-    transition:transform .6s;
-  }
-  .project-card:hover .project-bg{transform:scale(1.08)}
-  .project-overlay{
-    position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(8,20,33,.95) 0%,rgba(8,20,33,.4) 50%,transparent 100%);
-    z-index:1;
-  }
-  .project-content{
-    position:absolute;
-    bottom:0;left:0;right:0;
-    padding:28px;
-    z-index:2;
-    transform:translateY(20px);
-    transition:transform .4s;
-  }
-  .project-card:hover .project-content{transform:translateY(0)}
-  .project-cat{
-    display:inline-block;
-    background:var(--safety);
-    color:var(--steel);
-    padding:4px 12px;
-    font-size:.72rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:1.5px;
-    margin-bottom:12px;
-  }
-  .project-content h3{
-    font-size:1.5rem;
-    color:#fff;
-    margin-bottom:8px;
-  }
-  .project-location{
-    color:rgba(255,255,255,.7);
-    font-size:.85rem;
-    display:flex;align-items:center;gap:6px;
-    margin-bottom:14px;
-  }
-  .project-link{
-    color:var(--safety);
-    font-size:.82rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:1.5px;
-    text-decoration:none;
-    opacity:0;
-    transition:opacity .4s;
-    display:inline-flex;align-items:center;gap:8px;
-  }
-  .project-card:hover .project-link{opacity:1}
-
-  /* Project backgrounds */
-  .bg-tower{
-    background:
-      linear-gradient(to bottom,#4a5d73 0%,#2c3e50 100%);
-  }
-  .bg-tower::before{
-    content:'';position:absolute;
-    bottom:0;left:30%;width:40%;height:80%;
-    background:linear-gradient(to bottom,#8b95a1 0%,#4a5d73 100%);
-    clip-path:polygon(10% 100%,10% 10%,30% 10%,30% 0,70% 0,70% 10%,90% 10%,90% 100%);
-  }
-  .bg-tower::after{
-    content:'';position:absolute;
-    inset:0;
-    background:
-      repeating-linear-gradient(0deg,transparent 0,transparent 15px,rgba(255,184,0,.15) 15px,rgba(255,184,0,.15) 16px),
-      repeating-linear-gradient(90deg,transparent 0,transparent 20px,rgba(255,184,0,.1) 20px,rgba(255,184,0,.1) 21px);
-  }
-  .bg-bridge{
-    background:linear-gradient(to bottom,#87a8c4 0%,#5d7a94 60%,#3d5570 100%);
-  }
-  .bg-bridge::before{
-    content:'';position:absolute;
-    bottom:30%;left:0;right:0;height:15%;
-    background:#2c3e50;
-  }
-  .bg-bridge::after{
-    content:'';position:absolute;
-    bottom:45%;left:10%;right:10%;height:30%;
-    background:transparent;
-    border-top:4px solid #c2410c;
-    border-left:4px solid #c2410c;
-    border-right:4px solid #c2410c;
-    clip-path:polygon(0 100%,50% 0,100% 100%);
-  }
-  .bg-warehouse{
-    background:linear-gradient(to bottom,#6b7a8c 0%,#3d4f63 100%);
-  }
-  .bg-warehouse::before{
-    content:'';position:absolute;
-    bottom:0;left:10%;right:10%;height:70%;
-    background:#4a5d73;
-    clip-path:polygon(0 100%,0 30%,50% 0,100% 30%,100% 100%);
-  }
-  .bg-warehouse::after{
-    content:'';position:absolute;
-    bottom:10%;left:25%;right:25%;height:40%;
-    background:repeating-linear-gradient(90deg,#ffb800 0,#ffb800 20px,#2c3e50 20px,#2c3e50 40px);
-    opacity:.6;
-  }
-  .bg-residential{
-    background:linear-gradient(to bottom,#a8c0d4 0%,#6b8ba8 100%);
-  }
-  .bg-residential::before{
-    content:'';position:absolute;
-    bottom:0;left:0;right:0;height:60%;
-    background:#8b6f47;
-    clip-path:polygon(0 100%,0 40%,20% 40%,20% 20%,40% 20%,40% 40%,60% 40%,60% 20%,80% 20%,80% 40%,100% 40%,100% 100%);
-  }
-  .bg-residential::after{
-    content:'';position:absolute;
-    bottom:0;left:0;right:0;height:20%;
-    background:#5d4a2e;
-  }
-  .bg-hospital{
-    background:linear-gradient(to bottom,#c5d4e0 0%,#7a95ad 100%);
-  }
-  .bg-hospital::before{
-    content:'';position:absolute;
-    bottom:10%;left:15%;right:15%;height:75%;
-    background:#fff;
-    clip-path:polygon(0 100%,0 20%,20% 20%,20% 0,80% 0,80% 20%,100% 20%,100% 100%);
-  }
-  .bg-hospital::after{
-    content:'✚';position:absolute;
-    top:30%;left:50%;transform:translateX(-50%);
-    font-size:3rem;color:#c2410c;font-weight:700;
-  }
-  .bg-stadium{
-    background:linear-gradient(to bottom,#4a6b8a 0%,#2c4560 100%);
-  }
-  .bg-stadium::before{
-    content:'';position:absolute;
-    bottom:15%;left:5%;right:5%;height:60%;
-    background:#3d5570;
-    border-radius:50% 50% 10% 10% / 30% 30% 10% 10%;
-  }
-  .bg-stadium::after{
-    content:'';position:absolute;
-    bottom:15%;left:20%;right:20%;height:20%;
-    background:#4caf50;
-    border-radius:4px;
-  }
-
-  /* PROCESS */
-  .process{background:var(--cream)}
-  .process-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
     gap:30px;
-    max-width:1400px;margin:0 auto;
+    max-width:1200px;margin:0 auto;
     position:relative;
   }
-  .process-grid::before{
+  .steps::before{
     content:'';position:absolute;
-    top:40px;left:10%;right:10%;
+    top:45px;left:15%;right:15%;
     height:2px;
-    background:repeating-linear-gradient(90deg,var(--safety) 0,var(--safety) 10px,transparent 10px,transparent 20px);
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+    opacity:.2;
     z-index:0;
   }
-  .process-step{
-    text-align:center;
-    position:relative;
-    z-index:1;
-  }
-  .process-num{
-    width:80px;height:80px;
-    background:var(--white);
-    border:3px solid var(--safety);
+  .step{text-align:center;position:relative;z-index:1}
+  .step-num{
+    width:90px;height:90px;
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     margin:0 auto 24px;
-    font-family:'Oswald',sans-serif;
-    font-size:2rem;font-weight:700;
-    color:var(--safety-dark);
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
+    font-size:2rem;font-weight:800;
+    color:var(--primary);
+    box-shadow:0 8px 24px rgba(0,102,255,.1);
     transition:all .3s;
   }
-  .process-step:hover .process-num{
-    background:var(--safety);color:var(--steel);
-    transform:translateY(-6px);
+  .step:hover .step-num{
+    background:var(--primary);color:#fff;
+    transform:scale(1.1);
   }
-  .process-step h4{
-    font-size:1.2rem;
-    color:var(--steel);
-    margin-bottom:10px;
+  .step h3{font-size:1.3rem;margin-bottom:10px}
+  .step p{color:var(--gray);font-size:.92rem;max-width:280px;margin:0 auto}
+
+  /* SPECS */
+  .specs{
+    background:linear-gradient(135deg,var(--dark) 0%,var(--dark-2) 100%);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
   }
-  .process-step p{
-    color:var(--concrete);
-    font-size:.88rem;
+  .specs::before{
+    content:'';position:absolute;
+    top:-200px;right:-200px;
+    width:600px;height:600px;
+    background:radial-gradient(circle,rgba(0,102,255,.2) 0%,transparent 70%);
+    border-radius:50%;
+  }
+  .specs::after{
+    content:'';position:absolute;
+    bottom:-200px;left:-200px;
+    width:500px;height:500px;
+    background:radial-gradient(circle,rgba(255,107,53,.15) 0%,transparent 70%);
+    border-radius:50%;
+  }
+  .specs .section-head h2{color:#fff}
+  .specs .section-head p{color:rgba(255,255,255,.7)}
+  .specs-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    max-width:1200px;margin:0 auto;
+    position:relative;z-index:2;
+  }
+  .spec-card{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.1);
+    padding:30px 24px;
+    border-radius:20px;
+    transition:all .3s;
+  }
+  .spec-card:hover{
+    background:rgba(255,255,255,.1);
+    transform:translateY(-5px);
+    border-color:rgba(255,255,255,.2);
+  }
+  .spec-icon{
+    font-size:2rem;margin-bottom:14px;
+  }
+  .spec-value{
+    font-size:1.8rem;font-weight:800;
+    color:#fff;margin-bottom:4px;
+  }
+  .spec-label{
+    font-size:.85rem;color:rgba(255,255,255,.6);
+    font-weight:500;
   }
 
   /* TESTIMONIALS */
-  .testimonials{
-    background:var(--white);
-    position:relative;
-    overflow:hidden;
-  }
-  .testimonials::before{
-    content:'';position:absolute;
-    top:-100px;right:-100px;
-    width:400px;height:400px;
-    background:radial-gradient(circle,rgba(255,184,0,.1) 0%,transparent 70%);
-    border-radius:50%;
-  }
+  .testimonials{background:#fff}
   .testi-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:28px;
-    max-width:1300px;margin:0 auto;
+    gap:24px;
+    max-width:1200px;margin:0 auto;
   }
   .testi-card{
-    background:var(--cream);
-    padding:36px;
-    position:relative;
-    border-left:4px solid var(--safety);
+    background:var(--bg);
+    padding:32px;
+    border-radius:24px;
+    border:1px solid var(--border);
     transition:all .3s;
+    position:relative;
   }
-  .testi-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+  .testi-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(0,0,0,.06);
+    border-color:transparent;
+  }
   .testi-card::before{
     content:'"';
     position:absolute;
     top:10px;right:24px;
-    font-family:'Oswald',sans-serif;
-    font-size:6rem;
-    color:var(--safety);
-    opacity:.2;
+    font-size:5rem;
+    color:var(--primary);
+    opacity:.1;
     line-height:1;
+    font-family:serif;
   }
-  .testi-stars{color:var(--safety);margin-bottom:14px;letter-spacing:2px}
+  .testi-stars{color:var(--accent);margin-bottom:14px;letter-spacing:2px}
   .testi-card p{
-    color:var(--concrete);
+    color:var(--dark-2);
     font-size:.95rem;
-    margin-bottom:24px;
-    font-style:italic;
+    margin-bottom:22px;
   }
-  .testi-author{
-    display:flex;align-items:center;gap:14px;
-    padding-top:18px;
-    border-top:1px solid var(--sand);
-  }
+  .testi-author{display:flex;align-items:center;gap:12px}
   .testi-avatar{
-    width:50px;height:50px;
-    background:var(--steel);
-    color:var(--safety);
+    width:48px;height:48px;border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
     display:flex;align-items:center;justify-content:center;
-    font-family:'Oswald',sans-serif;
-    font-weight:700;font-size:1.1rem;
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
+    color:#fff;font-weight:700;
   }
-  .testi-author strong{
-    display:block;
-    font-family:'Oswald',sans-serif;
-    color:var(--steel);
-    text-transform:uppercase;letter-spacing:.5px;
-    font-size:.95rem;
-  }
-  .testi-author span{font-size:.8rem;color:var(--cement)}
+  .testi-author strong{display:block;font-size:.92rem}
+  .testi-author span{font-size:.8rem;color:var(--gray)}
 
-  /* CTA BANNER */
-  .cta-banner{
-    background:var(--safety);
-    padding:60px 6%;
-    display:flex;justify-content:space-between;align-items:center;
-    gap:30px;flex-wrap:wrap;
+  /* PRICING */
+  .pricing{background:var(--bg)}
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:24px;
+    max-width:1100px;margin:0 auto;
+  }
+  .price-card{
+    background:#fff;
+    padding:40px 32px;
+    border-radius:24px;
+    border:2px solid var(--border);
+    transition:all .3s;
+    position:relative;
+  }
+  .price-card.featured{
+    border-color:var(--primary);
+    transform:scale(1.03);
+    box-shadow:0 20px 50px rgba(0,102,255,.15);
+  }
+  .price-card.featured::before{
+    content:'MOST POPULAR';
+    position:absolute;
+    top:-14px;left:50%;transform:translateX(-50%);
+    background:var(--primary);color:#fff;
+    padding:6px 16px;border-radius:20px;
+    font-size:.72rem;font-weight:700;
+    letter-spacing:1px;
+  }
+  .price-card:hover{transform:translateY(-6px)}
+  .price-card.featured:hover{transform:scale(1.03) translateY(-6px)}
+  .price-name{
+    font-size:1.2rem;font-weight:700;
+    margin-bottom:8px;
+  }
+  .price-desc{color:var(--gray);font-size:.88rem;margin-bottom:20px}
+  .price-amount{
+    display:flex;align-items:baseline;gap:4px;
+    margin-bottom:24px;
+  }
+  .price-amount .currency{font-size:1.2rem;font-weight:700;color:var(--dark)}
+  .price-amount .value{font-size:3rem;font-weight:800;color:var(--dark);line-height:1}
+  .price-amount .period{font-size:.9rem;color:var(--gray);margin-left:4px}
+  .price-features{list-style:none;margin-bottom:28px}
+  .price-features li{
+    padding:8px 0;
+    font-size:.9rem;
+    color:var(--dark-2);
+    display:flex;align-items:center;gap:10px;
+  }
+  .price-features li::before{
+    content:'✓';
+    color:var(--success);
+    font-weight:700;
+  }
+  .price-btn{
+    width:100%;
+    background:var(--dark);color:#fff;
+    border:none;padding:14px;border-radius:30px;
+    font-weight:600;font-size:.92rem;cursor:pointer;
+    transition:all .3s;
+  }
+  .price-btn:hover{background:var(--primary)}
+  .price-card.featured .price-btn{background:var(--primary)}
+  .price-card.featured .price-btn:hover{background:var(--primary-dark)}
+
+  /* CTA */
+  .cta{
+    background:linear-gradient(135deg,var(--primary) 0%,#4d8eff 50%,var(--accent) 100%);
+    color:#fff;
+    text-align:center;
     position:relative;
     overflow:hidden;
   }
-  .cta-banner::before{
-    content:'';position:absolute;
-    top:0;right:0;
-    width:300px;height:100%;
-    background:repeating-linear-gradient(45deg,rgba(0,0,0,.05) 0,rgba(0,0,0,.05) 10px,transparent 10px,transparent 20px);
+  .cta::before{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 20% 30%,rgba(255,255,255,.15) 0%,transparent 40%),
+      radial-gradient(circle at 80% 70%,rgba(255,255,255,.1) 0%,transparent 40%);
   }
-  .cta-banner h2{
-    font-size:clamp(1.6rem,3vw,2.4rem);
-    color:var(--steel);
-    position:relative;z-index:2;
+  .cta-content{position:relative;z-index:2;max-width:700px;margin:0 auto}
+  .cta h2{
+    font-size:clamp(2rem,4vw,3rem);
+    margin-bottom:18px;
   }
-  .cta-banner h2 span{display:block;font-weight:400;font-style:italic;color:var(--concrete);font-size:.9em}
-  .cta-banner-btn{
-    background:var(--steel);color:var(--safety);
-    border:none;padding:18px 40px;
-    font-family:'Oswald',sans-serif;
-    font-weight:600;font-size:1rem;
-    text-transform:uppercase;letter-spacing:2px;
-    cursor:pointer;
-    clip-path:polygon(0 0,100% 0,100% 75%,95% 100%,0 100%);
+  .cta p{
+    font-size:1.1rem;opacity:.95;
+    margin-bottom:32px;
+  }
+  .cta-btn{
+    background:#fff;color:var(--primary);
+    border:none;padding:16px 38px;border-radius:30px;
+    font-weight:700;font-size:1rem;cursor:pointer;
     transition:all .3s;
-    position:relative;z-index:2;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
   }
-  .cta-banner-btn:hover{background:var(--steel-dark);transform:translateY(-3px)}
-
-  /* CONTACT */
-  .contact{
-    background:var(--steel);
-    color:#fff;
-    display:grid;
-    grid-template-columns:1fr 1.3fr;
-    gap:60px;
-  }
-  .contact-info h2{
-    font-size:clamp(2rem,4vw,2.8rem);
-    color:#fff;
-    margin-bottom:20px;
-  }
-  .contact-info h2 span{color:var(--safety)}
-  .contact-info > p{
-    color:rgba(255,255,255,.7);
-    margin-bottom:36px;
-  }
-  .contact-list{list-style:none}
-  .contact-list li{
-    display:flex;gap:18px;
-    padding:20px 0;
-    border-bottom:1px solid rgba(255,255,255,.1);
-  }
-  .contact-icon{
-    width:50px;height:50px;
-    background:var(--safety);
-    color:var(--steel);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.2rem;flex-shrink:0;
-    clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);
-  }
-  .contact-list strong{
-    display:block;
-    font-family:'Oswald',sans-serif;
-    color:var(--safety);
-    text-transform:uppercase;letter-spacing:1px;
-    font-size:.82rem;
-    margin-bottom:4px;
-  }
-  .contact-list span{color:rgba(255,255,255,.85);font-size:.95rem}
-
-  .contact-form{
-    background:var(--white);
-    padding:44px;
-    clip-path:polygon(0 0,100% 0,100% 95%,95% 100%,0 100%);
-  }
-  .contact-form h3{
-    font-size:1.6rem;
-    color:var(--steel);
-    margin-bottom:8px;
-  }
-  .contact-form > p{
-    color:var(--concrete);
-    font-size:.9rem;
-    margin-bottom:28px;
-  }
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .form-group{margin-bottom:18px}
-  .form-group label{
-    display:block;
-    font-size:.78rem;font-weight:600;
-    color:var(--steel);
-    text-transform:uppercase;letter-spacing:1px;
-    margin-bottom:8px;
-  }
-  .form-group input,.form-group select,.form-group textarea{
-    width:100%;
-    padding:12px 16px;
-    border:2px solid var(--sand);
-    background:var(--cream);
-    font-family:inherit;font-size:.92rem;
-    color:var(--ink);
-    transition:border-color .3s;
-  }
-  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-    outline:none;border-color:var(--safety);background:#fff;
-  }
-  .form-group textarea{resize:vertical;min-height:110px}
-  .submit-btn{
-    width:100%;
-    background:var(--safety);color:var(--steel);
-    border:none;padding:16px;
-    font-family:'Oswald',sans-serif;
-    font-weight:600;font-size:1rem;
-    text-transform:uppercase;letter-spacing:2px;
-    cursor:pointer;
-    clip-path:polygon(0 0,100% 0,100% 75%,95% 100%,0 100%);
-    transition:all .3s;
-    margin-top:10px;
-  }
-  .submit-btn:hover{background:var(--steel);color:var(--safety)}
+  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.3)}
 
   /* FOOTER */
   footer{
-    background:var(--steel-dark);
+    background:var(--dark);
     color:#fff;
     padding:70px 6% 30px;
   }
   .footer-grid{
     display:grid;
-    grid-template-columns:2fr 1fr 1fr 1.2fr;
+    grid-template-columns:2fr 1fr 1fr 1fr;
     gap:40px;
-    max-width:1400px;margin:0 auto 40px;
+    max-width:1300px;margin:0 auto 40px;
   }
-  .footer-brand .logo{color:#fff;margin-bottom:18px}
-  .footer-brand p{
-    color:rgba(255,255,255,.6);
-    font-size:.88rem;
-    margin-bottom:20px;
-    max-width:320px;
+  .footer-brand .logo{color:#fff;margin-bottom:16px}
+  .footer-brand p{color:rgba(255,255,255,.6);font-size:.88rem;max-width:300px;margin-bottom:20px}
+  .social{display:flex;gap:10px}
+  .social a{
+    width:40px;height:40px;
+    background:rgba(255,255,255,.08);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;text-decoration:none;
+    transition:all .3s;
   }
-  .footer-cert{
-    display:flex;gap:10px;flex-wrap:wrap;
-  }
-  .cert-badge{
-    background:rgba(255,184,0,.15);
-    border:1px solid var(--safety);
-    color:var(--safety);
-    padding:6px 12px;
-    font-size:.72rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:1px;
-  }
+  .social a:hover{background:var(--primary);transform:translateY(-3px)}
   .footer-col h4{
-    font-size:.9rem;
-    color:var(--safety);
+    font-size:.85rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:1.5px;
     margin-bottom:20px;
-    letter-spacing:1.5px;
+    color:var(--primary);
   }
   .footer-col ul{list-style:none}
   .footer-col li{margin-bottom:10px}
   .footer-col a{
     color:rgba(255,255,255,.65);
     text-decoration:none;font-size:.88rem;
-    transition:all .3s;
-    display:inline-flex;align-items:center;gap:6px;
+    transition:color .3s;
   }
-  .footer-col a::before{
-    content:'›';color:var(--safety);
-    transition:transform .3s;
-  }
-  .footer-col a:hover{color:var(--safety)}
-  .footer-col a:hover::before{transform:translateX(4px)}
+  .footer-col a:hover{color:#fff}
   .footer-bottom{
     border-top:1px solid rgba(255,255,255,.1);
     padding-top:24px;
-    display:flex;justify-content:space-between;align-items:center;
+    display:flex;justify-content:space-between;
     flex-wrap:wrap;gap:14px;
     font-size:.82rem;
     color:rgba(255,255,255,.5);
@@ -962,36 +608,29 @@
   .toast{
     position:fixed;bottom:30px;left:50%;
     transform:translateX(-50%) translateY(100px);
-    background:var(--steel);color:var(--safety);
-    padding:14px 28px;
-    border-left:4px solid var(--safety);
+    background:var(--dark);color:#fff;
+    padding:14px 28px;border-radius:30px;
     font-size:.9rem;font-weight:500;
-    box-shadow:0 10px 30px rgba(0,0,0,.3);
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
     z-index:3000;
     transition:transform .4s cubic-bezier(.2,.8,.2,1);
-    font-family:'Oswald',sans-serif;
-    text-transform:uppercase;letter-spacing:1px;
   }
   .toast.show{transform:translateX(-50%) translateY(0)}
 
   /* RESPONSIVE */
-  @media(max-width:1024px){
-    .about{grid-template-columns:1fr;gap:50px}
-    .contact{grid-template-columns:1fr}
-    .projects-grid{grid-template-columns:repeat(2,1fr)}
-    .project-card.wide{grid-column:span 2}
-    .process-grid{grid-template-columns:repeat(2,1fr)}
-    .process-grid::before{display:none}
-    .stats-strip{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;padding-top:100px}
+    .hero-visual{max-width:500px;margin:0 auto;width:100%}
+    .steps{grid-template-columns:1fr;gap:40px}
+    .steps::before{display:none}
     .footer-grid{grid-template-columns:1fr 1fr}
-    .hero-info{position:static;margin-top:40px;justify-content:flex-start}
-    .hero-info-item{text-align:left}
+    .price-card.featured{transform:none}
+    .price-card.featured:hover{transform:translateY(-6px)}
   }
   @media(max-width:700px){
     .nav-links{
       position:fixed;top:0;right:0;bottom:0;
-      width:280px;
-      background:var(--white);
+      width:280px;background:#fff;
       flex-direction:column;
       padding:80px 30px;gap:24px;
       transform:translateX(100%);
@@ -1001,433 +640,327 @@
     }
     .nav-links.open{transform:translateX(0)}
     .menu-toggle{display:block}
-    .topbar{flex-direction:column;gap:8px;text-align:center}
-    .projects-grid{grid-template-columns:1fr}
-    .project-card.wide{grid-column:span 1;aspect-ratio:4/5}
-    .process-grid{grid-template-columns:1fr}
-    .stats-strip{grid-template-columns:1fr}
     .footer-grid{grid-template-columns:1fr}
-    .form-row{grid-template-columns:1fr}
-    .about-features{grid-template-columns:1fr}
-    .section-head{flex-direction:column;align-items:flex-start}
-    .cta-banner{flex-direction:column;text-align:center}
+    .hero-stats{gap:20px}
+    .trust-inner{flex-direction:column;gap:20px}
   }
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="topbar-info">
-    <span>📞 (555) 234-5678</span>
-    <span>✉ info@ironcladconstruction.com</span>
-    <span>📍 1247 Industrial Blvd, Melbourne</span>
-  </div>
-  <div class="topbar-social">
-    <a href="#" aria-label="LinkedIn">in</a>
-    <a href="#" aria-label="Facebook">f</a>
-    <a href="#" aria-label="Instagram">ig</a>
-  </div>
-</div>
-
-<!-- NAV -->
 <nav id="nav">
   <div class="logo">
-    <div class="logo-mark"></div>
-    <div>Iron<span>clad</span></div>
+    <div class="logo-mark">🐾</div>
+    <span>PitPat</span>
   </div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Quote</button></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it Works</a></li>
+    <li><a href="#specs">Specs</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Buy Now</button></li>
   </ul>
   <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <svg class="crane" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
-    <rect x="95" y="50" width="10" height="250" fill="#ffb800"/>
-    <rect x="20" y="50" width="160" height="8" fill="#ffb800"/>
-    <line x1="100" y1="50" x2="30" y2="58" stroke="#ffb800" stroke-width="2"/>
-    <line x1="100" y1="50" x2="170" y2="58" stroke="#ffb800" stroke-width="2"/>
-    <line x1="100" y1="50" x2="60" y2="58" stroke="#ffb800" stroke-width="2"/>
-    <line x1="100" y1="50" x2="140" y2="58" stroke="#ffb800" stroke-width="2"/>
-    <rect x="160" y="58" width="4" height="80" fill="#ffb800"/>
-    <rect x="150" y="138" width="24" height="16" fill="#ffb800"/>
-    <rect x="80" y="290" width="40" height="10" fill="#ffb800"/>
-  </svg>
-
   <div class="hero-content">
-    <div class="hero-tag">Licensed · Insured · Trusted Since 1998</div>
-    <h1>Building the <span>future</span>,<br><em>one structure at a time</em></h1>
-    <p>From concept to completion, Ironclad Construction delivers commercial, industrial, and residential projects with unmatched precision, safety, and craftsmanship.</p>
-    <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
-        Our Services →
+    <div class="hero-badge">
+      <span class="dot"></span>
+      New · 2026 GPS Tracker
+    </div>
+    <h1>Never lose sight of your <span class="gradient">best friend</span></h1>
+    <p class="hero-desc">Real-time GPS tracking, activity monitoring, and virtual fences — all in one lightweight, waterproof device built for adventurous dogs.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+        Get PitPat GPS →
       </button>
-      <button class="btn-secondary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
-        View Projects
+      <button class="btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+        ▶ See how it works
       </button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">500K+</div>
+        <div class="hero-stat-label">Happy Dogs Tracked</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.9★</div>
+        <div class="hero-stat-label">Customer Rating</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">30 day</div>
+        <div class="hero-stat-label">Money-back Guarantee</div>
+      </div>
     </div>
   </div>
 
-  <div class="hero-info">
-    <div class="hero-info-item">
-      <div class="hero-info-num">25+</div>
-      <div class="hero-info-label">Years Experience</div>
-    </div>
-    <div class="hero-info-item">
-      <div class="hero-info-num">480+</div>
-      <div class="hero-info-label">Projects Delivered</div>
-    </div>
-    <div class="hero-info-item">
-      <div class="hero-info-num">100%</div>
-      <div class="hero-info-label">Safety Record</div>
+  <div class="hero-visual">
+    <div id="viewer3d">
+      <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading 3D model...</div>
+      </div>
+      <div class="viewer-badge">Interactive 3D</div>
+      <div class="viewer-hint">🖱️ Drag to rotate · Scroll to zoom</div>
     </div>
   </div>
 </section>
 
-<!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stat-item">
-    <div class="stat-icon">🏗️</div>
-    <div>
-      <div class="stat-num">480+</div>
-      <div class="stat-label">Projects Completed</div>
-    </div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-icon">👷</div>
-    <div>
-      <div class="stat-num">120+</div>
-      <div class="stat-label">Expert Team Members</div>
-    </div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-icon">🏆</div>
-    <div>
-      <div class="stat-num">35</div>
-      <div class="stat-label">Industry Awards</div>
-    </div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-icon">🌍</div>
-    <div>
-      <div class="stat-num">12</div>
-      <div class="stat-label">Regions Served</div>
-    </div>
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><div class="trust-icon">🚚</div>Free Worldwide Shipping</div>
+    <div class="trust-item"><div class="trust-icon">🛡️</div>2-Year Warranty</div>
+    <div class="trust-item"><div class="trust-icon">💧</div>IP67 Waterproof</div>
+    <div class="trust-item"><div class="trust-icon">📱</div>Free Mobile App</div>
   </div>
 </div>
 
-<!-- SERVICES -->
-<section class="services" id="services">
+<!-- FEATURES -->
+<section class="features" id="features">
   <div class="section-head">
-    <div class="section-title">
-      <div class="section-tag">What We Do</div>
-      <h2>Comprehensive <span>construction</span> services</h2>
-    </div>
-    <p class="section-desc">End-to-end construction solutions backed by decades of engineering expertise and an unwavering commitment to quality.</p>
+    <div class="section-tag">Features</div>
+    <h2>Everything your dog needs, <span class="gradient">in one device</span></h2>
+    <p>Advanced technology packed into a lightweight tracker that keeps your pup safe, active, and happy.</p>
   </div>
 
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-num">01 / SERVICE</div>
-      <div class="service-icon">🏢</div>
-      <h3 class="service-title">Commercial Construction</h3>
-      <p class="service-desc">Office towers, retail centers, and mixed-use developments delivered on time and on budget.</p>
-      <a href="#contact" class="service-link">Learn More →</a>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📍</div>
+      <h3>Live GPS Tracking</h3>
+      <p>Real-time location updates every 1-3 seconds. See exactly where your dog is, anywhere in the world.</p>
     </div>
-    <div class="service-card">
-      <div class="service-num">02 / SERVICE</div>
-      <div class="service-icon">🏭</div>
-      <h3 class="service-title">Industrial Projects</h3>
-      <p class="service-desc">Warehouses, factories, and manufacturing facilities engineered for performance and longevity.</p>
-      <a href="#contact" class="service-link">Learn More →</a>
+    <div class="feature-card">
+      <div class="feature-icon">🏃</div>
+      <h3>Activity Monitor</h3>
+      <p>Track walks, runs, and rest. Get daily activity goals and insights into your dog's health and fitness.</p>
     </div>
-    <div class="service-card">
-      <div class="service-num">03 / SERVICE</div>
-      <div class="service-icon">🏠</div>
-      <h3 class="service-title">Residential Builds</h3>
-      <p class="service-desc">Custom homes and multi-residential developments crafted with precision and care.</p>
-      <a href="#contact" class="service-link">Learn More →</a>
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <h3>Virtual Fence Alerts</h3>
+      <p>Set safe zones and get instant notifications the moment your dog leaves the area. Peace of mind, always.</p>
     </div>
-    <div class="service-card">
-      <div class="service-num">04 / SERVICE</div>
-      <div class="service-icon">📐</div>
-      <h3 class="service-title">Structural Engineering</h3>
-      <p class="service-desc">Expert structural design, analysis, and certification by licensed professional engineers.</p>
-      <a href="#contact" class="service-link">Learn More →</a>
+    <div class="feature-card">
+      <div class="feature-icon">🔋</div>
+      <h3>10-Day Battery</h3>
+      <p>Industry-leading battery life. Charge once, track for up to 10 days on a single charge.</p>
     </div>
-    <div class="service-card">
-      <div class="service-num">05 / SERVICE</div>
-      <div class="service-icon">🔧</div>
-      <h3 class="service-title">Renovation & Retrofit</h3>
-      <p class="service-desc">Modernize, restore, and strengthen existing structures with minimal disruption.</p>
-      <a href="#contact" class="service-link">Learn More →</a>
+    <div class="feature-card">
+      <div class="feature-icon">💧</div>
+      <h3>Fully Waterproof</h3>
+      <p>IP67 rated — built to handle rain, mud, puddles, and even a dip in the lake. Adventure-ready.</p>
     </div>
-    <div class="service-card">
-      <div class="service-num">06 / SERVICE</div>
-      <div class="service-icon">📋</div>
-      <h3 class="service-title">Project Management</h3>
-      <p class="service-desc">Full lifecycle project oversight from feasibility studies through to handover.</p>
-      <a href="#contact" class="service-link">Learn More →</a>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Health Insights</h3>
+      <p>Monitor sleep quality, calorie burn, and activity trends. Spot changes early with smart health reports.</p>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-visual">
-    <div class="about-img-main">
-      <div class="building-silhouette"></div>
-    </div>
-    <div class="about-badge">
-      <div class="about-badge-num">25</div>
-      <div class="about-badge-label">Years of Excellence</div>
-    </div>
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how">
+  <div class="section-head">
+    <div class="section-tag">How it works</div>
+    <h2>Up and running in <span class="gradient">3 simple steps</span></h2>
+    <p>No complicated setup. Get tracking in under 5 minutes.</p>
   </div>
-  <div class="about-content">
-    <div class="section-tag">About Ironclad</div>
-    <h2>Engineering excellence, <span>built on trust</span></h2>
-    <p>Founded in 1998, Ironclad Construction has grown from a small family operation into one of the region's most respected construction firms. We combine old-school craftsmanship with cutting-edge technology to deliver projects that stand the test of time.</p>
-    <p>Our team of licensed engineers, project managers, and skilled tradespeople share a single commitment: building structures that are safe, sustainable, and built to last.</p>
 
-    <div class="about-features">
-      <div class="about-feature">
-        <div class="about-feature-icon">✓</div>
-        <div>
-          <strong>Licensed & Insured</strong>
-          <span>Fully certified professionals</span>
-        </div>
-      </div>
-      <div class="about-feature">
-        <div class="about-feature-icon">✓</div>
-        <div>
-          <strong>Safety First</strong>
-          <span>Zero-incident track record</span>
-        </div>
-      </div>
-      <div class="about-feature">
-        <div class="about-feature-icon">✓</div>
-        <div>
-          <strong>On-Time Delivery</strong>
-          <span>98% schedule adherence</span>
-        </div>
-      </div>
-      <div class="about-feature">
-        <div class="about-feature-icon">✓</div>
-        <div>
-          <strong>Sustainable Builds</strong>
-          <span>Green building certified</span>
-        </div>
-      </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Attach to collar</h3>
+      <p>Clip the lightweight PitPat GPS onto your dog's collar. It weighs just 35g — they won't even notice it.</p>
     </div>
-
-    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-      Start Your Project →
-    </button>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Download the app</h3>
+      <p>Get the free PitPat app on iOS or Android. Create your profile and pair the device in seconds.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Start tracking</h3>
+      <p>Set virtual fences, track walks, and get real-time location updates. Your dog's safety, simplified.</p>
+    </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="projects" id="projects">
+<!-- SPECS -->
+<section class="specs" id="specs">
   <div class="section-head">
-    <div class="section-title">
-      <div class="section-tag" style="color:var(--safety)">Our Portfolio</div>
-      <h2>Featured <span style="color:var(--safety)">projects</span></h2>
-    </div>
-    <p class="section-desc">A selection of our recent work across commercial, industrial, and residential sectors.</p>
+    <div class="section-tag" style="color:var(--accent)">Technical Specs</div>
+    <h2>Built for real adventures</h2>
+    <p>Every detail engineered for performance, durability, and your peace of mind.</p>
   </div>
 
-  <div class="project-filters">
-    <button class="project-filter active" data-filter="all">All Projects</button>
-    <button class="project-filter" data-filter="commercial">Commercial</button>
-    <button class="project-filter" data-filter="industrial">Industrial</button>
-    <button class="project-filter" data-filter="residential">Residential</button>
-    <button class="project-filter" data-filter="infrastructure">Infrastructure</button>
-  </div>
-
-  <div class="projects-grid" id="projectsGrid"></div>
-</section>
-
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="section-head">
-    <div class="section-title">
-      <div class="section-tag">How We Work</div>
-      <h2>Our proven <span>process</span></h2>
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-icon">⚡</div>
+      <div class="spec-value">10 days</div>
+      <div class="spec-label">Battery Life</div>
     </div>
-    <p class="section-desc">A transparent, four-stage approach that keeps your project on track from first sketch to final handover.</p>
-  </div>
-
-  <div class="process-grid">
-    <div class="process-step">
-      <div class="process-num">01</div>
-      <h4>Consultation</h4>
-      <p>We listen to your vision, assess the site, and define project scope, budget, and timeline.</p>
+    <div class="spec-card">
+      <div class="spec-icon">⚖️</div>
+      <div class="spec-value">35g</div>
+      <div class="spec-label">Ultra-Lightweight</div>
     </div>
-    <div class="process-step">
-      <div class="process-num">02</div>
-      <h4>Design & Planning</h4>
-      <p>Our engineers and architects develop detailed plans, securing all necessary permits and approvals.</p>
+    <div class="spec-card">
+      <div class="spec-icon">💧</div>
+      <div class="spec-value">IP67</div>
+      <div class="spec-label">Waterproof Rating</div>
     </div>
-    <div class="process-step">
-      <div class="process-num">03</div>
-      <h4>Construction</h4>
-      <p>Skilled teams execute the build with rigorous quality control and weekly progress reporting.</p>
+    <div class="spec-card">
+      <div class="spec-icon">📡</div>
+      <div class="spec-value">150+ countries</div>
+      <div class="spec-label">Global Coverage</div>
     </div>
-    <div class="process-step">
-      <div class="process-num">04</div>
-      <h4>Handover</h4>
-      <p>Final inspections, certification, and a comprehensive warranty package — your project, complete.</p>
+    <div class="spec-card">
+      <div class="spec-icon">🎯</div>
+      <div class="spec-value">3m</div>
+      <div class="spec-label">GPS Accuracy</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">📶</div>
+      <div class="spec-value">4G LTE</div>
+      <div class="spec-label">Connectivity</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🌡️</div>
+      <div class="spec-value">-20° to 50°C</div>
+      <div class="spec-label">Operating Range</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🔌</div>
+      <div class="spec-value">1.5h</div>
+      <div class="spec-label">Fast Charging</div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials">
+<section class="testimonials" id="reviews">
   <div class="section-head">
-    <div class="section-title">
-      <div class="section-tag">Client Testimonials</div>
-      <h2>Trusted by <span>industry leaders</span></h2>
-    </div>
+    <div class="section-tag">Customer Reviews</div>
+    <h2>Loved by dogs and their <span class="gradient">humans</span></h2>
+    <p>Join 500,000+ pet parents who trust PitPat to keep their dogs safe.</p>
   </div>
 
   <div class="testi-grid">
     <div class="testi-card">
       <div class="testi-stars">★★★★★</div>
-      <p>"Ironclad delivered our 12-story office tower three weeks ahead of schedule and under budget. Their project management is genuinely world-class. We've already engaged them for our next development."</p>
+      <p>"Our labrador is an escape artist. Since getting PitPat GPS, I can track him in real-time and set alerts if he leaves the yard. Absolute game-changer."</p>
       <div class="testi-author">
-        <div class="testi-avatar">MR</div>
+        <div class="testi-avatar">SM</div>
         <div>
-          <strong>Marcus Reynolds</strong>
-          <span>CEO, Reynolds Property Group</span>
+          <strong>Sarah Mitchell</strong>
+          <span>Verified Buyer · UK</span>
         </div>
       </div>
     </div>
     <div class="testi-card">
       <div class="testi-stars">★★★★★</div>
-      <p>"The structural engineering team solved challenges on our warehouse retrofit that two other firms couldn't. Professional, responsive, and technically brilliant. Highly recommended."</p>
+      <p>"The battery life is insane. I charge it once a week and it just works. The activity tracking has helped me understand my dog's exercise needs so much better."</p>
       <div class="testi-author">
-        <div class="testi-avatar">SL</div>
+        <div class="testi-avatar">JC</div>
         <div>
-          <strong>Sandra Liu</strong>
-          <span>Director, Pacific Logistics</span>
+          <strong>James Chen</strong>
+          <span>Verified Buyer · USA</span>
         </div>
       </div>
     </div>
     <div class="testi-card">
       <div class="testi-stars">★★★★★</div>
-      <p>"Building our family home was a big decision. Ironclad made it feel effortless — transparent pricing, quality craftsmanship, and a team that genuinely cared about the details."</p>
+      <p>"Setup took literally 2 minutes. The app is beautiful and intuitive. I feel so much safer knowing I can find my husky if she ever gets loose on our hikes."</p>
       <div class="testi-author">
-        <div class="testi-avatar">JT</div>
+        <div class="testi-avatar">EP</div>
         <div>
-          <strong>James & Tara O'Brien</strong>
-          <span>Custom Home Clients</span>
+          <strong>Emma Park</strong>
+          <span>Verified Buyer · Canada</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<div class="cta-banner">
-  <h2>Ready to break ground?<span>Let's build something remarkable together.</span></h2>
-  <button class="cta-banner-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a Quote →</button>
-</div>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-info">
-    <div class="section-tag" style="color:var(--safety)">Get in Touch</div>
-    <h2>Let's discuss your <span>next project</span></h2>
-    <p>Whether you're planning a new build, renovation, or need structural engineering advice — our team is ready to help.</p>
-
-    <ul class="contact-list">
-      <li>
-        <div class="contact-icon">📍</div>
-        <div>
-          <strong>Head Office</strong>
-          <span>1247 Industrial Boulevard<br />Melbourne, VIC 3000, Australia</span>
-        </div>
-      </li>
-      <li>
-        <div class="contact-icon">📞</div>
-        <div>
-          <strong>Phone</strong>
-          <span>(555) 234-5678 · Mon–Fri 7am–6pm</span>
-        </div>
-      </li>
-      <li>
-        <div class="contact-icon">✉</div>
-        <div>
-          <strong>Email</strong>
-          <span>info@ironcladconstruction.com<br />quotes@ironcladconstruction.com</span>
-        </div>
-      </li>
-      <li>
-        <div class="contact-icon">🚧</div>
-        <div>
-          <strong>24/7 Emergency</strong>
-          <span>(555) 234-9999 — Structural emergencies</span>
-        </div>
-      </li>
-    </ul>
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-head">
+    <div class="section-tag">Pricing</div>
+    <h2>Choose your <span class="gradient">plan</span></h2>
+    <p>One device. Flexible plans. No hidden fees. Cancel anytime.</p>
   </div>
 
-  <form class="contact-form" onsubmit="handleSubmit(event)">
-    <h3>Request a Quote</h3>
-    <p>Fill out the form and we'll get back to you within one business day.</p>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" required placeholder="John Smith">
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Basic</div>
+      <div class="price-desc">Great for casual tracking</div>
+      <div class="price-amount">
+        <span class="currency">$</span>
+        <span class="value">4.99</span>
+        <span class="period">/month</span>
       </div>
-      <div class="form-group">
-        <label>Company</label>
-        <input type="text" placeholder="Your company (optional)">
-      </div>
+      <ul class="price-features">
+        <li>Live GPS tracking</li>
+        <li>Location history (24h)</li>
+        <li>1 virtual fence</li>
+        <li>Basic activity tracking</li>
+        <li>Mobile app access</li>
+      </ul>
+      <button class="price-btn" onclick="showToast('✓ Added Basic plan to cart')">Choose Basic</button>
     </div>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" required placeholder="john@company.com">
+    <div class="price-card featured">
+      <div class="price-name">Premium</div>
+      <div class="price-desc">Best value for most dogs</div>
+      <div class="price-amount">
+        <span class="currency">$</span>
+        <span class="value">8.99</span>
+        <span class="period">/month</span>
       </div>
-      <div class="form-group">
-        <label>Phone</label>
-        <input type="tel" required placeholder="(555) 000-0000">
+      <ul class="price-features">
+        <li>Everything in Basic</li>
+        <li>Unlimited virtual fences</li>
+        <li>Full location history</li>
+        <li>Advanced health insights</li>
+        <li>Family sharing (up to 5)</li>
+        <li>Priority 24/7 support</li>
+      </ul>
+      <button class="price-btn" onclick="showToast('✓ Added Premium plan to cart')">Choose Premium</button>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">Family</div>
+      <div class="price-desc">For multi-dog households</div>
+      <div class="price-amount">
+        <span class="currency">$</span>
+        <span class="value">14.99</span>
+        <span class="period">/month</span>
       </div>
+      <ul class="price-features">
+        <li>Everything in Premium</li>
+        <li>Track up to 5 dogs</li>
+        <li>Group walk tracking</li>
+        <li>Vet-ready health reports</li>
+        <li>Multi-pet activity comparison</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <button class="price-btn" onclick="showToast('✓ Added Family plan to cart')">Choose Family</button>
     </div>
+  </div>
+</section>
 
-    <div class="form-group">
-      <label>Project Type</label>
-      <select required>
-        <option value="">Select a service...</option>
-        <option>Commercial Construction</option>
-        <option>Industrial Project</option>
-        <option>Residential Build</option>
-        <option>Structural Engineering</option>
-        <option>Renovation / Retrofit</option>
-        <option>Project Management</option>
-        <option>Other / Consultation</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Project Details</label>
-      <textarea required placeholder="Tell us about your project — scope, location, timeline, budget..."></textarea>
-    </div>
-
-    <button type="submit" class="submit-btn">Submit Request →</button>
-  </form>
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-content">
+    <h2>Ready to give your dog the safest adventure?</h2>
+    <p>Join 500,000+ happy pet parents. Free shipping, 30-day money-back guarantee, and 2-year warranty included.</p>
+    <button class="cta-btn" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+      Get PitPat GPS — From $99 →
+    </button>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -1435,148 +968,236 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="logo">
-        <div class="logo-mark"></div>
-        <div>Iron<span>clad</span></div>
+        <div class="logo-mark">🐾</div>
+        <span>PitPat</span>
       </div>
-      <p>Building tomorrow's landmarks with today's expertise. Licensed, insured, and committed to excellence since 1998.</p>
-      <div class="footer-cert">
-        <span class="cert-badge">ISO 9001</span>
-        <span class="cert-badge">ISO 45001</span>
-        <span class="cert-badge">Green Build</span>
+      <p>The smartest GPS tracker for dogs. Keeping your best friend safe, active, and happy — wherever they roam.</p>
+      <div class="social">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="YouTube">▶</a>
       </div>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h4>Product</h4>
       <ul>
-        <li><a href="#services">Commercial</a></li>
-        <li><a href="#services">Industrial</a></li>
-        <li><a href="#services">Residential</a></li>
-        <li><a href="#services">Engineering</a></li>
-        <li><a href="#services">Renovation</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#">App Download</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#process">Our Process</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog</a></li>
         <li><a href="#">Careers</a></li>
-        <li><a href="#">Safety Policy</a></li>
+        <li><a href="#">Press</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contact</h4>
+      <h4>Support</h4>
       <ul>
-        <li><a href="#contact">Get a Quote</a></li>
-        <li><a href="#contact">Request Consultation</a></li>
-        <li><a href="#">Emergency Line</a></li>
-        <li><a href="#">Client Portal</a></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Returns</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <div>© 2026 Ironclad Construction Pty Ltd. License #BC-284751. All rights reserved.</div>
-    <div>Privacy Policy · Terms of Service · Sitemap</div>
+    <div>© 2026 PitPat Ltd. All rights reserved.</div>
+    <div>Privacy Policy · Terms of Service · Cookie Policy</div>
   </div>
 </footer>
 
-<div class="toast" id="toast">✓ Message sent</div>
+<div class="toast" id="toast">✓ Added to cart</div>
 
-<script>
-const projects = [
-  {id:1, name:'Meridian Tower', location:'Melbourne CBD, VIC', cat:'commercial', bg:'bg-tower', wide:true},
-  {id:2, name:'Harbor Bridge Retrofit', location:'Port Phillip, VIC', cat:'infrastructure', bg:'bg-bridge'},
-  {id:3, name:'Pacific Distribution Hub', location:'Dandenong South, VIC', cat:'industrial', bg:'bg-warehouse'},
-  {id:4, name:'Riverside Residences', location:'Yarra Valley, VIC', cat:'residential', bg:'bg-residential'},
-  {id:5, name:'St. Andrews Medical Center', location:'Geelong, VIC', cat:'commercial', bg:'bg-hospital', wide:true},
-  {id:6, name:'Victoria Sports Arena', location:'Melbourne Park, VIC', cat:'infrastructure', bg:'bg-stadium'},
-];
+<!-- THREE.JS -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 
-function renderProjects(filter='all'){
-  const grid = document.getElementById('projectsGrid');
-  grid.innerHTML = '';
-  const items = filter==='all' ? projects : projects.filter(p=>p.cat===filter);
-  items.forEach((p,i)=>{
-    const card = document.createElement('div');
-    card.className = 'project-card' + (p.wide ? ' wide' : '');
-    card.style.animation = `slideIn .6s ease ${i*.08}s both`;
-    card.innerHTML = `
-      <div class="project-bg ${p.bg}"></div>
-      <div class="project-overlay"></div>
-      <div class="project-content">
-        <span class="project-cat">${p.cat}</span>
-        <h3>${p.name}</h3>
-        <div class="project-location">📍 ${p.location}</div>
-        <a href="#" class="project-link" onclick="event.preventDefault()">View Case Study →</a>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+
+const container = document.getElementById('viewer3d');
+const loader = document.getElementById('loader');
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = null;
+
+// Camera
+const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+camera.position.set(0, 0.5, 3);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+container.appendChild(renderer.domElement);
+
+// Lights
+const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+scene.add(ambient);
+
+const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+keyLight.position.set(5, 5, 5);
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0x88aaff, 0.6);
+fillLight.position.set(-5, 2, -3);
+scene.add(fillLight);
+
+const rimLight = new THREE.DirectionalLight(0xff8844, 0.4);
+rimLight.position.set(0, -3, -5);
+scene.add(rimLight);
+
+// Controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.enablePan = false;
+controls.minDistance = 1.5;
+controls.maxDistance = 6;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 1.2;
+
+// Load model
+const modelUrl = 'https://cdn.shopify.com/3d/models/ad98e28dbb6ea23f/PitPat-GPS-optimized.glb';
+
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://unpkg.com/three@0.160.0/examples/jsm/libs/draco/');
+
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+
+let model = null;
+
+gltfLoader.load(
+  modelUrl,
+  (gltf) => {
+    model = gltf.scene;
+    
+    // Center and scale model
+    const box = new THREE.Box3().setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 2 / maxDim;
+    model.scale.setScalar(scale);
+    model.position.sub(center.multiplyScalar(scale));
+    
+    scene.add(model);
+    loader.classList.add('hidden');
+  },
+  (progress) => {
+    // Progress
+  },
+  (error) => {
+    console.error('Error loading model:', error);
+    loader.innerHTML = `
+      <div style="text-align:center;padding:20px">
+        <div style="font-size:3rem;margin-bottom:14px">📦</div>
+        <div style="color:var(--dark);font-weight:600;margin-bottom:8px">Model Preview</div>
+        <div style="color:var(--gray);font-size:.85rem">Interactive 3D viewer</div>
       </div>
     `;
-    grid.appendChild(card);
-  });
-}
+    // Fallback: create placeholder
+    const fallback = new THREE.Mesh(
+      new THREE.BoxGeometry(1.5, 0.8, 0.3),
+      new THREE.MeshStandardMaterial({ 
+        color: 0x0066ff,
+        metalness: 0.3,
+        roughness: 0.4
+      })
+    );
+    scene.add(fallback);
+    loader.classList.add('hidden');
+  }
+);
 
-document.querySelectorAll('.project-filter').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.project-filter').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    renderProjects(btn.dataset.filter);
-  });
+// Resize
+function onResize() {
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', onResize);
+
+// Animation
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  
+  if (model) {
+    model.position.y = Math.sin(Date.now() * 0.001) * 0.05;
+  }
+  
+  renderer.render(scene, camera);
+}
+animate();
+
+// Pause auto-rotate on interaction
+renderer.domElement.addEventListener('pointerdown', () => {
+  controls.autoRotate = false;
+});
+renderer.domElement.addEventListener('pointerup', () => {
+  setTimeout(() => { controls.autoRotate = true; }, 3000);
+});
+</script>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 });
 
-function handleSubmit(e){
-  e.preventDefault();
-  showToast('✓ Request received — we\'ll be in touch within 24 hours.');
-  e.target.reset();
-}
+// Close mobile nav
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
 
-function showToast(msg){
+// Toast
+function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(()=>t.classList.remove('show'), 3500);
+  window._toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// Nav scroll
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY>50);
-});
-
-// Close mobile nav on link click
-document.querySelectorAll('.nav-links a').forEach(a=>{
-  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
-});
-
-// Animate stats on scroll
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const el = entry.target;
-      const num = el.querySelector('.stat-num');
-      if(num && !num.dataset.animated){
-        num.dataset.animated = 'true';
-        const target = parseInt(num.textContent);
-        if(!isNaN(target)){
-          let current = 0;
-          const step = Math.max(1, Math.ceil(target/40));
-          const suffix = num.textContent.replace(/[0-9]/g,'');
-          const interval = setInterval(()=>{
-            current += step;
-            if(current >= target){
-              current = target;
-              clearInterval(interval);
-            }
-            num.textContent = current + suffix;
-          },30);
-        }
-      }
+// Animate on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = 'fadeUp .6s ease forwards';
     }
   });
-},{threshold:.3});
-document.querySelectorAll('.stat-item').forEach(el=>observer.observe(el));
+}, { threshold: 0.15 });
 
-// Init
-renderProjects();
+document.querySelectorAll('.feature-card, .step, .spec-card, .testi-card, .price-card').forEach(el => {
+  el.style.opacity = '0';
+  observer.observe(el);
+});
 </script>
+
 </body>
 </html>
+
